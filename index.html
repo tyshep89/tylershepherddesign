@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tyler Shepherd | Application Developer and Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f6f9;--ink:#0f1a3a;--muted:#59627c;--line:#cfd5e3;--accent:#2b44ff;--on:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430}}
+:root[data-theme="dark"]{--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430}
+body.des{--accent:#ff5c39}
+@media (prefers-color-scheme:dark){body.des{--accent:#ff8a6b}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 "Schibsted Grotesk",system-ui,sans-serif;transition:background .3s,color .3s}
+main{max-width:1040px;margin:0 auto;padding:0 1.5rem 3rem}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;font-weight:600}
+nav a{color:var(--ink);text-decoration:none;margin-left:1.5rem}
+nav a:hover{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.hero{padding:5rem 0 4rem;border-bottom:2px solid var(--ink)}
+h1{font-weight:900;font-size:clamp(2.8rem,9.5vw,7.4rem);line-height:.95;letter-spacing:-.045em;margin:0;max-width:11ch}
+h1 span{display:none;animation:in .45s ease}
+body.dev h1 .d,body.des h1 .s{display:block}
+@keyframes in{from{opacity:0;transform:translateY(.25em)}to{opacity:1;transform:none}}
+.lede{max-width:32rem;color:var(--muted);font-size:1.25rem;margin:2rem 0}
+.switch{display:inline-flex;background:var(--ink);border-radius:999px;padding:4px}
+.switch button{font:600 1rem "Schibsted Grotesk",sans-serif;border:0;background:none;color:var(--bg);padding:.65rem 1.4rem;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
+.switch button[aria-pressed="true"]{background:var(--accent);color:var(--on)}
+h2{font-size:1rem;font-weight:600;color:var(--muted);margin:4rem 0 .5rem}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:1.4rem 0}
+summary::-webkit-details-marker{display:none}
+.t{font-size:clamp(1.7rem,4.5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;transition:color .2s}
+summary:hover .t,details[open] .t{color:var(--accent)}
+.k{color:var(--muted);font-weight:500;white-space:nowrap}
+.body{padding:0 0 1.75rem;max-width:40rem;color:var(--muted)}
+.body p{margin:.3rem 0}
+.body .dv,.body .ds{display:none}
+body.dev .dv,body.des .ds{display:block}
+.body b{color:var(--ink)}
+.about{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));padding-top:1rem}
+.about p{margin:0 0 1rem;max-width:32rem;font-size:1.2rem}
+dl{margin:0}
+dl div{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
+dt{color:var(--muted)}dd{margin:0;font-weight:600;text-align:right}
+.contact{margin-top:5rem;padding:3rem 0 0;border-top:2px solid var(--ink)}
+.contact h3{font-size:clamp(2rem,6vw,4rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin:0 0 1.5rem}
+.cta{display:inline-block;background:var(--accent);color:var(--on);padding:1rem 1.75rem;border-radius:999px;font-weight:600;text-decoration:none;transition:background .3s}
+.cta:hover{filter:brightness(1.08)}
+footer{margin-top:3rem;color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body class="dev">
+<main>
+<nav aria-label="Main"><span>Tyler Shepherd</span><div><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
+
+<header class="hero">
+  <h1><span class="d">I build the systems.</span><span class="s">I shape the experience.</span></h1>
+  <p class="lede">Application developer and product designer in New York City. Pick a lens and every project below tells its story that way.</p>
+  <div class="switch" role="group" aria-label="Choose a lens">
+    <button id="bd" aria-pressed="true">Developer</button>
+    <button id="bs" aria-pressed="false">Designer</button>
+  </div>
+</header>
+
+<section id="work" aria-labelledby="wt">
+  <h2 id="wt">Selected work</h2>
+  <details open><summary><span class="t">Project name one</span><span class="k">Industry, 2025</span></summary>
+    <div class="body">
+      <p class="dv"><b>The build.</b> Architecture, integrations, and the hard technical problem you solved.</p>
+      <p class="ds"><b>The design.</b> Who used it, what confused them, and what you changed.</p>
+      <p>Result: add one real number here.</p></div></details>
+  <details><summary><span class="t">Project name two</span><span class="k">Industry, 2024</span></summary>
+    <div class="body">
+      <p class="dv"><b>The build.</b> A workflow you automated and the time it saved.</p>
+      <p class="ds"><b>The design.</b> The flows you sketched, tested, and simplified.</p>
+      <p>Result: add one real number here.</p></div></details>
+  <details><summary><span class="t">Project name three</span><span class="k">Industry, 2023</span></summary>
+    <div class="body">
+      <p class="dv"><b>The build.</b> A team you led or a system you untangled.</p>
+      <p class="ds"><b>The design.</b> A moment where research changed the product's direction.</p>
+      <p>Result: add one real number here.</p></div></details>
+</section>
+
+<section id="about" aria-labelledby="at">
+  <h2 id="at">About</h2>
+  <div class="about">
+    <div>
+      <p>I lead development teams, and I care about the person on the other side of the screen just as much as the code underneath.</p>
+      <p>Swap this for a few lines in your own voice about what you enjoy and what working with you is like.</p>
+    </div>
+    <dl>
+      <div><dt>Based in</dt><dd>New York City</dd></div>
+      <div><dt>Builds</dt><dd>Business applications</dd></div>
+      <div><dt>Designs</dt><dd>Workflows and interfaces</dd></div>
+      <div><dt>Off the clock</dt><dd>Add something real</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="contact" class="contact" aria-labelledby="ct">
+  <h3 id="ct">Let's build something.</h3>
+  <a class="cta" href="mailto:you@example.com">Email Tyler</a>
+</section>
+<footer>Tyler Shepherd. tylershepherddesign.com</footer>
+</main>
+<script>
+(function(){
+  var b=document.body,d=document.getElementById('bd'),s=document.getElementById('bs');
+  function set(m){b.className=m;d.setAttribute('aria-pressed',m==='dev');s.setAttribute('aria-pressed',m==='des')}
+  d.onclick=function(){set('dev')};s.onclick=function(){set('des')};
+})();
+</script>
+</body>
+</html>
