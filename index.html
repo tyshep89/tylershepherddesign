@@ -7,10 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f6f9;--ink:#0f1a3a;--muted:#59627c;--line:#cfd5e3;--accent:#2b44ff;--on:#fff;--soft:#e8ebf4;--coral:#ff5c39;--sun:#ffc933;--dk:#0f1a3a;
+:root{--bg:#f5f6f9;--ink:#0f1a3a;--muted:#59627c;--line:#cfd5e3;--accent:#2b44ff;--on:#fff;--soft:#e8ebf4;--coral:#ff5c39;--sun:#ffc933;--dk:#0f1a3a;--to:#e2342f;--tf:#ff8a2a;--ts:#f06a1e;
 box-sizing:border-box}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f;--dk:#070b1d}}
-:root[data-theme="dark"]{--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f;--dk:#070b1d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f;--dk:#070b1d;--to:#ff5c57;--tf:#ffa347;--ts:#ff8a3d}}
+:root[data-theme="dark"]{--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f;--dk:#070b1d;--to:#ff5c57;--tf:#ffa347;--ts:#ff8a3d}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:4rem}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 "Schibsted Grotesk",system-ui,sans-serif;overflow-x:clip;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -27,19 +27,25 @@ h1 em{font-style:normal;color:var(--accent)}
 .wd>span{display:inline-block;transform:translateY(110%);animation:up .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d)*70ms + 150ms)}
 @keyframes up{to{transform:none}}
 h2{font-weight:900;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.04em;line-height:1;margin:0 0 1.5rem}
-.hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:clip;padding:5rem 0 4rem}
-.hero .lede{max-width:34rem;color:var(--muted);font-size:1.3rem;margin:1.75rem 0 0;position:relative;z-index:1;opacity:0;animation:fade .8s 1s forwards}
 @keyframes fade{to{opacity:1}}
-.shapes{position:absolute;inset:0;pointer-events:none}
-.sh{position:absolute;will-change:transform;opacity:.92}
-.c{border-radius:50%;background:var(--accent)}
-.q{background:var(--coral);border-radius:14px}
-.r{border-radius:50%;border:clamp(10px,2vw,18px) solid var(--ink)}
-.t{background:var(--sun);clip-path:polygon(50% 0,100% 100%,0 100%)}
-.band{overflow:hidden;border-block:2px solid var(--ink);padding:1rem 0;background:var(--sun);color:#0f1a3a}
+.hero{position:relative;z-index:1;min-height:88vh;display:flex;align-items:center;padding:5rem 0 4rem}
+.hero .w{width:100%}
+.lede{max-width:34rem;color:var(--muted);font-size:1.3rem;margin:1.75rem 0 0;position:relative;z-index:1;opacity:0;animation:fade .8s 1s forwards}
+.zone{position:relative}
+.bgstage{position:sticky;top:0;height:100vh;height:100svh;margin-bottom:-100vh;margin-bottom:-100svh;pointer-events:none;z-index:0;opacity:.32}
+@media (prefers-color-scheme:dark){.bgstage{opacity:.4}}
+.stage{position:absolute;right:4vw;top:50%;width:min(520px,46vw);aspect-ratio:17/16.6;transform:translateY(-46%)}
+#hand{position:absolute;inset:0;transform-origin:48% 97%}
+#hand.wave{animation:wave 1.1s ease-in-out 1}
+@keyframes wave{0%,100%{transform:none}25%{transform:rotate(-10deg)}75%{transform:rotate(14deg)}}
+.b{position:absolute;left:0;top:0;border-radius:6px;background:var(--c);will-change:transform;box-shadow:inset 0 -4px 0 rgba(0,0,0,.06),inset 0 3px 0 rgba(255,255,255,.18)}
+.b::before{content:"";position:absolute;left:6%;right:6%;top:-5px;height:6px;background:radial-gradient(circle at 50% 100%,var(--c) 0 3px,transparent 3.6px) 0 0/calc(100%/var(--n)) 100% repeat-x}
+@media (max-width:800px){.stage{right:auto;left:50%;width:84vw;transform:translate(-50%,-40%)}.lede{font-size:1.1rem}h1{font-size:clamp(2.3rem,10vw,3.6rem)}}
+.band{position:relative;z-index:1;overflow:hidden;border-block:2px solid var(--ink);padding:1rem 0;background:var(--sun);color:#0f1a3a}
 .band div{white-space:nowrap;font-weight:900;font-size:clamp(2.4rem,7vw,5rem);letter-spacing:-.04em;will-change:transform}
 section{position:relative}
-.about{padding:6rem 0 7rem}
+.about{position:relative;z-index:1;padding:6rem 0 7rem}
+.ov{background:color-mix(in srgb,var(--bg) 58%,transparent);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border:1px solid var(--line);border-radius:28px;padding:clamp(1.5rem,4vw,3rem);box-shadow:0 30px 60px -30px rgba(15,26,58,.35)}
 .ab{display:grid;gap:3rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}
 .ab p{margin:0 0 1.1rem;max-width:34rem}
 .ab p:first-child{font-size:1.4rem;font-weight:500}
@@ -96,24 +102,17 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
 <div id="prog"></div>
 <nav aria-label="Main"><div class="w"><span>Tyler Shepherd</span><div><a href="#about">About me</a><a href="#approach">My approach</a><a href="#resume">Resume</a><a href="#contact">Contact</a></div></div></nav>
 
-<header class="hero">
-  <div class="shapes" id="shapes" aria-hidden="true">
-    <div class="sh c" style="left:62%;top:14%;width:clamp(70px,13vw,150px);aspect-ratio:1" data-s=".18" data-x="-260" data-y="200" data-r="0"></div>
-    <div class="sh q" style="left:80%;top:10%;width:clamp(60px,11vw,120px);aspect-ratio:1" data-s=".32" data-x="120" data-y="280" data-r="40"></div>
-    <div class="sh r" style="left:70%;top:42%;width:clamp(80px,14vw,160px);aspect-ratio:1" data-s=".1" data-x="200" data-y="-120" data-r="0"></div>
-    <div class="sh t" style="left:88%;top:44%;width:clamp(60px,10vw,110px);aspect-ratio:1" data-s=".26" data-x="-300" data-y="-160" data-r="-65"></div>
-    <div class="sh c" style="left:58%;top:70%;width:clamp(40px,7vw,80px);aspect-ratio:1;background:var(--coral)" data-s=".4" data-x="320" data-y="-240" data-r="0"></div>
-    <div class="sh q" style="left:78%;top:72%;width:clamp(70px,12vw,130px);aspect-ratio:1;background:var(--accent)" data-s=".14" data-x="-180" data-y="-300" data-r="-30"></div>
-  </div>
-  <div class="w">
-    <h1 id="h1">I turn messy problems into things <em>people love</em> to use.</h1>
-    <p class="lede">Hi, I'm Tyler. I design and build business applications, and I am happiest where UX and UI, problem solving, and clear thinking meet.</p>
-  </div>
-</header>
+<div class="zone">
+<div class="bgstage" aria-hidden="true"><div class="stage" id="stage"><div id="hand"></div></div></div>
+<header class="hero" id="hero"><div class="w">
+  <h1 id="h1">I turn messy problems into things <em>people love</em> to use.</h1>
+  <p class="lede">Hi, I'm Tyler. I design and build business applications, and I am happiest where UX and UI, problem solving, and clear thinking meet.</p>
+</div></header>
 
 <div class="band" aria-hidden="true"><div id="band">Ask why • Map the journey • Reframe • Design small • Prove impact • Ask why • Map the journey • Reframe • Design small • Prove impact •</div></div>
 
 <section id="about" class="about"><div class="w">
+<div class="ov">
   <h2 class="rv">About me</h2>
   <div class="ab">
     <div>
@@ -129,8 +128,10 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
       <div class="rv" style="--d:5"><dt>Lives with</dt><dd>A cattle dog mix who hates stairs</dd></div>
     </dl>
   </div>
+</div>
 </div></section>
 
+</div>
 <section id="approach" class="dark"><div class="bgnum" id="bgnum" aria-hidden="true">05</div><div class="w">
   <h2 class="rv">My approach to design</h2>
   <p class="intro rv" style="--d:1">Five steps from a messy problem to a measurable result. Click through them, or hit next.</p>
@@ -174,17 +175,45 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   // reveal on scroll
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+  // building blocks: a pixel art waving hand in tonal shades of the background
+  var ART=["........oo.......", ".......offooo....", ".....oooffoffo...", "....offoffoffooo.", "....offoffoffoffo", ".oo.offoffoffoffo", "offooffoffoffoffo", "offooffoffoffoffo", "offfffffffffffffo", ".offfffffffffffso", "..oofffffffffffso", "....offfffffffso.", ".....offfffffso..", "......offfffso...", ".......offfso....", "........ooooo...."],
+  TONE={o:'var(--to)',f:'var(--tf)',s:'var(--ts)'},SEQ=[3,2,4,2,3],BL=[],stage=$('stage'),hand=$('hand'),W=1,U=1,solved=false,R=ART.length;
+  function rnd(i,k){var x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x)}
+  function mk(col,row,n,ch){
+    var el=document.createElement('div'),i=BL.length;el.className='b';el.style.setProperty('--c',TONE[ch]);el.style.setProperty('--n',n);hand.appendChild(el);
+    BL.push({el:el,col:col,row:row,n:n,st:.42*(R-1-row)/(R-1)+rnd(i,4)*.06,dx:(rnd(i,1)*2-1)*.9,dy:(rnd(i,2)*2-1)*.8,r:(rnd(i,3)*2-1)*110});
+  }
+  ART.forEach(function(line,ri){
+    var c=0,k=ri%SEQ.length;
+    while(c<line.length){
+      var ch=line.charAt(c);if(ch==='.'){c++;continue}
+      var e=c;while(e<line.length&&line.charAt(e)===ch)e++;
+      var left=e-c,pos=c;
+      while(left>0){var n=Math.min(left,SEQ[k++%SEQ.length]);mk(pos,ri,n,ch);pos+=n;left-=n}
+      c=e;
+    }
+  });
+  function size(){W=stage.clientWidth;U=W/17;BL.forEach(function(b){b.el.style.width=(b.n*U-2)+'px';b.el.style.height=(U-2)+'px'})}
+  function ob(t){var c1=1.5,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)}
+  function place(p){
+    if(!W||W===1)size();
+    BL.forEach(function(b){
+      var t=Math.max(0,Math.min(1,(p-b.st)/.5)),e=1-ob(t);
+      b.el.style.transform='translate3d('+(b.col*U+1+b.dx*W*e)+'px,'+(b.row*U+9+b.dy*W*e)+'px,0) rotate('+(b.r*e)+'deg)';
+    });
+    var ok=p>=.985;
+    if(ok&&!solved){hand.classList.remove('wave');void hand.offsetWidth;hand.classList.add('wave')}
+    if(!ok)hand.classList.remove('wave');
+    solved=ok;
+  }
+  size();
   // scroll effects
-  var sh=[].slice.call(document.querySelectorAll('.sh')),hero=document.querySelector('.hero'),band=$('band'),bg=$('bgnum'),ap=$('approach'),ct=$('contact'),pg=$('prog');
+  var ab=$('about'),band=$('band'),bg=$('bgnum'),ap=$('approach'),ct=$('contact'),pg=$('prog');
   function clamp(v){return Math.max(0,Math.min(1,v))}
   function upd(){
-    var y=window.scrollY,vh=innerHeight,hh=hero.offsetHeight;
+    var y=window.scrollY,vh=innerHeight;
     pg.style.width=(y/(document.documentElement.scrollHeight-vh)*100)+'%';
-    var p=clamp(y/(hh*.8)),e=1-Math.pow(1-p,3);
-    sh.forEach(function(s){
-      var x=+s.dataset.x*(1-e),yy=+s.dataset.y*(1-e)+y*+s.dataset.s,r=+s.dataset.r*(1-e)+y*.04;
-      s.style.transform='translate3d('+x+'px,'+yy+'px,0) rotate('+r+'deg)';
-    });
+    place(clamp(y/Math.max(1,ab.offsetTop-vh*.3)));
     var br=band.parentNode.getBoundingClientRect();
     band.style.transform='translateX('+(br.top*-.6)+'px)';
     var ar=ap.getBoundingClientRect();
@@ -193,8 +222,8 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
     ct.style.setProperty('--r',(q*150)+'%');
     ct.classList.toggle('on',q>.7);
   }
-  if(!RM){var t=false;addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){upd();t=false})}},{passive:true});addEventListener('resize',upd);upd()}
-  else{sh.forEach(function(s){s.style.transform='rotate('+s.dataset.r*0+'deg)'});ct.classList.add('on')}
+  if(!RM){var t=false;addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){upd();t=false})}},{passive:true});addEventListener('resize',function(){size();upd()});upd()}
+  else{place(1);ct.classList.add('on')}
   // approach stepper
   var S=[
     {n:'Ask why',h:'Start with the problem, not the solution.',p:'Everyone arrives with an answer. I slow the room down until we agree on what is actually broken and who feels it.',q:'What problem are we solving, and for whom?',w:'The first solution anyone suggests.'},
