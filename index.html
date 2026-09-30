@@ -7,49 +7,69 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f6f9;--ink:#0f1a3a;--muted:#59627c;--line:#cfd5e3;--accent:#2b44ff;--on:#fff;--soft:#e8ebf4;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f}}
-:root[data-theme="dark"]{--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f}
+:root{--bg:#f5f6f9;--ink:#0f1a3a;--muted:#59627c;--line:#cfd5e3;--accent:#2b44ff;--on:#fff;--soft:#e8ebf4;--coral:#ff5c39;--sun:#ffc933;--dk:#0f1a3a;
+box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f;--dk:#070b1d}}
+:root[data-theme="dark"]{--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f;--dk:#070b1d}
 *{box-sizing:border-box}
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 "Schibsted Grotesk",system-ui,sans-serif}
-main{max-width:1040px;margin:0 auto;padding:0 1.5rem 3rem}
-nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;font-weight:600;flex-wrap:wrap;gap:.75rem}
-nav a{color:var(--ink);text-decoration:none;margin-left:1.5rem}
-nav a:first-child{margin-left:0}
+html{scroll-behavior:smooth;scroll-padding-top:4rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 "Schibsted Grotesk",system-ui,sans-serif;overflow-x:clip;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.w{max-width:1040px;margin:0 auto;padding:0 1.5rem;position:relative}
+#prog{position:fixed;top:0;left:0;height:4px;width:0;background:var(--coral);z-index:30}
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+nav .w{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;padding-bottom:1rem;font-weight:700;flex-wrap:wrap;gap:.5rem}
+nav a{color:var(--ink);text-decoration:none;margin-left:1.4rem;font-weight:600}
 nav a:hover{color:var(--accent)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-h1{font-weight:900;font-size:clamp(2.8rem,8.5vw,6.6rem);line-height:.96;letter-spacing:-.045em;margin:0;max-width:13ch}
+h1{font-weight:900;font-size:clamp(2.9rem,9vw,7rem);line-height:.96;letter-spacing:-.045em;margin:0;max-width:12ch;position:relative;z-index:1}
 h1 em{font-style:normal;color:var(--accent)}
-h2{font-weight:900;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.04em;line-height:1;margin:0 0 1.25rem}
-section{padding-top:5rem}
-.hero{padding:4.5rem 0 4rem;border-bottom:2px solid var(--ink)}
-.lede{max-width:34rem;color:var(--muted);font-size:1.3rem;margin:1.75rem 0 0}
-.about{display:grid;gap:3rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}
-.about p{margin:0 0 1.1rem;max-width:34rem}
-.about p:first-child{font-size:1.35rem;font-weight:500}
+.wd{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
+.wd>span{display:inline-block;transform:translateY(110%);animation:up .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d)*70ms + 150ms)}
+@keyframes up{to{transform:none}}
+h2{font-weight:900;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.04em;line-height:1;margin:0 0 1.5rem}
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:clip;padding:5rem 0 4rem}
+.hero .lede{max-width:34rem;color:var(--muted);font-size:1.3rem;margin:1.75rem 0 0;position:relative;z-index:1;opacity:0;animation:fade .8s 1s forwards}
+@keyframes fade{to{opacity:1}}
+.shapes{position:absolute;inset:0;pointer-events:none}
+.sh{position:absolute;will-change:transform;opacity:.92}
+.c{border-radius:50%;background:var(--accent)}
+.q{background:var(--coral);border-radius:14px}
+.r{border-radius:50%;border:clamp(10px,2vw,18px) solid var(--ink)}
+.t{background:var(--sun);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.band{overflow:hidden;border-block:2px solid var(--ink);padding:1rem 0;background:var(--sun);color:#0f1a3a}
+.band div{white-space:nowrap;font-weight:900;font-size:clamp(2.4rem,7vw,5rem);letter-spacing:-.04em;will-change:transform}
+section{position:relative}
+.about{padding:6rem 0 7rem}
+.ab{display:grid;gap:3rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}
+.ab p{margin:0 0 1.1rem;max-width:34rem}
+.ab p:first-child{font-size:1.4rem;font-weight:500}
 dl{margin:0;border-top:2px solid var(--ink)}
 dl div{display:flex;justify-content:space-between;gap:1.5rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
 dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:right}
+.rv{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*90ms)}
+.rv.in{opacity:1;transform:none}
+.dark{background:var(--dk);color:#eef1fb;--ink:#eef1fb;--muted:#a9b2cf;--line:#2c3760;--soft:#1a2448;--accent:#8ea0ff;--on:#0a1026;clip-path:polygon(0 5rem,100% 0,100% calc(100% - 5rem),0 100%);padding:11rem 0 12rem;margin:-2.5rem 0}
+.bgnum{position:absolute;right:-1rem;top:4rem;font-weight:900;font-size:clamp(10rem,32vw,26rem);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px #2c3760;will-change:transform;pointer-events:none}
 .intro{color:var(--muted);max-width:36rem;margin:0 0 2rem}
-.path{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:.5rem;overflow-x:auto;padding-bottom:.5rem}
-.path button{font:600 1rem "Schibsted Grotesk",sans-serif;text-align:left;background:var(--soft);color:var(--ink);border:0;border-radius:10px;padding:.9rem 1rem;cursor:pointer;transition:background .25s,color .25s}
-.path button b{display:block;font-size:1.6rem;font-weight:900;letter-spacing:-.04em;color:var(--accent);transition:color .25s}
+.path{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:.5rem;overflow-x:auto;padding-bottom:.5rem;position:relative}
+.path button{font:600 1rem "Schibsted Grotesk",sans-serif;text-align:left;background:var(--soft);color:var(--ink);border:0;border-radius:12px;padding:.9rem 1rem;cursor:pointer;transition:background .25s,color .25s,transform .25s}
+.path button:hover{transform:translateY(-3px)}
+.path button b{display:block;font-size:1.7rem;font-weight:900;letter-spacing:-.04em;color:var(--accent)}
 .path button[aria-selected="true"]{background:var(--accent);color:var(--on)}
 .path button[aria-selected="true"] b{color:var(--on)}
 .bar{height:4px;background:var(--line);border-radius:2px;margin:.75rem 0 2rem}
-.bar i{display:block;height:100%;width:20%;background:var(--accent);border-radius:2px;transition:width .4s ease}
-.panel{display:grid;gap:2rem 3rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));animation:in .4s ease}
-@keyframes in{from{opacity:0;transform:translateY(.4em)}to{opacity:1;transform:none}}
-.panel h3{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900;letter-spacing:-.035em;line-height:1.02;margin:0 0 .75rem}
+.bar i{display:block;height:100%;width:20%;background:var(--coral);border-radius:2px;transition:width .4s ease}
+.panel{display:grid;gap:2rem 3rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));animation:in .45s ease;position:relative}
+@keyframes in{from{opacity:0;transform:translateY(.5em)}to{opacity:1;transform:none}}
+.panel h3{font-size:clamp(1.9rem,4.8vw,3.2rem);font-weight:900;letter-spacing:-.035em;line-height:1.02;margin:0 0 .75rem}
 .panel p{margin:0;color:var(--muted);max-width:32rem}
-.ask{border-left:6px solid var(--accent);padding-left:1.25rem}
+.ask{border-left:6px solid var(--coral);padding-left:1.25rem}
 .ask small,.watch small{display:block;color:var(--muted);font-size:.95rem;margin-bottom:.35rem}
-.ask q{display:block;font-size:1.45rem;font-weight:700;line-height:1.3;quotes:none;letter-spacing:-.01em}
-.watch{margin-top:1.25rem;font-weight:500}
-.next{margin-top:2rem;font:600 1rem "Schibsted Grotesk",sans-serif;background:none;color:var(--accent);border:2px solid var(--accent);border-radius:999px;padding:.7rem 1.4rem;cursor:pointer}
+.ask q{display:block;font-size:1.5rem;font-weight:700;line-height:1.3;quotes:none}
+.watch{margin-top:1.25rem;font-weight:500;color:#eef1fb!important}
+.next{margin-top:2rem;font:600 1rem "Schibsted Grotesk",sans-serif;background:none;color:var(--accent);border:2px solid var(--accent);border-radius:999px;padding:.7rem 1.4rem;cursor:pointer;position:relative}
 .next:hover{background:var(--accent);color:var(--on)}
+.resume{padding:8rem 0 6rem}
 .job{display:grid;gap:.25rem 2rem;grid-template-columns:minmax(150px,220px) 1fr;padding:1.5rem 0;border-bottom:1px solid var(--line)}
 .job:first-of-type{border-top:2px solid var(--ink)}
 .job .when{color:var(--muted)}
@@ -57,88 +77,140 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .job p{margin:0;color:var(--muted);max-width:38rem}
 @media (max-width:600px){.job{grid-template-columns:1fr}}
 .skills{display:flex;flex-wrap:wrap;gap:.6rem;margin:2rem 0 0;padding:0;list-style:none}
-.skills li{border:2px solid var(--ink);border-radius:999px;padding:.4rem 1rem;font-weight:600;font-size:.98rem}
+.skills li{border:2px solid var(--ink);border-radius:999px;padding:.4rem 1rem;font-weight:600;font-size:.98rem;transition:background .2s,color .2s,transform .2s}
+.skills li:hover{background:var(--sun);color:#0f1a3a;border-color:var(--sun);transform:rotate(-3deg) scale(1.06)}
 .cta{display:inline-block;background:var(--accent);color:var(--on);padding:1rem 1.75rem;border-radius:999px;font-weight:600;text-decoration:none;margin-top:2rem}
 .cta:hover{filter:brightness(1.08)}
-.contact{margin-top:5rem;padding-top:3rem;border-top:2px solid var(--ink)}
-.contact h2{font-size:clamp(2.4rem,7vw,5rem)}
-.contact p{max-width:30rem;color:var(--muted);margin:0 0 .5rem}
-.links{margin-top:1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;font-weight:600}
-.links a{color:var(--ink)}
-.links a:hover{color:var(--accent)}
-footer{margin-top:3rem;color:var(--muted);font-size:.9rem}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+.contact{padding:9rem 0 5rem;overflow:clip;min-height:80vh;display:flex;flex-direction:column;justify-content:center;transition:color .4s}
+.contact::before{content:"";position:absolute;inset:0;background:var(--accent);clip-path:circle(var(--r,0%) at 50% 100%)}
+.contact.on{color:var(--on)}
+.contact h2{font-size:clamp(3rem,10vw,7.5rem);margin-bottom:1rem}
+.contact p{max-width:30rem;margin:0 0 1rem}
+.links{display:flex;gap:1.5rem;flex-wrap:wrap;font-weight:700;font-size:1.25rem}
+.links a{color:inherit}
+footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(--bg)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}.rv{opacity:1;transform:none}.wd>span{transform:none}.hero .lede{opacity:1}.contact::before{clip-path:none}.contact{color:var(--on)}}
 </style>
 </head>
 <body>
-<main>
-<nav aria-label="Main"><span>Tyler Shepherd</span><div><a href="#about">About me</a><a href="#approach">My approach</a><a href="#resume">Resume</a><a href="#contact">Contact</a></div></nav>
+<div id="prog"></div>
+<nav aria-label="Main"><div class="w"><span>Tyler Shepherd</span><div><a href="#about">About me</a><a href="#approach">My approach</a><a href="#resume">Resume</a><a href="#contact">Contact</a></div></div></nav>
 
 <header class="hero">
-  <h1>I turn messy problems into things <em>people love</em> to use.</h1>
-  <p class="lede">Hi, I'm Tyler. I design and build business applications, and I am happiest where UX and UI, problem solving, and clear thinking meet.</p>
+  <div class="shapes" id="shapes" aria-hidden="true">
+    <div class="sh c" style="left:62%;top:14%;width:clamp(70px,13vw,150px);aspect-ratio:1" data-s=".18" data-x="-260" data-y="200" data-r="0"></div>
+    <div class="sh q" style="left:80%;top:10%;width:clamp(60px,11vw,120px);aspect-ratio:1" data-s=".32" data-x="120" data-y="280" data-r="40"></div>
+    <div class="sh r" style="left:70%;top:42%;width:clamp(80px,14vw,160px);aspect-ratio:1" data-s=".1" data-x="200" data-y="-120" data-r="0"></div>
+    <div class="sh t" style="left:88%;top:44%;width:clamp(60px,10vw,110px);aspect-ratio:1" data-s=".26" data-x="-300" data-y="-160" data-r="-65"></div>
+    <div class="sh c" style="left:58%;top:70%;width:clamp(40px,7vw,80px);aspect-ratio:1;background:var(--coral)" data-s=".4" data-x="320" data-y="-240" data-r="0"></div>
+    <div class="sh q" style="left:78%;top:72%;width:clamp(70px,12vw,130px);aspect-ratio:1;background:var(--accent)" data-s=".14" data-x="-180" data-y="-300" data-r="-30"></div>
+  </div>
+  <div class="w">
+    <h1 id="h1">I turn messy problems into things <em>people love</em> to use.</h1>
+    <p class="lede">Hi, I'm Tyler. I design and build business applications, and I am happiest where UX and UI, problem solving, and clear thinking meet.</p>
+  </div>
 </header>
 
-<section id="about" aria-labelledby="at">
-  <h2 id="at">About me</h2>
-  <div class="about">
+<div class="band" aria-hidden="true"><div id="band">Ask why • Map the journey • Reframe • Design small • Prove impact • Ask why • Map the journey • Reframe • Design small • Prove impact •</div></div>
+
+<section id="about" class="about"><div class="w">
+  <h2 class="rv">About me</h2>
+  <div class="ab">
     <div>
-      <p>I am the person who asks "wait, what problem are we actually solving?" and then stays curious until we know.</p>
-      <p>I am drawn to simple, honest design, and I bring the same instinct to how I live. Less clutter, more clarity, and a good reason behind every choice.</p>
-      <p>Replace this with a line or two in your own voice about what makes working with you different.</p>
+      <p class="rv" style="--d:1">I am the person who asks "wait, what problem are we actually solving?" and then stays curious until we know.</p>
+      <p class="rv" style="--d:2">I am drawn to simple, honest design, and I bring the same instinct to how I live. Less clutter, more clarity, and a good reason behind every choice.</p>
+      <p class="rv" style="--d:3">Replace this with a line or two in your own voice about what makes working with you different.</p>
     </div>
     <dl>
-      <div><dt>Based in</dt><dd>New York City</dd></div>
-      <div><dt>Thinks in</dt><dd>Systems and journeys</dd></div>
-      <div><dt>Leans toward</dt><dd>Minimalism</dd></div>
-      <div><dt>Keeps coming back to</dt><dd>Stoic philosophy</dd></div>
-      <div><dt>Lives with</dt><dd>A cattle dog mix who hates stairs</dd></div>
+      <div class="rv" style="--d:1"><dt>Based in</dt><dd>New York City</dd></div>
+      <div class="rv" style="--d:2"><dt>Thinks in</dt><dd>Systems and journeys</dd></div>
+      <div class="rv" style="--d:3"><dt>Leans toward</dt><dd>Minimalism</dd></div>
+      <div class="rv" style="--d:4"><dt>Keeps coming back to</dt><dd>Stoic philosophy</dd></div>
+      <div class="rv" style="--d:5"><dt>Lives with</dt><dd>A cattle dog mix who hates stairs</dd></div>
     </dl>
   </div>
-</section>
+</div></section>
 
-<section id="approach" aria-labelledby="pt">
-  <h2 id="pt">My approach to design</h2>
-  <p class="intro">Five steps from a messy problem to a measurable result. Click through them, or hit next.</p>
-  <div class="path" role="tablist" aria-label="Design steps" id="tabs"></div>
-  <div class="bar" aria-hidden="true"><i id="fill"></i></div>
+<section id="approach" class="dark"><div class="bgnum" id="bgnum" aria-hidden="true">05</div><div class="w">
+  <h2 class="rv">My approach to design</h2>
+  <p class="intro rv" style="--d:1">Five steps from a messy problem to a measurable result. Click through them, or hit next.</p>
+  <div class="rv" style="--d:2"><div class="path" role="tablist" aria-label="Design steps" id="tabs"></div>
+  <div class="bar" aria-hidden="true"><i id="fill"></i></div></div>
   <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
   <button class="next" id="next">Next step</button>
-</section>
+</div></section>
 
-<section id="resume" aria-labelledby="rt">
-  <h2 id="rt">Resume</h2>
-  <div class="job"><div class="when">Add dates</div><div><h3>Principal Consultant, Appian</h3><p>Lead development teams on business process and low code delivery, and lead UX and UI design and user research. Add two or three results with real numbers.</p></div></div>
-  <div class="job"><div class="when">Add dates</div><div><h3>Previous role</h3><p>One or two lines on what you did and what changed because of it.</p></div></div>
+<section id="resume" class="resume"><div class="w">
+  <h2 class="rv">Resume</h2>
+  <div class="job rv" style="--d:1"><div class="when">Add dates</div><div><h3>Principal Consultant, Appian</h3><p>Lead development teams on business process and low code delivery, and lead UX and UI design and user research. Add two or three results with real numbers.</p></div></div>
+  <div class="job rv" style="--d:2"><div class="when">Add dates</div><div><h3>Previous role</h3><p>One or two lines on what you did and what changed because of it.</p></div></div>
   <ul class="skills" aria-label="Skills">
-    <li>UX and UI design</li><li>User research and interviews</li><li>Journey and process mapping</li><li>Workshop facilitation</li><li>Design thinking</li><li>Critical thinking</li><li>Low code development</li><li>Team leadership</li>
+    <li class="rv" style="--d:1">UX and UI design</li><li class="rv" style="--d:2">User research and interviews</li><li class="rv" style="--d:3">Journey and process mapping</li><li class="rv" style="--d:4">Workshop facilitation</li><li class="rv" style="--d:5">Design thinking</li><li class="rv" style="--d:6">Critical thinking</li><li class="rv" style="--d:7">Low code development</li><li class="rv" style="--d:8">Team leadership</li>
   </ul>
-  <a class="cta" href="resume.pdf">Download my resume</a>
-</section>
+  <a class="cta rv" style="--d:3" href="resume.pdf">Download my resume</a>
+</div></section>
 
-<section id="contact" class="contact" aria-labelledby="ct">
-  <h2 id="ct">Let's talk.</h2>
+<section id="contact" class="contact"><div class="w">
+  <h2>Let's talk.</h2>
   <p>If you have a problem worth solving or a role you think fits, I would love to hear about it.</p>
   <div class="links"><a href="mailto:you@example.com">you@example.com</a><a href="https://www.linkedin.com/in/your-profile">LinkedIn</a></div>
-</section>
-<footer>Tyler Shepherd. tylershepherddesign.com</footer>
-</main>
+</div></section>
+<footer><div class="w">Tyler Shepherd. tylershepherddesign.com</div></footer>
+
 <script>
 (function(){
+  var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,$=function(i){return document.getElementById(i)};
+  // headline word reveal
+  var h=$('h1'),n=0;
+  function split(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(c){
+      if(c.nodeType===3){var f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(function(t){
+        if(!t)return; if(/^\s+$/.test(t)){f.appendChild(document.createTextNode(' '));return}
+        var o=document.createElement('span');o.className='wd';var i=document.createElement('span');i.textContent=t;i.style.setProperty('--d',n++);o.appendChild(i);f.appendChild(o)});
+        node.replaceChild(f,c)}
+      else if(c.nodeType===1)split(c)});
+  }
+  split(h);
+  // reveal on scroll
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+  // scroll effects
+  var sh=[].slice.call(document.querySelectorAll('.sh')),hero=document.querySelector('.hero'),band=$('band'),bg=$('bgnum'),ap=$('approach'),ct=$('contact'),pg=$('prog');
+  function clamp(v){return Math.max(0,Math.min(1,v))}
+  function upd(){
+    var y=window.scrollY,vh=innerHeight,hh=hero.offsetHeight;
+    pg.style.width=(y/(document.documentElement.scrollHeight-vh)*100)+'%';
+    var p=clamp(y/(hh*.8)),e=1-Math.pow(1-p,3);
+    sh.forEach(function(s){
+      var x=+s.dataset.x*(1-e),yy=+s.dataset.y*(1-e)+y*+s.dataset.s,r=+s.dataset.r*(1-e)+y*.04;
+      s.style.transform='translate3d('+x+'px,'+yy+'px,0) rotate('+r+'deg)';
+    });
+    var br=band.parentNode.getBoundingClientRect();
+    band.style.transform='translateX('+(br.top*-.6)+'px)';
+    var ar=ap.getBoundingClientRect();
+    bg.style.transform='translateY('+(ar.top*-.18)+'px)';
+    var cr=ct.getBoundingClientRect(),q=clamp((vh-cr.top)/(vh*.85));
+    ct.style.setProperty('--r',(q*150)+'%');
+    ct.classList.toggle('on',q>.7);
+  }
+  if(!RM){var t=false;addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){upd();t=false})}},{passive:true});addEventListener('resize',upd);upd()}
+  else{sh.forEach(function(s){s.style.transform='rotate('+s.dataset.r*0+'deg)'});ct.classList.add('on')}
+  // approach stepper
   var S=[
     {n:'Ask why',h:'Start with the problem, not the solution.',p:'Everyone arrives with an answer. I slow the room down until we agree on what is actually broken and who feels it.',q:'What problem are we solving, and for whom?',w:'The first solution anyone suggests.'},
     {n:'Map the journey',h:'See the whole day, not one screen.',p:'I map how work really flows, including the handoffs and the feelings along the way, because pain hides between the steps.',q:'Where does it slow down, and how does that feel?',w:'Workarounds that people stopped noticing.'},
     {n:'Reframe',h:'Pick the one thing worth fixing.',p:'There are always ten problems. I look for the one that unlocks the most and say no to the rest, out loud and with reasons.',q:'If we fix only one thing, which changes the most?',w:'Mistaking a loud problem for an important one.'},
     {n:'Design small',h:'Make it testable this week.',p:'I sketch, prototype, and put it in front of real people early. A rough idea that teaches me something beats a polished one that does not.',q:'What is the smallest version someone could try?',w:'Falling in love with my own first draft.'},
     {n:'Prove impact',h:'Tie it back to a result.',p:'A design earns its place when it moves something the business cares about. I decide how we will know it worked before we build.',q:'How will we know this worked?',w:'Measuring activity instead of outcomes.'}
-  ],t=document.getElementById('tabs'),pn=document.getElementById('panel'),f=document.getElementById('fill'),nx=document.getElementById('next'),cur=0;
-  S.forEach(function(s,i){var b=document.createElement('button');b.setAttribute('role','tab');b.innerHTML='<b>'+(i+1)+'</b>'+s.n;b.onclick=function(){go(i)};t.appendChild(b)});
+  ],t2=$('tabs'),pn=$('panel'),f=$('fill'),nx=$('next'),cur=0;
+  S.forEach(function(s,i){var b=document.createElement('button');b.setAttribute('role','tab');b.innerHTML='<b>'+(i+1)+'</b>'+s.n;b.onclick=function(){go(i)};t2.appendChild(b)});
   function go(i){
-    cur=i;var s=S[i],bs=t.children;
+    cur=i;var s=S[i],bs=t2.children;
     for(var k=0;k<bs.length;k++)bs[k].setAttribute('aria-selected',k===i);
     f.style.width=((i+1)/S.length*100)+'%';
     pn.style.animation='none';pn.offsetHeight;pn.style.animation='';
     pn.innerHTML='<div><h3>'+s.h+'</h3><p>'+s.p+'</p></div><div><div class="ask"><small>The question I ask</small><q>'+s.q+'</q></div><p class="watch"><small>What I watch out for</small>'+s.w+'</p></div>';
+    bg.textContent='0'+(i+1);
     nx.textContent=i===S.length-1?'Start over':'Next step';
   }
   nx.onclick=function(){go((cur+1)%S.length)};
