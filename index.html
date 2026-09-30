@@ -17,8 +17,9 @@ body.des{--accent:#ff5c39}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 "Schibsted Grotesk",system-ui,sans-serif;transition:background .3s,color .3s}
 main{max-width:1040px;margin:0 auto;padding:0 1.5rem 3rem}
-nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;font-weight:600}
-nav a{color:var(--ink);text-decoration:none;margin-left:1.5rem}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;font-weight:600;flex-wrap:wrap;gap:.75rem}
+nav a{color:var(--ink);text-decoration:none;margin-left:1.25rem}
+nav a:first-child{margin-left:0}
 nav a:hover{color:var(--accent)}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .hero{padding:5rem 0 4rem;border-bottom:2px solid var(--ink)}
@@ -30,69 +31,78 @@ body.dev h1 .d,body.des h1 .s{display:block}
 .switch{display:inline-flex;background:var(--ink);border-radius:999px;padding:4px}
 .switch button{font:600 1rem "Schibsted Grotesk",sans-serif;border:0;background:none;color:var(--bg);padding:.65rem 1.4rem;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
 .switch button[aria-pressed="true"]{background:var(--accent);color:var(--on)}
-h2{font-size:1rem;font-weight:600;color:var(--muted);margin:4rem 0 .5rem}
-details{border-bottom:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:1.4rem 0}
-summary::-webkit-details-marker{display:none}
-.t{font-size:clamp(1.7rem,4.5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;transition:color .2s}
-summary:hover .t,details[open] .t{color:var(--accent)}
-.k{color:var(--muted);font-weight:500;white-space:nowrap}
-.body{padding:0 0 1.75rem;max-width:40rem;color:var(--muted)}
-.body p{margin:.3rem 0}
-.body .dv,.body .ds{display:none}
-body.dev .dv,body.des .ds{display:block}
-.body b{color:var(--ink)}
-.about{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));padding-top:1rem}
+h2{font-size:1rem;font-weight:600;color:var(--muted);margin:4.5rem 0 .75rem}
+.principles{display:grid;gap:2rem 2.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:1.5rem}
+.principles h3{font-size:1.6rem;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:0 0 .5rem}
+.principles h3 b{color:var(--accent);margin-right:.5rem}
+.principles p{margin:0;color:var(--muted)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:1.4rem 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.row:first-of-type{border-top:1px solid var(--line)}
+.row .t{font-size:clamp(1.6rem,4.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;transition:color .2s}
+.row:hover .t{color:var(--accent)}
+.row .k{color:var(--muted);font-weight:500;text-align:right}
+.note{color:var(--muted);max-width:36rem;margin:1rem 0 0}
+.job{display:grid;gap:.25rem 2rem;grid-template-columns:minmax(150px,220px) 1fr;padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.job:first-of-type{border-top:1px solid var(--line)}
+.job .when{color:var(--muted)}
+.job h3{font-size:1.35rem;font-weight:800;letter-spacing:-.02em;margin:0 0 .4rem}
+.job p{margin:0;color:var(--muted);max-width:38rem}
+@media (max-width:600px){.job{grid-template-columns:1fr}}
+.cta{display:inline-block;background:var(--accent);color:var(--on);padding:.9rem 1.6rem;border-radius:999px;font-weight:600;text-decoration:none;margin-top:1.5rem;transition:background .3s}
+.cta:hover{filter:brightness(1.08)}
+.about{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 .about p{margin:0 0 1rem;max-width:32rem;font-size:1.2rem}
 dl{margin:0}
 dl div{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
 dt{color:var(--muted)}dd{margin:0;font-weight:600;text-align:right}
-.contact{margin-top:5rem;padding:3rem 0 0;border-top:2px solid var(--ink)}
-.contact h3{font-size:clamp(2rem,6vw,4rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin:0 0 1.5rem}
-.cta{display:inline-block;background:var(--accent);color:var(--on);padding:1rem 1.75rem;border-radius:999px;font-weight:600;text-decoration:none;transition:background .3s}
-.cta:hover{filter:brightness(1.08)}
+.contact{margin-top:5rem;padding-top:3rem;border-top:2px solid var(--ink)}
+.contact h3{font-size:clamp(2rem,6vw,4rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin:0}
 footer{margin-top:3rem;color:var(--muted);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
 </style>
 </head>
 <body class="dev">
 <main>
-<nav aria-label="Main"><span>Tyler Shepherd</span><div><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
- 
+<nav aria-label="Main"><span>Tyler Shepherd</span><div><a href="#work">Work</a><a href="#think">How I think</a><a href="#experience">Experience</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
+
 <header class="hero">
   <h1><span class="d">I build the systems.</span><span class="s">I shape the experience.</span></h1>
-  <p class="lede">Application developer and product designer in New York City. Pick a lens and every project below tells its story that way.</p>
+  <p class="lede">Application developer and product designer in New York City. Pick a lens and the page tells its story that way.</p>
   <div class="switch" role="group" aria-label="Choose a lens">
     <button id="bd" aria-pressed="true">Developer</button>
     <button id="bs" aria-pressed="false">Designer</button>
   </div>
 </header>
- 
+
 <section id="work" aria-labelledby="wt">
   <h2 id="wt">Selected work</h2>
-  <details open><summary><span class="t">Construction project management</span><span class="k">Appian, 2024</span></summary>
-    <div class="body">
-      <p class="dv"><b>The build.</b> Add what you built or configured for this client after discovery.</p>
-      <p class="ds"><b>The design.</b> I led UX and UI design and user interviews for an eight week discovery, replacing a patchwork of spreadsheets and email with one view for project managers.</p>
-      <p><a href="construction-case-study.html">Read the case study</a></p></div></details>
-  <details><summary><span class="t">Project name two</span><span class="k">Industry, 2024</span></summary>
-    <div class="body">
-      <p class="dv"><b>The build.</b> A workflow you automated and the time it saved.</p>
-      <p class="ds"><b>The design.</b> The flows you sketched, tested, and simplified.</p>
-      <p>Result: add one real number here.</p></div></details>
-  <details><summary><span class="t">Project name three</span><span class="k">Industry, 2023</span></summary>
-    <div class="body">
-      <p class="dv"><b>The build.</b> A team you led or a system you untangled.</p>
-      <p class="ds"><b>The design.</b> A moment where research changed the product's direction.</p>
-      <p>Result: add one real number here.</p></div></details>
+  <a class="row" href="case-study.html"><span class="t">Construction project management</span><span class="k">Case study, password protected</span></a>
+  <p class="note">My client work is confidential, so case studies are protected. Ask me for the password and I will share it when we talk.</p>
 </section>
- 
+
+<section id="think" aria-labelledby="tt">
+  <h2 id="tt">How I think about design</h2>
+  <div class="principles">
+    <div><h3><b>1</b>Ask why before what</h3><p>Shared understanding comes before solutions. I hold off on answers until the real problem is clear, even when everyone in the room wants to jump ahead.</p></div>
+    <div><h3><b>2</b>Map the whole journey</h3><p>A screen is only one moment in someone's day. I map the full process, the handoffs, and the feelings along the way to find where people actually struggle.</p></div>
+    <div><h3><b>3</b>Design for the person doing the work</h3><p>People want to do their job, not manage a process. Good design removes repetition so they can spend their time on work that matters.</p></div>
+    <div><h3><b>4</b>Tie every choice to an outcome</h3><p>A design earns its place when it moves a result the business cares about. I connect features to impact so priorities are easy to defend.</p></div>
+  </div>
+</section>
+
+<section id="experience" aria-labelledby="et">
+  <h2 id="et">Experience</h2>
+  <div class="job"><div class="when">Add dates</div><div><h3>Principal Consultant, Appian</h3><p>Lead development teams on business process and low code delivery engagements, and lead UX and UI design and user research on client projects. Add two or three results with real numbers.</p></div></div>
+  <div class="job"><div class="when">Add dates</div><div><h3>Previous role</h3><p>One or two lines on what you did and what changed because of it.</p></div></div>
+  <a class="cta" href="resume.pdf">Download my resume</a>
+</section>
+
 <section id="about" aria-labelledby="at">
   <h2 id="at">About</h2>
   <div class="about">
     <div>
-      <p>I lead development teams, and I care about the person on the other side of the screen just as much as the code underneath.</p>
-      <p>Swap this for a few lines in your own voice about what you enjoy and what working with you is like.</p>
+      <p>I care about the person on the other side of the screen just as much as the code underneath.</p>
+      <p>Swap this for a few lines in your own voice about what you enjoy, what you are curious about, and what working with you is like.</p>
     </div>
     <dl>
       <div><dt>Based in</dt><dd>New York City</dd></div>
@@ -102,7 +112,7 @@ footer{margin-top:3rem;color:var(--muted);font-size:.9rem}
     </dl>
   </div>
 </section>
- 
+
 <section id="contact" class="contact" aria-labelledby="ct">
   <h3 id="ct">Let's build something.</h3>
   <a class="cta" href="mailto:you@example.com">Email Tyler</a>
@@ -118,4 +128,3 @@ footer{margin-top:3rem;color:var(--muted);font-size:.9rem}
 </script>
 </body>
 </html>
- 
