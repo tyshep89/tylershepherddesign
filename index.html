@@ -41,8 +41,11 @@ h2{font-weight:900;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.04em;line-h
 .b{position:absolute;left:0;top:0;border-radius:6px;background:var(--c);will-change:transform;box-shadow:inset 0 -4px 0 rgba(0,0,0,.06),inset 0 3px 0 rgba(255,255,255,.18)}
 .b::before{content:"";position:absolute;left:6%;right:6%;top:-5px;height:6px;background:radial-gradient(circle at 50% 100%,var(--c) 0 3px,transparent 3.6px) 0 0/calc(100%/var(--n)) 100% repeat-x}
 @media (max-width:800px){.stage{width:84vw}.lede{font-size:1.1rem}h1{font-size:clamp(2.3rem,10vw,3.6rem)}}
-.band{position:fixed;left:0;right:0;bottom:0;z-index:25;overflow:hidden;border-top:2px solid #0f1a3a;padding:.55rem 0 calc(.55rem + env(safe-area-inset-bottom,0px));background:var(--sun);color:#0f1a3a}
-.band div{white-space:nowrap;font-weight:900;font-size:clamp(1.3rem,3vw,2rem);letter-spacing:-.03em;line-height:1.2;will-change:transform}
+.band{position:fixed;top:0;left:0;right:0;z-index:25;display:flex;align-items:stretch;background:var(--sun);color:#0f1a3a;border-top:2px solid #0f1a3a;padding-bottom:env(safe-area-inset-bottom,0px);will-change:transform;transform:translateY(110vh)}
+.lab{flex:none;background:#0f1a3a;color:#fff;font-weight:800;font-size:clamp(.85rem,2vw,1.05rem);padding:.6rem 1rem;display:flex;align-items:center;white-space:nowrap}
+.track{flex:1;overflow:hidden;display:flex;align-items:center;padding-left:1rem}
+.slot{height:3.4rem}
+#band{white-space:nowrap;font-weight:900;font-size:clamp(1.3rem,3vw,2rem);letter-spacing:-.03em;line-height:1.2;will-change:transform}
 section{position:relative}
 .about{position:relative;z-index:1;padding:6rem 0 7rem}
 .ov{background:color-mix(in srgb,var(--bg) 58%,transparent);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border:1px solid var(--line);border-radius:28px;padding:clamp(1.5rem,4vw,3rem);box-shadow:0 30px 60px -30px rgba(15,26,58,.35)}
@@ -100,7 +103,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
 </head>
 <body>
 <div id="prog"></div>
-<div class="band" aria-hidden="true"><div id="band"></div></div>
+<div class="band" aria-hidden="true"><div class="lab">More about me</div><div class="track"><div id="band"></div></div></div>
 <nav aria-label="Main"><div class="w"><span>Tyler Shepherd</span><div><a href="#about">About me</a><a href="#approach">My approach</a><a href="#resume">Resume</a><a href="#contact">Contact</a></div></div></nav>
 
 <div class="zone">
@@ -132,6 +135,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
 </div>
 </div></section>
 
+<div class="slot" id="slot"></div>
 </div>
 <section id="approach" class="dark"><div class="bgnum" id="bgnum" aria-hidden="true">05</div><div class="w">
   <h2 class="rv">My approach to design</h2>
@@ -209,17 +213,18 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   }
   size();
   // scroll effects
-  var ab=$('about'),band=$('band'),bg=$('bgnum'),ap=$('approach'),ct=$('contact'),pg=$('prog');
+  var ab=$('about'),band=$('band'),bg=$('bgnum'),ap=$('approach'),ct=$('contact'),bar=document.querySelector('.band'),slot=$('slot'),bh=56,pg=$('prog');
   function clamp(v){return Math.max(0,Math.min(1,v))}
   var WORDS=['Curious','Problem solver','Systems thinker','UX and UI designer','Application developer','Team lead','Minimalist','Stoic','Dog person'],setW=1;
   (function(){var t=WORDS.concat(WORDS).join(' \u2022 ')+' \u2022 ';for(var i=0;i<2;i++){var e=document.createElement('span');e.textContent=t;e.style.display='inline-block';band.appendChild(e)}})();
-  function meas(){setW=band.firstChild.getBoundingClientRect().width||1}
+  function meas(){setW=band.firstChild.getBoundingClientRect().width||1;bh=bar.offsetHeight||56;slot.style.height=bh+'px'}
+  function pos(){bar.style.transform='translateY('+Math.max(slot.getBoundingClientRect().top,innerHeight-bh)+'px)'}
   meas();addEventListener('load',meas);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(meas);
   function upd(){
     var y=window.scrollY,vh=innerHeight;
     pg.style.width=(y/(document.documentElement.scrollHeight-vh)*100)+'%';
     place(clamp(y/Math.max(1,ab.offsetTop-vh*.3)));
-    band.style.transform='translateX('+(-((y*.55)%setW))+'px)';
+    band.style.transform='translateX('+(-((y*.55)%setW))+'px)';pos();
     var ar=ap.getBoundingClientRect();
     bg.style.transform='translateY('+(ar.top*-.18)+'px)';
     var cr=ct.getBoundingClientRect(),q=clamp((vh-cr.top)/(vh*.85));
@@ -227,7 +232,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
     ct.classList.toggle('on',q>.7);
   }
   if(!RM){var t=false;addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){upd();t=false})}},{passive:true});addEventListener('resize',function(){size();meas();upd()});upd()}
-  else{place(1);ct.classList.add('on')}
+  else{place(1);ct.classList.add('on');addEventListener('scroll',pos,{passive:true});addEventListener('resize',function(){meas();pos()});pos()}
   // approach stepper
   var S=[
     {n:'Ask why',h:'Start with the problem, not the solution.',p:'Everyone arrives with an answer. I slow the room down until we agree on what is actually broken and who feels it.',q:'What problem are we solving, and for whom?',w:'The first solution anyone suggests.'},
