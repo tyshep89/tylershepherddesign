@@ -3,127 +3,146 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Tyler Shepherd | Application Developer and Product Designer</title>
+<title>Tyler Shepherd | Design, UX and Problem Solving</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f6f9;--ink:#0f1a3a;--muted:#59627c;--line:#cfd5e3;--accent:#2b44ff;--on:#fff;
+:root{--bg:#f5f6f9;--ink:#0f1a3a;--muted:#59627c;--line:#cfd5e3;--accent:#2b44ff;--on:#fff;--soft:#e8ebf4;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430}}
-:root[data-theme="dark"]{--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430}
-body.des{--accent:#ff5c39}
-@media (prefers-color-scheme:dark){body.des{--accent:#ff8a6b}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f}}
+:root[data-theme="dark"]{--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 "Schibsted Grotesk",system-ui,sans-serif;transition:background .3s,color .3s}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 "Schibsted Grotesk",system-ui,sans-serif}
 main{max-width:1040px;margin:0 auto;padding:0 1.5rem 3rem}
 nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;font-weight:600;flex-wrap:wrap;gap:.75rem}
-nav a{color:var(--ink);text-decoration:none;margin-left:1.25rem}
+nav a{color:var(--ink);text-decoration:none;margin-left:1.5rem}
 nav a:first-child{margin-left:0}
 nav a:hover{color:var(--accent)}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.hero{padding:5rem 0 4rem;border-bottom:2px solid var(--ink)}
-h1{font-weight:900;font-size:clamp(2.8rem,9.5vw,7.4rem);line-height:.95;letter-spacing:-.045em;margin:0;max-width:11ch}
-h1 span{display:none;animation:in .45s ease}
-body.dev h1 .d,body.des h1 .s{display:block}
-@keyframes in{from{opacity:0;transform:translateY(.25em)}to{opacity:1;transform:none}}
-.lede{max-width:32rem;color:var(--muted);font-size:1.25rem;margin:2rem 0}
-.switch{display:inline-flex;background:var(--ink);border-radius:999px;padding:4px}
-.switch button{font:600 1rem "Schibsted Grotesk",sans-serif;border:0;background:none;color:var(--bg);padding:.65rem 1.4rem;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
-.switch button[aria-pressed="true"]{background:var(--accent);color:var(--on)}
-h2{font-size:1rem;font-weight:600;color:var(--muted);margin:4.5rem 0 .75rem}
-.principles{display:grid;gap:2rem 2.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:1.5rem}
-.principles h3{font-size:1.6rem;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:0 0 .5rem}
-.principles h3 b{color:var(--accent);margin-right:.5rem}
-.principles p{margin:0;color:var(--muted)}
-.row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:1.4rem 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
-.row:first-of-type{border-top:1px solid var(--line)}
-.row .t{font-size:clamp(1.6rem,4.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;transition:color .2s}
-.row:hover .t{color:var(--accent)}
-.row .k{color:var(--muted);font-weight:500;text-align:right}
-.note{color:var(--muted);max-width:36rem;margin:1rem 0 0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h1{font-weight:900;font-size:clamp(2.8rem,8.5vw,6.6rem);line-height:.96;letter-spacing:-.045em;margin:0;max-width:13ch}
+h1 em{font-style:normal;color:var(--accent)}
+h2{font-weight:900;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.04em;line-height:1;margin:0 0 1.25rem}
+section{padding-top:5rem}
+.hero{padding:4.5rem 0 4rem;border-bottom:2px solid var(--ink)}
+.lede{max-width:34rem;color:var(--muted);font-size:1.3rem;margin:1.75rem 0 0}
+.about{display:grid;gap:3rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}
+.about p{margin:0 0 1.1rem;max-width:34rem}
+.about p:first-child{font-size:1.35rem;font-weight:500}
+dl{margin:0;border-top:2px solid var(--ink)}
+dl div{display:flex;justify-content:space-between;gap:1.5rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
+dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:right}
+.intro{color:var(--muted);max-width:36rem;margin:0 0 2rem}
+.path{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:.5rem;overflow-x:auto;padding-bottom:.5rem}
+.path button{font:600 1rem "Schibsted Grotesk",sans-serif;text-align:left;background:var(--soft);color:var(--ink);border:0;border-radius:10px;padding:.9rem 1rem;cursor:pointer;transition:background .25s,color .25s}
+.path button b{display:block;font-size:1.6rem;font-weight:900;letter-spacing:-.04em;color:var(--accent);transition:color .25s}
+.path button[aria-selected="true"]{background:var(--accent);color:var(--on)}
+.path button[aria-selected="true"] b{color:var(--on)}
+.bar{height:4px;background:var(--line);border-radius:2px;margin:.75rem 0 2rem}
+.bar i{display:block;height:100%;width:20%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.panel{display:grid;gap:2rem 3rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));animation:in .4s ease}
+@keyframes in{from{opacity:0;transform:translateY(.4em)}to{opacity:1;transform:none}}
+.panel h3{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900;letter-spacing:-.035em;line-height:1.02;margin:0 0 .75rem}
+.panel p{margin:0;color:var(--muted);max-width:32rem}
+.ask{border-left:6px solid var(--accent);padding-left:1.25rem}
+.ask small,.watch small{display:block;color:var(--muted);font-size:.95rem;margin-bottom:.35rem}
+.ask q{display:block;font-size:1.45rem;font-weight:700;line-height:1.3;quotes:none;letter-spacing:-.01em}
+.watch{margin-top:1.25rem;font-weight:500}
+.next{margin-top:2rem;font:600 1rem "Schibsted Grotesk",sans-serif;background:none;color:var(--accent);border:2px solid var(--accent);border-radius:999px;padding:.7rem 1.4rem;cursor:pointer}
+.next:hover{background:var(--accent);color:var(--on)}
 .job{display:grid;gap:.25rem 2rem;grid-template-columns:minmax(150px,220px) 1fr;padding:1.5rem 0;border-bottom:1px solid var(--line)}
-.job:first-of-type{border-top:1px solid var(--line)}
+.job:first-of-type{border-top:2px solid var(--ink)}
 .job .when{color:var(--muted)}
-.job h3{font-size:1.35rem;font-weight:800;letter-spacing:-.02em;margin:0 0 .4rem}
+.job h3{font-size:1.4rem;font-weight:800;letter-spacing:-.02em;margin:0 0 .4rem}
 .job p{margin:0;color:var(--muted);max-width:38rem}
 @media (max-width:600px){.job{grid-template-columns:1fr}}
-.cta{display:inline-block;background:var(--accent);color:var(--on);padding:.9rem 1.6rem;border-radius:999px;font-weight:600;text-decoration:none;margin-top:1.5rem;transition:background .3s}
+.skills{display:flex;flex-wrap:wrap;gap:.6rem;margin:2rem 0 0;padding:0;list-style:none}
+.skills li{border:2px solid var(--ink);border-radius:999px;padding:.4rem 1rem;font-weight:600;font-size:.98rem}
+.cta{display:inline-block;background:var(--accent);color:var(--on);padding:1rem 1.75rem;border-radius:999px;font-weight:600;text-decoration:none;margin-top:2rem}
 .cta:hover{filter:brightness(1.08)}
-.about{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.about p{margin:0 0 1rem;max-width:32rem;font-size:1.2rem}
-dl{margin:0}
-dl div{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
-dt{color:var(--muted)}dd{margin:0;font-weight:600;text-align:right}
 .contact{margin-top:5rem;padding-top:3rem;border-top:2px solid var(--ink)}
-.contact h3{font-size:clamp(2rem,6vw,4rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin:0}
+.contact h2{font-size:clamp(2.4rem,7vw,5rem)}
+.contact p{max-width:30rem;color:var(--muted);margin:0 0 .5rem}
+.links{margin-top:1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;font-weight:600}
+.links a{color:var(--ink)}
+.links a:hover{color:var(--accent)}
 footer{margin-top:3rem;color:var(--muted);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
 </style>
 </head>
-<body class="dev">
+<body>
 <main>
-<nav aria-label="Main"><span>Tyler Shepherd</span><div><a href="#work">Work</a><a href="#think">How I think</a><a href="#experience">Experience</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
+<nav aria-label="Main"><span>Tyler Shepherd</span><div><a href="#about">About me</a><a href="#approach">My approach</a><a href="#resume">Resume</a><a href="#contact">Contact</a></div></nav>
 
 <header class="hero">
-  <h1><span class="d">I build the systems.</span><span class="s">I shape the experience.</span></h1>
-  <p class="lede">Application developer and product designer in New York City. Pick a lens and the page tells its story that way.</p>
-  <div class="switch" role="group" aria-label="Choose a lens">
-    <button id="bd" aria-pressed="true">Developer</button>
-    <button id="bs" aria-pressed="false">Designer</button>
-  </div>
+  <h1>I turn messy problems into things <em>people love</em> to use.</h1>
+  <p class="lede">Hi, I'm Tyler. I design and build business applications, and I am happiest where UX and UI, problem solving, and clear thinking meet.</p>
 </header>
 
-<section id="work" aria-labelledby="wt">
-  <h2 id="wt">Selected work</h2>
-  <a class="row" href="case-study.html"><span class="t">Construction project management</span><span class="k">Case study, password protected</span></a>
-  <p class="note">My client work is confidential, so case studies are protected. Ask me for the password and I will share it when we talk.</p>
-</section>
-
-<section id="think" aria-labelledby="tt">
-  <h2 id="tt">How I think about design</h2>
-  <div class="principles">
-    <div><h3><b>1</b>Ask why before what</h3><p>Shared understanding comes before solutions. I hold off on answers until the real problem is clear, even when everyone in the room wants to jump ahead.</p></div>
-    <div><h3><b>2</b>Map the whole journey</h3><p>A screen is only one moment in someone's day. I map the full process, the handoffs, and the feelings along the way to find where people actually struggle.</p></div>
-    <div><h3><b>3</b>Design for the person doing the work</h3><p>People want to do their job, not manage a process. Good design removes repetition so they can spend their time on work that matters.</p></div>
-    <div><h3><b>4</b>Tie every choice to an outcome</h3><p>A design earns its place when it moves a result the business cares about. I connect features to impact so priorities are easy to defend.</p></div>
-  </div>
-</section>
-
-<section id="experience" aria-labelledby="et">
-  <h2 id="et">Experience</h2>
-  <div class="job"><div class="when">Add dates</div><div><h3>Principal Consultant, Appian</h3><p>Lead development teams on business process and low code delivery engagements, and lead UX and UI design and user research on client projects. Add two or three results with real numbers.</p></div></div>
-  <div class="job"><div class="when">Add dates</div><div><h3>Previous role</h3><p>One or two lines on what you did and what changed because of it.</p></div></div>
-  <a class="cta" href="resume.pdf">Download my resume</a>
-</section>
-
 <section id="about" aria-labelledby="at">
-  <h2 id="at">About</h2>
+  <h2 id="at">About me</h2>
   <div class="about">
     <div>
-      <p>I care about the person on the other side of the screen just as much as the code underneath.</p>
-      <p>Swap this for a few lines in your own voice about what you enjoy, what you are curious about, and what working with you is like.</p>
+      <p>I am the person who asks "wait, what problem are we actually solving?" and then stays curious until we know.</p>
+      <p>I am drawn to simple, honest design, and I bring the same instinct to how I live. Less clutter, more clarity, and a good reason behind every choice.</p>
+      <p>Replace this with a line or two in your own voice about what makes working with you different.</p>
     </div>
     <dl>
       <div><dt>Based in</dt><dd>New York City</dd></div>
-      <div><dt>Builds</dt><dd>Business applications</dd></div>
-      <div><dt>Designs</dt><dd>Workflows and interfaces</dd></div>
-      <div><dt>Off the clock</dt><dd>Add something real</dd></div>
+      <div><dt>Thinks in</dt><dd>Systems and journeys</dd></div>
+      <div><dt>Leans toward</dt><dd>Minimalism</dd></div>
+      <div><dt>Keeps coming back to</dt><dd>Stoic philosophy</dd></div>
+      <div><dt>Lives with</dt><dd>A cattle dog mix who hates stairs</dd></div>
     </dl>
   </div>
 </section>
 
+<section id="approach" aria-labelledby="pt">
+  <h2 id="pt">My approach to design</h2>
+  <p class="intro">Five steps from a messy problem to a measurable result. Click through them, or hit next.</p>
+  <div class="path" role="tablist" aria-label="Design steps" id="tabs"></div>
+  <div class="bar" aria-hidden="true"><i id="fill"></i></div>
+  <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
+  <button class="next" id="next">Next step</button>
+</section>
+
+<section id="resume" aria-labelledby="rt">
+  <h2 id="rt">Resume</h2>
+  <div class="job"><div class="when">Add dates</div><div><h3>Principal Consultant, Appian</h3><p>Lead development teams on business process and low code delivery, and lead UX and UI design and user research. Add two or three results with real numbers.</p></div></div>
+  <div class="job"><div class="when">Add dates</div><div><h3>Previous role</h3><p>One or two lines on what you did and what changed because of it.</p></div></div>
+  <ul class="skills" aria-label="Skills">
+    <li>UX and UI design</li><li>User research and interviews</li><li>Journey and process mapping</li><li>Workshop facilitation</li><li>Design thinking</li><li>Critical thinking</li><li>Low code development</li><li>Team leadership</li>
+  </ul>
+  <a class="cta" href="resume.pdf">Download my resume</a>
+</section>
+
 <section id="contact" class="contact" aria-labelledby="ct">
-  <h3 id="ct">Let's build something.</h3>
-  <a class="cta" href="mailto:you@example.com">Email Tyler</a>
+  <h2 id="ct">Let's talk.</h2>
+  <p>If you have a problem worth solving or a role you think fits, I would love to hear about it.</p>
+  <div class="links"><a href="mailto:you@example.com">you@example.com</a><a href="https://www.linkedin.com/in/your-profile">LinkedIn</a></div>
 </section>
 <footer>Tyler Shepherd. tylershepherddesign.com</footer>
 </main>
 <script>
 (function(){
-  var b=document.body,d=document.getElementById('bd'),s=document.getElementById('bs');
-  function set(m){b.className=m;d.setAttribute('aria-pressed',m==='dev');s.setAttribute('aria-pressed',m==='des')}
-  d.onclick=function(){set('dev')};s.onclick=function(){set('des')};
+  var S=[
+    {n:'Ask why',h:'Start with the problem, not the solution.',p:'Everyone arrives with an answer. I slow the room down until we agree on what is actually broken and who feels it.',q:'What problem are we solving, and for whom?',w:'The first solution anyone suggests.'},
+    {n:'Map the journey',h:'See the whole day, not one screen.',p:'I map how work really flows, including the handoffs and the feelings along the way, because pain hides between the steps.',q:'Where does it slow down, and how does that feel?',w:'Workarounds that people stopped noticing.'},
+    {n:'Reframe',h:'Pick the one thing worth fixing.',p:'There are always ten problems. I look for the one that unlocks the most and say no to the rest, out loud and with reasons.',q:'If we fix only one thing, which changes the most?',w:'Mistaking a loud problem for an important one.'},
+    {n:'Design small',h:'Make it testable this week.',p:'I sketch, prototype, and put it in front of real people early. A rough idea that teaches me something beats a polished one that does not.',q:'What is the smallest version someone could try?',w:'Falling in love with my own first draft.'},
+    {n:'Prove impact',h:'Tie it back to a result.',p:'A design earns its place when it moves something the business cares about. I decide how we will know it worked before we build.',q:'How will we know this worked?',w:'Measuring activity instead of outcomes.'}
+  ],t=document.getElementById('tabs'),pn=document.getElementById('panel'),f=document.getElementById('fill'),nx=document.getElementById('next'),cur=0;
+  S.forEach(function(s,i){var b=document.createElement('button');b.setAttribute('role','tab');b.innerHTML='<b>'+(i+1)+'</b>'+s.n;b.onclick=function(){go(i)};t.appendChild(b)});
+  function go(i){
+    cur=i;var s=S[i],bs=t.children;
+    for(var k=0;k<bs.length;k++)bs[k].setAttribute('aria-selected',k===i);
+    f.style.width=((i+1)/S.length*100)+'%';
+    pn.style.animation='none';pn.offsetHeight;pn.style.animation='';
+    pn.innerHTML='<div><h3>'+s.h+'</h3><p>'+s.p+'</p></div><div><div class="ask"><small>The question I ask</small><q>'+s.q+'</q></div><p class="watch"><small>What I watch out for</small>'+s.w+'</p></div>';
+    nx.textContent=i===S.length-1?'Start over':'Next step';
+  }
+  nx.onclick=function(){go((cur+1)%S.length)};
+  go(0);
 })();
 </script>
 </body>
