@@ -21,24 +21,23 @@ nav .w{display:flex;justify-content:space-between;align-items:center;padding-top
 nav a{color:var(--ink);text-decoration:none;margin-left:1.4rem;font-weight:600}
 nav a:hover{color:var(--accent)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-h1{font-weight:900;font-size:clamp(2.8rem,8vw,7.4rem);line-height:1.32;letter-spacing:-.045em;margin:0;max-width:14ch;position:relative;z-index:1}
+h1{font-weight:900;font-size:clamp(2.6rem,7vw,6.2rem);line-height:1.28;letter-spacing:-.045em;margin:0;max-width:16ch;position:relative;z-index:1}
 h1 em{font-style:normal;color:var(--accent)}
 .wd{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
 .wd>span{display:inline-block;transform:translateY(110%);animation:up .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d)*70ms + 150ms)}
 @keyframes up{to{transform:none}}
 h2{font-weight:900;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.04em;line-height:1;margin:0 0 1.5rem}
 @keyframes fade{to{opacity:1}}
-.hero{position:relative;z-index:1;min-height:88vh;display:flex;align-items:center;padding:5rem 0 4rem}
+.hero{position:relative;z-index:1;min-height:74vh;display:flex;align-items:flex-start;padding:3.2rem 0 3rem}
 .hero .w{width:100%}
-.lede{max-width:34rem;color:var(--muted);font-size:1.3rem;margin:1.75rem 0 0;position:relative;z-index:1;opacity:0;animation:fade .8s 1s forwards}
+.lede{max-width:34rem;color:var(--muted);font-size:1.25rem;margin:1.2rem 0 0;position:relative;z-index:1;opacity:0;animation:fade .8s 1s forwards}
 .zone{position:relative}
 .tape{background:linear-gradient(transparent 12%,rgba(255,201,51,.78) 12% 88%,transparent 88%);color:#0f1a3a;padding:.1em .45em;-webkit-box-decoration-break:clone;box-decoration-break:clone;border-radius:2px}
 .tape em{color:#2b44ff}
 .tp2{background:linear-gradient(transparent 12%,rgba(255,201,51,.74) 12% 88%,transparent 88%);padding:.3em .85em;line-height:2.1;font-weight:500}
-.replay{margin-top:1.5rem;font:600 .95rem "Schibsted Grotesk",sans-serif;background:var(--bg);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;position:relative;z-index:1}
+.replay{margin-top:1rem;font:600 .95rem "Schibsted Grotesk",sans-serif;background:var(--bg);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;position:relative;z-index:1}
 .replay:hover{background:var(--ink);color:var(--bg)}
-.bgstage{position:sticky;top:0;height:100vh;height:100svh;margin-bottom:-100vh;margin-bottom:-100svh;pointer-events:none;z-index:0;opacity:.74}
-@media (prefers-color-scheme:dark){.bgstage{opacity:.8}}
+.bgstage{position:sticky;top:0;height:100vh;height:100svh;margin-bottom:-100vh;margin-bottom:-100svh;pointer-events:none;z-index:0;opacity:.3}
 
 #hand{position:absolute;inset:0;width:100%;height:100%}
 #hand.beat{animation:beat 1.2s ease-in-out 1}
@@ -185,7 +184,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
   // 3D lego bricks on a canvas: scattered across a table on load, then stood up into a waving hand on scroll
-  var ART=["......mmkkk......", "....kkmmkkkmm....", "...kkkrrrrrmmm...", "..mkkrr.c.rrmkk..", ".mmmrb..c..drkkk.", ".mmrbbb.c.dddrkk.", "kkrr.bbbcddd.rrmm", "kkr...bhhhd...rmm", "kkraaaahxhaaaarkk", "mmr...dhhhb...rkk", "mmrr.dddcbbb.rrkk", ".kkrddd.c.bbbrmm.", ".kkkrd..c..brmmm.", "..kkmrr.c.rrkkm..", "...mmmrrrrrkkk...", "....mmkkkmmkk....", "......kkkmm......"],SEQ=[3,2,4,2,3],BR=[],cv=$('hand'),g=cv.getContext('2d'),VW=1,VH=1,u=30,P=0,T=99,need=true,solved=false,introOn=false,t0=0,COL={},F0=.62,F1=.28,R=ART.length,TW=1000,BW=780,BH=660,YC=0,Q=0,CD=0,DK=false,COLS=ART[0].length;
+  var ART=["......mmkkk......", "....kkmmkkkmm....", "...kkkrrrrrmmm...", "..mkkrr.c.rrmkk..", ".mmmrb..c..drkkk.", ".mmrbbb.c.dddrkk.", "kkrr.bbbcddd.rrmm", "kkr...bhhhd...rmm", "kkraaaahxhaaaarkk", "mmr...dhhhb...rkk", "mmrr.dddcbbb.rrkk", ".kkrddd.c.bbbrmm.", ".kkkrd..c..brmmm.", "..kkmrr.c.rrkkm..", "...mmmrrrrrkkk...", "....mmkkkmmkk....", "......kkkmm......"],SEQ=[3,2,4,2,3],BR=[],cv=$('hand'),g=cv.getContext('2d'),VW=1,VH=1,u=30,P=0,T=99,need=true,solved=false,introOn=false,t0=0,COL={},F0=.62,F1=.28,R=ART.length,TW=1000,BW=780,BH=660,YC=0,Q=0,CD=0,DK=false,bgs=document.querySelector('.bgstage'),COLS=ART[0].length;
   function rnd(i,k){var x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x)}
   function hex(v){v=v.trim();return [1,3,5].map(function(i){return parseInt(v.substr(i,2),16)})}
   function readCols(){DK=matchMedia('(prefers-color-scheme:dark)').matches;COL={k:[38,34,92],m:[86,70,210],r:[88,186,120],a:[255,92,57],b:[255,201,51],c:[30,200,180],d:[128,152,214],h:[255,201,51],t:[196,168,128],v:[172,144,108],z:[214,190,152],x:[255,92,57]};need=true}
@@ -206,14 +205,14 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   function size(){
     VW=cv.clientWidth||innerWidth;VH=cv.clientHeight||innerHeight;var dp=window.devicePixelRatio||1;
     cv.width=VW*dp;cv.height=VH*dp;g.setTransform(dp,0,0,dp,0,0);
-    BH=Math.min(780,VH*.78);BW=Math.min(1000,VW*.9);u=Math.min(VW<800?VW*.84/COLS:42,VH*.047,BH*.88/R,BW*.92/COLS);TW=BW*.86;var rpb=document.getElementById('replay'),tb=rpb?rpb.getBoundingClientRect().bottom+window.scrollY:VH*.6,TY=Math.max(VH*.68,Math.min(VH*.88,tb+(VH-tb)*.6));YC=(R*u/2*Math.cos(F0)-(TY-VH*.5))/Math.sin(F0);pile();
+    BH=Math.min(780,VH*.78);BW=Math.min(1000,VW*.9);u=Math.min(VW<800?VW*.84/COLS:42,VH*.047,BH*.88/R,BW*.92/COLS);TW=BW*.86;var rpb=document.getElementById('replay'),tb=rpb?rpb.getBoundingClientRect().bottom+window.scrollY:VH*.6,h1e=document.getElementById('h1'),tt=h1e?h1e.getBoundingClientRect().top+window.scrollY:VH*.2,TY=Math.max(VH*.3,Math.min(VH*.62,(tt+tb)/2));YC=(R*u/2*Math.cos(F0)-(TY-VH*.5))/Math.sin(F0);pile();
     cv.style.transformOrigin=(VW/2)+'px '+(VH*.5)+'px';
     need=true;
   }
   function pile(){
     var order=BR.slice().sort(function(a,b){return a.dl-b.dl}),g2=u*.5,S=Math.ceil(TW*1.6/g2),HM=new Float32Array(S*S),o=S/2;
     order.forEach(function(b){
-      var gx=(rnd(b.id,7)+rnd(b.id,8)+rnd(b.id,9)-1.5)*2,gy=(rnd(b.id,11)+rnd(b.id,12)+rnd(b.id,13)-1.5)*2,x=gx*TW*.3,y=gy*BH*.13,w=b.n*u,d=u,c=Math.cos(b.th),s=Math.sin(b.th),hx=Math.abs(w/2*c)+Math.abs(d/2*s),hy=Math.abs(w/2*s)+Math.abs(d/2*c),mx=0,cells=[];
+      var gx=(rnd(b.id,7)+rnd(b.id,8)+rnd(b.id,9)-1.5)*2,gy=(rnd(b.id,11)+rnd(b.id,12)+rnd(b.id,13)-1.5)*2,x=gx*Math.min(VW*.27,TW*.4),y=gy*BH*.17,w=b.n*u,d=u,c=Math.cos(b.th),s=Math.sin(b.th),hx=Math.abs(w/2*c)+Math.abs(d/2*s),hy=Math.abs(w/2*s)+Math.abs(d/2*c),mx=0,cells=[];
       for(var cy=Math.floor((y-hy)/g2);cy<=Math.ceil((y+hy)/g2);cy++)for(var cx=Math.floor((x-hx)/g2);cx<=Math.ceil((x+hx)/g2);cx++){
         var px=cx*g2+g2/2-x,py=cy*g2+g2/2-y,lx=px*c+py*s,ly=-px*s+py*c;
         if(Math.abs(lx)<=w/2&&Math.abs(ly)<=d/2){var ix=Math.round(cx+o),iy=Math.round(cy+o);if(ix>=0&&iy>=0&&ix<S&&iy<S){cells.push(iy*S+ix);if(HM[iy*S+ix]>mx)mx=HM[iy*S+ix]}}
@@ -271,7 +270,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
     L.forEach(function(o){brick(o,pj,sp)});
     g.restore();
   }
-  function place(p){P=p;need=true}
+  function place(p){P=p;need=true;bgs.style.opacity=(.3+(DK?.5:.44)*Math.min(1,p/.7)).toFixed(3)}
   function travel(q,cd){Q=q;CD=cd||0;need=true}
   function frame(ts){
     if(introOn){if(!t0)t0=ts;T=(ts-t0)/1000;need=true;if(T>2.5){introOn=false;T=99;place(P)}}
@@ -281,7 +280,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   rp.onclick=function(){window.scrollTo(0,0);t0=0;T=0;introOn=true;place(0);travel(0)};
   requestAnimationFrame(frame);
   }
-  readCols();size();addEventListener('load',function(){size()});
+  readCols();size();addEventListener('load',function(){size()});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size()});
   try{matchMedia('(prefers-color-scheme:dark)').addEventListener('change',readCols)}catch(x){}
   if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&window.scrollY<40){introOn=true;T=0}
   requestAnimationFrame(frame);
