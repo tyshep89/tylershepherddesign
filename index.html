@@ -21,8 +21,8 @@ nav .w{display:flex;justify-content:space-between;align-items:center;padding-top
 nav a{color:var(--ink);text-decoration:none;margin-left:1.4rem;font-weight:600}
 nav a:hover{color:var(--accent)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-h1{font-weight:900;font-size:clamp(2.4rem,7.8vw,7.4rem);line-height:1.04;letter-spacing:.012em;margin:0;white-space:nowrap;position:relative;z-index:1;color:#fff;text-shadow:0 2px 3px rgba(7,12,35,.75),0 0 22px rgba(255,255,255,.3),0 0 48px rgba(150,170,255,.22)}
-h1 em{font-style:normal;text-shadow:0 2px 3px rgba(7,12,35,.7),0 0 24px rgba(255,201,51,.5),0 0 52px rgba(255,201,51,.28);color:#ffc933;text-decoration:underline;text-decoration-color:#ffc933;text-decoration-thickness:.07em;text-underline-offset:.12em}
+h1{font-weight:900;font-size:clamp(2.4rem,7.8vw,7.4rem);line-height:1.04;letter-spacing:.012em;margin:0;white-space:nowrap;position:relative;z-index:1;color:#fff}
+h1 em{font-style:normal;color:#ffc933;text-decoration:underline;text-decoration-color:#ffc933;text-decoration-thickness:.07em;text-underline-offset:.12em}
 .wd{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
 .wd>span{display:inline-block;transform:translateY(110%);animation:up .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d)*70ms + 150ms)}
 @keyframes up{to{transform:none}}
@@ -81,15 +81,26 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .step .watch{margin-top:1.3rem;font-weight:500;color:var(--fg)}
 @media (max-width:800px){.step{min-height:0;padding:3rem 0}.step.r{justify-content:flex-start}.step .num{font-size:11rem}.step .txt{text-align:left!important}.step.r .ask{padding-right:0;padding-left:1.2rem;border-right:0;border-left:6px solid var(--bar)}}
 .resume{padding:8rem 0 6rem}
-.job{display:grid;gap:.25rem 2rem;grid-template-columns:minmax(150px,220px) 1fr;padding:1.5rem 0;border-bottom:1px solid var(--line)}
-.job:first-of-type{border-top:2px solid var(--ink)}
+.rnote{color:var(--muted);margin:0 0 1rem}
+.tag{font:600 .98rem "Schibsted Grotesk",system-ui,sans-serif;background:none;color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:.4rem 1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.tag:hover{background:var(--sun);color:#0f1a3a;border-color:var(--sun);transform:translateY(-2px)}
+.tag[aria-pressed="true"]{background:var(--accent);color:var(--on);border-color:var(--accent)}
+.clr{margin-top:1rem;background:none;border:0;color:var(--accent);font:600 .95rem "Schibsted Grotesk",sans-serif;text-decoration:underline;cursor:pointer;padding:0}
+.jobs{margin-top:2.2rem;border-top:2px solid var(--ink)}
+.job{display:grid;gap:.25rem 2rem;grid-template-columns:minmax(150px,220px) 1fr;padding:1.6rem 1rem;margin:0 -1rem;border-bottom:1px solid var(--line);transition:opacity .3s,background .3s,box-shadow .3s}
+.job.match{background:color-mix(in srgb,var(--accent) 9%,transparent);box-shadow:inset 5px 0 0 var(--accent)}
+.job.dim{opacity:.3}
+.bul{margin:.9rem 0 0;padding-left:1.1rem;color:var(--muted);max-width:44rem}
+.bul li{margin:.35rem 0;transition:color .25s}
+.bul li.on{color:var(--ink);font-weight:600}
+.used{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.used span{font-size:.82rem;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:.15rem .65rem;color:var(--muted);transition:background .25s,color .25s,border-color .25s}
+.used span.on{background:var(--sun);color:#0f1a3a;border-color:var(--sun)}
 .job .when{color:var(--muted)}
 .job h3{font-size:1.4rem;font-weight:800;letter-spacing:-.02em;margin:0 0 .4rem}
 .job p{margin:0;color:var(--muted);max-width:38rem}
 @media (max-width:600px){.job{grid-template-columns:1fr}}
-.skills{display:flex;flex-wrap:wrap;gap:.6rem;margin:2rem 0 0;padding:0;list-style:none}
-.skills li{border:2px solid var(--ink);border-radius:999px;padding:.4rem 1rem;font-weight:600;font-size:.98rem;transition:background .2s,color .2s,transform .2s}
-.skills li:hover{background:var(--sun);color:#0f1a3a;border-color:var(--sun);transform:rotate(-3deg) scale(1.06)}
+.skills{display:flex;flex-wrap:wrap;gap:.6rem;margin:0;padding:0;list-style:none}
 .cta{display:inline-block;background:var(--accent);color:var(--on);padding:1rem 1.75rem;border-radius:999px;font-weight:600;text-decoration:none;margin-top:2rem}
 .cta:hover{filter:brightness(1.08)}
 .contact{padding:9rem 0 5rem;overflow:clip;min-height:80vh;display:flex;flex-direction:column;justify-content:center;transition:color .4s}
@@ -200,11 +211,30 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
 
 <section id="resume" class="resume"><div class="w">
   <h2 class="rv">Resume</h2>
-  <div class="job rv" style="--d:1"><div class="when">Add dates</div><div><h3>Principal Consultant, Appian</h3><p>Lead development teams on business process and low code delivery, and lead UX and UI design and user research. Add two or three results with real numbers.</p></div></div>
-  <div class="job rv" style="--d:2"><div class="when">Add dates</div><div><h3>Previous role</h3><p>One or two lines on what you did and what changed because of it.</p></div></div>
+  <p class="rnote rv" id="rnote" style="--d:1">Pick a skill to see where I have used it.</p>
   <ul class="skills" aria-label="Skills">
-    <li class="rv" style="--d:1">UX and UI design</li><li class="rv" style="--d:2">User research and interviews</li><li class="rv" style="--d:3">Journey and process mapping</li><li class="rv" style="--d:4">Workshop facilitation</li><li class="rv" style="--d:5">Design thinking</li><li class="rv" style="--d:6">Critical thinking</li><li class="rv" style="--d:7">Low code development</li><li class="rv" style="--d:8">Team leadership</li>
+    <li class="rv" style="--d:1"><button type="button" class="tag" aria-pressed="false" data-skill="UX and UI design">UX and UI design</button></li>
+    <li class="rv" style="--d:2"><button type="button" class="tag" aria-pressed="false" data-skill="User research and interviews">User research and interviews</button></li>
+    <li class="rv" style="--d:3"><button type="button" class="tag" aria-pressed="false" data-skill="Journey and process mapping">Journey and process mapping</button></li>
+    <li class="rv" style="--d:4"><button type="button" class="tag" aria-pressed="false" data-skill="Workshop facilitation">Workshop facilitation</button></li>
+    <li class="rv" style="--d:5"><button type="button" class="tag" aria-pressed="false" data-skill="Design thinking">Design thinking</button></li>
+    <li class="rv" style="--d:6"><button type="button" class="tag" aria-pressed="false" data-skill="Critical thinking">Critical thinking</button></li>
+    <li class="rv" style="--d:7"><button type="button" class="tag" aria-pressed="false" data-skill="Low code development">Low code development</button></li>
+    <li class="rv" style="--d:8"><button type="button" class="tag" aria-pressed="false" data-skill="Team leadership">Team leadership</button></li>
   </ul>
+  <button type="button" class="clr" id="clr" hidden>Clear selection</button>
+  <div class="jobs">
+    <article class="job rv" style="--d:1" data-skills="Critical thinking|Design thinking|Journey and process mapping|Low code development|Team leadership|UX and UI design|User research and interviews|Workshop facilitation"><div class="when">Add dates</div><div><h3>Principal Consultant, Appian</h3><p>Lead development teams on business process and low code delivery, and lead UX and UI design and user research.</p>
+      <ul class="bul">
+        <li data-skills="Low code development|Team leadership">Led development teams delivering business process applications on a low code platform.</li>
+        <li data-skills="UX and UI design|User research and interviews">Led UX and UI design and user interviews to turn complex processes into simple, usable interfaces.</li>
+        <li data-skills="Workshop facilitation|Journey and process mapping|Design thinking|Critical thinking">Facilitated workshops and mapped end to end processes to find where work slows down.</li>
+      </ul>
+      <div class="used"><span>Critical thinking</span><span>Design thinking</span><span>Journey and process mapping</span><span>Low code development</span><span>Team leadership</span><span>UX and UI design</span><span>User research and interviews</span><span>Workshop facilitation</span></div>
+    </div></article>
+    <article class="job rv" style="--d:2" data-skills=""><div class="when">Add dates</div><div><h3>Previous role</h3><p>One or two lines on what you did and what changed because of it.</p>
+    </div></article>
+  </div>
   <a class="cta rv" style="--d:3" href="resume.pdf">Download my resume</a>
 </div></section>
 
@@ -289,7 +319,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   }
   function poly(p,st){g.beginPath();g.moveTo(p[0][0],p[0][1]);for(var i=1;i<p.length;i++)g.lineTo(p[i][0],p[i][1]);g.closePath();g.fill()}
   function brick(o,pj,sp){
-    var b=o.b,us=o.us||u,w=b.n*us-1.5,d=us-1.5,h=us-1,c=Math.cos(o.th),s=Math.sin(o.th),C=COL[b.ch],mu=o.mu||0;if(mu>0){var kk=.55*mu;C=[C[0]+(34-C[0])*kk,C[1]+(46-C[1])*kk,C[2]+(88-C[2])*kk]}
+    var b=o.b,us=o.us||u,w=b.n*us-1.5,d=us-1.5,h=us-1,c=Math.cos(o.th),s=Math.sin(o.th),C=COL[b.ch],mu=o.mu||0;if(mu>0){var kk=.72*mu;C=[C[0]+(34-C[0])*kk,C[1]+(46-C[1])*kk,C[2]+(88-C[2])*kk]}
     function q(lx,ly,z){return pj(o.X+lx*c-ly*s,o.Y+lx*s+ly*c,o.Z+z)}
     var cr=[[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]],nm=[[0,-1],[1,0],[0,1],[-1,0]],k;
     var sa=.14*Math.max(0,1-o.Z/(3*us))*(1-Math.min(1,Q*5));
@@ -366,6 +396,26 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   }
   if(!RM){var t=false;addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){upd();t=false})}},{passive:true});addEventListener('resize',function(){size();meas();upd()});upd()}
   else{place(1);ct.classList.add('on');addEventListener('scroll',pos,{passive:true});addEventListener('resize',function(){meas();pos()});pos()}
+})();
+</script>
+<script>
+(function(){
+  var tags=[].slice.call(document.querySelectorAll('.tag')),jobs=[].slice.call(document.querySelectorAll('.job')),clr=document.getElementById('clr'),note=document.getElementById('rnote'),idle=note.textContent;
+  function sel(){return tags.filter(function(t){return t.getAttribute('aria-pressed')==='true'}).map(function(t){return t.dataset.skill})}
+  function has(attr,list){var a=(attr||'').split('|');return list.some(function(x){return a.indexOf(x)>-1})}
+  function upd(){
+    var s=sel(),hits=0;
+    jobs.forEach(function(j){
+      var hit=s.length>0&&has(j.dataset.skills,s);if(hit)hits++;
+      j.classList.toggle('match',hit);j.classList.toggle('dim',s.length>0&&!hit);
+      [].forEach.call(j.querySelectorAll('.bul li'),function(li){li.classList.toggle('on',s.length>0&&has(li.dataset.skills,s))});
+      [].forEach.call(j.querySelectorAll('.used span'),function(sp){sp.classList.toggle('on',s.indexOf(sp.textContent)>-1)});
+    });
+    clr.hidden=!s.length;
+    note.textContent=s.length?(hits?hits+' of '+jobs.length+' roles use '+(s.length>1?'these skills':'this skill')+'.':'No roles tagged with '+(s.length>1?'these skills':'this skill')+' yet.'):idle;
+  }
+  tags.forEach(function(t){t.addEventListener('click',function(){t.setAttribute('aria-pressed',t.getAttribute('aria-pressed')==='true'?'false':'true');upd()})});
+  clr.addEventListener('click',function(){tags.forEach(function(t){t.setAttribute('aria-pressed','false')});upd()});
 })();
 </script>
 </body>
