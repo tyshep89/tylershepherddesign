@@ -313,6 +313,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   function draw(){
     g.clearRect(0,0,VW,VH);
     var pr=Math.max(0,Math.min(1,(P-.1)/.85)),ph=F0+(F1-F0)*pr*pr*(3-2*pr),cp=Math.cos(ph),sp=Math.sin(ph),hh0=R*u*Math.cos(F1),hsr=hsEl.getBoundingClientRect(),ovr=ovEl.getBoundingClientRect(),yc=Math.max(hsr.top+hsr.height/2,130+hh0/2),oy=yc-VH*.5,camY=VH*.5+oy+R*u/2*cp;
+    var fs=130+hh0,fe=VH*.55-ovr.height,ff=fs>fe?Math.max(0,Math.min(1,(fs-ovr.top)/(fs-fe))):0;ff=ff*ff*(3-2*ff);bgs.style.opacity=(1-ff).toFixed(3);
     function pj(X,Y,Z){return [VW/2+OX+X,camY-(Z*cp+Y*sp)]}
     var gsa=.16*(1-Math.min(1,P*4))*Math.min(1,T/1.2);
     if(gsa>.004){var pc=pj(0,YC,0),rr=(TR-TL)*.5;g.save();g.translate(pc[0],pc[1]);g.scale(1,sp*.45);var gg=g.createRadialGradient(0,0,0,0,0,rr);gg.addColorStop(0,'rgba(0,0,0,'+(gsa*1.6)+')');gg.addColorStop(1,'rgba(15,26,58,0)');g.fillStyle=gg;g.beginPath();g.arc(0,0,rr,0,6.283);g.fill();g.restore()}
@@ -333,7 +334,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
     g.globalAlpha=1;
     g.restore();
   }
-  function place(p){P=p;need=true;bgs.style.opacity='1'}
+  function place(p){P=p;need=true}
   function travel(q,cd){Q=q;CD=cd||0;need=true}
   function frame(ts){
     if(introOn){if(!t0)t0=ts;T=(ts-t0)/1000;need=true;if(T>2.5){introOn=false;T=99;place(P)}}
