@@ -57,26 +57,22 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .rv{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*90ms)}
 .rv.in{opacity:1;transform:none}
 .dark{background:var(--dk);color:#eef1fb;--ink:#eef1fb;--muted:#a9b2cf;--line:#2c3760;--soft:#1a2448;--accent:#8ea0ff;--on:#0a1026;clip-path:polygon(0 5rem,100% 0,100% calc(100% - 5rem),0 100%);padding:11rem 0 12rem;margin:-2.5rem 0}
-.bgnum{position:absolute;right:-1rem;top:4rem;font-weight:900;font-size:clamp(10rem,32vw,26rem);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px #2c3760;will-change:transform;pointer-events:none}
-.intro{color:var(--muted);max-width:36rem;margin:0 0 2rem}
-.path{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:.5rem;overflow-x:auto;padding-bottom:.5rem;position:relative}
-.path button{font:600 1rem "Schibsted Grotesk",sans-serif;text-align:left;background:var(--soft);color:var(--ink);border:0;border-radius:12px;padding:.9rem 1rem;cursor:pointer;transition:background .25s,color .25s,transform .25s}
-.path button:hover{transform:translateY(-3px)}
-.path button b{display:block;font-size:1.7rem;font-weight:900;letter-spacing:-.04em;color:var(--accent)}
-.path button[aria-selected="true"]{background:var(--accent);color:var(--on)}
-.path button[aria-selected="true"] b{color:var(--on)}
-.bar{height:4px;background:var(--line);border-radius:2px;margin:.75rem 0 2rem}
-.bar i{display:block;height:100%;width:20%;background:var(--coral);border-radius:2px;transition:width .4s ease}
-.panel{display:grid;gap:2rem 3rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));animation:in .45s ease;position:relative}
-@keyframes in{from{opacity:0;transform:translateY(.5em)}to{opacity:1;transform:none}}
-.panel h3{font-size:clamp(1.9rem,4.8vw,3.2rem);font-weight:900;letter-spacing:-.035em;line-height:1.02;margin:0 0 .75rem}
-.panel p{margin:0;color:var(--muted);max-width:32rem}
-.ask{border-left:6px solid var(--coral);padding-left:1.25rem}
-.ask small,.watch small{display:block;color:var(--muted);font-size:.95rem;margin-bottom:.35rem}
-.ask q{display:block;font-size:1.5rem;font-weight:700;line-height:1.3;quotes:none}
-.watch{margin-top:1.25rem;font-weight:500;color:#eef1fb!important}
-.next{margin-top:2rem;font:600 1rem "Schibsted Grotesk",sans-serif;background:none;color:var(--accent);border:2px solid var(--accent);border-radius:999px;padding:.7rem 1.4rem;cursor:pointer;position:relative}
-.next:hover{background:var(--accent);color:var(--on)}
+.intro{color:var(--muted);max-width:36rem;margin:0 0 1rem}
+.step{position:relative;display:flex;align-items:center;min-height:62vh;padding:5rem 0;border-top:1px solid var(--line)}
+.step.r{justify-content:flex-end}
+.step .num{position:absolute;top:50%;font-weight:900;font-size:clamp(10rem,30vw,24rem);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px #2c3760;pointer-events:none;will-change:transform;transform:translateY(calc(-50% + var(--py,0px)))}
+.step.l .num{right:-1rem}.step.r .num{left:-1rem}
+.step .txt{position:relative;z-index:1;width:100%;max-width:54rem}
+.step.r .txt{text-align:right}
+.step .label{font-weight:700;color:var(--accent);margin-bottom:.6rem}
+.step h3{font-size:clamp(2rem,4.4vw,3.4rem);font-weight:900;letter-spacing:-.035em;line-height:1.03;margin:0 0 1rem}
+.step p{margin:0;color:var(--muted)}
+.step small{display:block;color:var(--muted);font-size:.95rem;margin-bottom:.35rem}
+.step .ask{margin-top:1.8rem;padding-left:1.2rem;border-left:6px solid var(--coral)}
+.step.r .ask{padding-left:0;padding-right:1.2rem;border-left:0;border-right:6px solid var(--coral)}
+.step .ask q{display:block;font-size:1.5rem;font-weight:700;line-height:1.3;quotes:none;color:#eef1fb}
+.step .watch{margin-top:1.3rem;font-weight:500;color:#eef1fb}
+@media (max-width:800px){.step{min-height:0;padding:3rem 0}.step.r{justify-content:flex-start}.step .num{font-size:11rem}.step .txt{text-align:left!important}.step.r .ask{padding-right:0;padding-left:1.2rem;border-right:0;border-left:6px solid var(--coral)}}
 .resume{padding:8rem 0 6rem}
 .job{display:grid;gap:.25rem 2rem;grid-template-columns:minmax(150px,220px) 1fr;padding:1.5rem 0;border-bottom:1px solid var(--line)}
 .job:first-of-type{border-top:2px solid var(--ink)}
@@ -137,13 +133,61 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
 
 <div class="slot" id="slot"></div>
 </div>
-<section id="approach" class="dark"><div class="bgnum" id="bgnum" aria-hidden="true">05</div><div class="w">
+<section id="approach" class="dark"><div class="w">
   <h2 class="rv">My approach to design</h2>
-  <p class="intro rv" style="--d:1">Five steps from a messy problem to a measurable result. Click through them, or hit next.</p>
-  <div class="rv" style="--d:2"><div class="path" role="tablist" aria-label="Design steps" id="tabs"></div>
-  <div class="bar" aria-hidden="true"><i id="fill"></i></div></div>
-  <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
-  <button class="next" id="next">Next step</button>
+  <p class="intro rv" style="--d:1">Five steps from a messy problem to a measurable result.</p>
+  <div class="steps">
+    <article class="step l">
+      <div class="num" aria-hidden="true">01</div>
+      <div class="txt rv" style="--d:1">
+        <div class="label">Ask why</div>
+        <h3>Start with the problem, not the solution.</h3>
+        <p>Everyone arrives with an answer. I slow the room down until we agree on what is actually broken and who feels it.</p>
+        <div class="ask"><small>The question I ask</small><q>What problem are we solving, and for whom?</q></div>
+        <p class="watch"><small>What I watch out for</small>The first solution anyone suggests.</p>
+      </div>
+    </article>
+    <article class="step r">
+      <div class="num" aria-hidden="true">02</div>
+      <div class="txt rv" style="--d:1">
+        <div class="label">Map the journey</div>
+        <h3>See the whole day, not one screen.</h3>
+        <p>I map how work really flows, including the handoffs and the feelings along the way, because pain hides between the steps.</p>
+        <div class="ask"><small>The question I ask</small><q>Where does it slow down, and how does that feel?</q></div>
+        <p class="watch"><small>What I watch out for</small>Workarounds that people stopped noticing.</p>
+      </div>
+    </article>
+    <article class="step l">
+      <div class="num" aria-hidden="true">03</div>
+      <div class="txt rv" style="--d:1">
+        <div class="label">Reframe</div>
+        <h3>Pick the one thing worth fixing.</h3>
+        <p>There are always ten problems. I look for the one that unlocks the most and say no to the rest, out loud and with reasons.</p>
+        <div class="ask"><small>The question I ask</small><q>If we fix only one thing, which changes the most?</q></div>
+        <p class="watch"><small>What I watch out for</small>Mistaking a loud problem for an important one.</p>
+      </div>
+    </article>
+    <article class="step r">
+      <div class="num" aria-hidden="true">04</div>
+      <div class="txt rv" style="--d:1">
+        <div class="label">Design small</div>
+        <h3>Make it testable this week.</h3>
+        <p>I sketch, prototype, and put it in front of real people early. A rough idea that teaches me something beats a polished one that does not.</p>
+        <div class="ask"><small>The question I ask</small><q>What is the smallest version someone could try?</q></div>
+        <p class="watch"><small>What I watch out for</small>Falling in love with my own first draft.</p>
+      </div>
+    </article>
+    <article class="step l">
+      <div class="num" aria-hidden="true">05</div>
+      <div class="txt rv" style="--d:1">
+        <div class="label">Prove impact</div>
+        <h3>Tie it back to a result.</h3>
+        <p>A design earns its place when it moves something the business cares about. I decide how we will know it worked before we build.</p>
+        <div class="ask"><small>The question I ask</small><q>How will we know this worked?</q></div>
+        <p class="watch"><small>What I watch out for</small>Measuring activity instead of outcomes.</p>
+      </div>
+    </article>
+  </div>
 </div></section>
 
 <section id="resume" class="resume"><div class="w">
@@ -293,7 +337,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&window.scrollY<40){introOn=true;T=0}
   requestAnimationFrame(frame);
   // scroll effects
-  var ab=$('about'),band=$('band'),bg=$('bgnum'),ap=$('approach'),ct=$('contact'),bar=document.querySelector('.band'),slot=$('slot'),bh=56,pg=$('prog');
+  var ab=$('about'),band=$('band'),ap=$('approach'),sn=[].slice.call(document.querySelectorAll('.step .num')),ct=$('contact'),bar=document.querySelector('.band'),slot=$('slot'),bh=56,pg=$('prog');
   function clamp(v){return Math.max(0,Math.min(1,v))}
   var WORDS=['Curious','Problem solver','Systems thinker','UX and UI designer','Application developer','Team lead','Minimalist','Stoic','Dog person'],setW=1;
   (function(){var t=WORDS.concat(WORDS).join(' \u2022 ')+' \u2022 ';for(var i=0;i<2;i++){var e=document.createElement('span');e.textContent=t;e.style.display='inline-block';band.appendChild(e)}})();
@@ -305,34 +349,14 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
     pg.style.width=(y/(document.documentElement.scrollHeight-vh)*100)+'%';
     place(clamp(y/(vh*.55)));
     band.style.transform='translateX('+(-((y*.55)%setW))+'px)';pos();
+    sn.forEach(function(n){var r=n.parentNode.getBoundingClientRect();n.style.setProperty('--py',(-(r.top+r.height/2-vh/2)*.22).toFixed(1)+'px')});
     var ar=ap.getBoundingClientRect();
-    bg.style.transform='translateY('+(ar.top*-.18)+'px)';
     var cr=ct.getBoundingClientRect(),q=clamp((vh-cr.top)/(vh*.85));
     ct.style.setProperty('--r',(q*150)+'%');
     ct.classList.toggle('on',q>.7);
   }
   if(!RM){var t=false;addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){upd();t=false})}},{passive:true});addEventListener('resize',function(){size();meas();upd()});upd()}
   else{place(1);ct.classList.add('on');addEventListener('scroll',pos,{passive:true});addEventListener('resize',function(){meas();pos()});pos()}
-  // approach stepper
-  var S=[
-    {n:'Ask why',h:'Start with the problem, not the solution.',p:'Everyone arrives with an answer. I slow the room down until we agree on what is actually broken and who feels it.',q:'What problem are we solving, and for whom?',w:'The first solution anyone suggests.'},
-    {n:'Map the journey',h:'See the whole day, not one screen.',p:'I map how work really flows, including the handoffs and the feelings along the way, because pain hides between the steps.',q:'Where does it slow down, and how does that feel?',w:'Workarounds that people stopped noticing.'},
-    {n:'Reframe',h:'Pick the one thing worth fixing.',p:'There are always ten problems. I look for the one that unlocks the most and say no to the rest, out loud and with reasons.',q:'If we fix only one thing, which changes the most?',w:'Mistaking a loud problem for an important one.'},
-    {n:'Design small',h:'Make it testable this week.',p:'I sketch, prototype, and put it in front of real people early. A rough idea that teaches me something beats a polished one that does not.',q:'What is the smallest version someone could try?',w:'Falling in love with my own first draft.'},
-    {n:'Prove impact',h:'Tie it back to a result.',p:'A design earns its place when it moves something the business cares about. I decide how we will know it worked before we build.',q:'How will we know this worked?',w:'Measuring activity instead of outcomes.'}
-  ],t2=$('tabs'),pn=$('panel'),f=$('fill'),nx=$('next'),cur=0;
-  S.forEach(function(s,i){var b=document.createElement('button');b.setAttribute('role','tab');b.innerHTML='<b>'+(i+1)+'</b>'+s.n;b.onclick=function(){go(i)};t2.appendChild(b)});
-  function go(i){
-    cur=i;var s=S[i],bs=t2.children;
-    for(var k=0;k<bs.length;k++)bs[k].setAttribute('aria-selected',k===i);
-    f.style.width=((i+1)/S.length*100)+'%';
-    pn.style.animation='none';pn.offsetHeight;pn.style.animation='';
-    pn.innerHTML='<div><h3>'+s.h+'</h3><p>'+s.p+'</p></div><div><div class="ask"><small>The question I ask</small><q>'+s.q+'</q></div><p class="watch"><small>What I watch out for</small>'+s.w+'</p></div>';
-    bg.textContent='0'+(i+1);
-    nx.textContent=i===S.length-1?'Start over':'Next step';
-  }
-  nx.onclick=function(){go((cur+1)%S.length)};
-  go(0);
 })();
 </script>
 </body>
