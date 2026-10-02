@@ -60,7 +60,14 @@ h2{font-weight:900;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.04em;line-h
 #band{white-space:nowrap;font-weight:900;font-size:clamp(1.3rem,3vw,2rem);letter-spacing:-.03em;line-height:1.2;will-change:transform}
 section{position:relative}
 .about{position:relative;z-index:2;padding:0 0 7rem}
-.work{position:relative;z-index:1;background:#0f1a3a;color:#fff;--ink:#fff;--muted:rgba(255,255,255,.84);--line:rgba(255,255,255,.3);padding:7rem 0 6rem}
+.dark,.work,.resume{position:relative}
+.hdrart{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%);position:absolute;right:clamp(0rem,1vw,1rem);top:-4rem;width:min(640px,54%);height:auto;pointer-events:none;z-index:-1}
+.hdrart [data-s]{will-change:transform}
+.hdrart.a3{top:-5.4rem;width:min(520px,40%)}
+@media (max-width:800px){.hdrart{width:92%;top:-1rem;opacity:.5}}
+.dark::before,.work::before,.resume::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;z-index:6}
+.dark::before,.work::before,.resume::before{background:#ffc933}
+.work{position:relative;z-index:1;background:#0f1a3a;color:#fff;--ink:#fff;--muted:rgba(255,255,255,.84);--line:rgba(255,255,255,.3);padding:3.2rem 0 6rem}
 .work h2{color:#fff}
 .work .intro{color:rgba(255,255,255,.88);max-width:44rem;margin:0 0 3rem}
 .wlist{margin-top:3rem}
@@ -80,14 +87,18 @@ section{position:relative}
 .wcta .wtxt{font-size:.95rem}
 .wk .ac{border-color:#fff}
 .wk.open .wcta .ac{transform:rotate(-135deg) translate(-2px,-2px)}
-.wk.open .wtxt{display:none}
+.wtxt{transition:opacity .3s ease}
+.wk.open .wtxt{opacity:0}
 .wkctx{position:relative;z-index:1;padding:.8rem 0 0}
 .wkctx .clede{font-size:1.25rem;color:#e2e7ff;max-width:44rem;margin:0}
 .wkctx .cmeta{margin-top:2rem;max-width:60rem}
-.wkp{position:relative;z-index:1;display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .5s ease,visibility 0s .5s}
-.wk.open .wkp{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .5s ease}
+.wkp{position:relative;z-index:1;display:grid;grid-template-rows:0fr;visibility:hidden}
+.wk.open .wkp{grid-template-rows:1fr;visibility:visible}
+.wkp .case{opacity:0;transform:translateY(34px);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.wk.open .wkp .case{opacity:1;transform:none}
+.wk.closing .wkp .case{opacity:0;transform:translateY(14px);transition:opacity .22s ease,transform .22s ease}
 .wkw{overflow:clip;min-height:0}
-.wk.instant .wkp{transition:none!important}
+.wk.instant .wkp .case{transition:none!important}
 .wk.open .wkw{padding-top:2.4rem}
 .case{background:#fff;color:#0f1a3a;border-radius:24px;overflow:clip;box-shadow:0 36px 70px -46px rgba(0,0,40,.7)}
 .chead{background:#0f1a3a;color:#fff;padding:2.4rem clamp(1.5rem,4vw,3.5rem) 2.6rem}
@@ -262,7 +273,19 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
 <div class="zpad" aria-hidden="true"></div>
 </div>
 <section id="approach" class="dark"><div class="w">
-  <h2 class="rv">My approach to design</h2>
+  <svg class="hdrart a1" viewBox="0 -40 640 310" aria-hidden="true" focusable="false">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
+      <g data-s=".05"><path d="M0 196H640" stroke="rgba(255,255,255,.13)" stroke-dasharray="2 9"/></g>
+      <g data-s=".13" stroke="rgba(255,255,255,.13)"><circle cx="318" cy="110" r="46"/><circle cx="318" cy="110" r="86" stroke-dasharray="3 10"/></g>
+      <g data-s=".22">
+        <path d="M24 176 C 130 20, 210 232, 318 110 S 500 12, 616 128" stroke="rgba(255,201,51,.34)" stroke-width="2.2"/>
+        <path d="M24 176 L130 20 M318 110 L210 232 M318 110 L430 40 M616 128 L500 12" stroke="rgba(255,255,255,.13)"/>
+        <g stroke="rgba(255,255,255,.13)" fill="#0a1128"><circle cx="130" cy="20" r="5"/><circle cx="430" cy="40" r="5"/><circle cx="500" cy="12" r="5"/></g>
+        <g stroke="rgba(255,201,51,.34)" fill="#0a1128"><rect x="16" y="168" width="16" height="16" rx="2"/><rect x="310" y="102" width="16" height="16" rx="2"/><rect x="608" y="120" width="16" height="16" rx="2"/></g>
+      </g>
+    </g>
+  </svg>
+    <h2 class="rv">My approach to design</h2>
   <p class="intro rv" style="--d:1">Five steps from a messy problem to a measurable result.</p>
   <div class="steps">
     <article class="step l c1">
@@ -319,7 +342,16 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
 </div></section>
 
 <section id="work" class="work"><div class="w">
-  <h2 class="rv">My work</h2>
+  <svg class="hdrart a2" viewBox="0 -40 640 310" aria-hidden="true" focusable="false">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
+      <g data-s=".06" stroke="rgba(255,255,255,.13)"><rect x="40" y="86" width="190" height="124" rx="14"/><path d="M64 110H190M64 134H160M64 158H176"/><circle cx="64" cy="186" r="6"/></g>
+      <g data-s=".13" stroke="rgba(255,255,255,.13)"><rect x="250" y="20" width="230" height="150" rx="16"/><rect x="274" y="44" width="70" height="46" rx="8"/><path d="M274 112H420M274 134H380"/></g>
+      <g data-s=".21"><rect x="352" y="70" width="250" height="150" rx="16" stroke="rgba(255,201,51,.34)" stroke-width="2.2"/><path d="M380 104H520M380 130H560M380 156H470" stroke="rgba(255,255,255,.13)"/>
+        <g stroke="rgba(255,201,51,.34)" fill="#0f1a3a"><rect x="344" y="62" width="14" height="14" rx="2"/><rect x="596" y="62" width="14" height="14" rx="2"/><rect x="596" y="212" width="14" height="14" rx="2"/></g></g>
+      <g data-s=".32"><path d="M560 168 L560 206 L571 197 L581 214 L588 210 L578 194 L592 192 Z" stroke="rgba(255,201,51,.34)" fill="#0f1a3a"/></g>
+    </g>
+  </svg>
+    <h2 class="rv">My work</h2>
   <p class="intro rv" style="--d:1">Selected projects and the thinking behind them. Open one to read the story. The first is the one you have been looking at all along: the mark in the corner of this page.</p>
   <div class="wlist">
     <section class="wk" style="--wc:#2336d0">
@@ -390,7 +422,16 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
   <div class="rword px" data-s=".16">EXPERIENCE</div>
 </div>
   <div class="w">
-  <h2 class="rv">Resume</h2>
+  <svg class="hdrart a3" viewBox="0 -40 640 310" aria-hidden="true" focusable="false">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
+      <g data-s=".04" stroke="rgba(255,255,255,.13)"><path d="M0 236H640"/><path d="M20 236V246"/><path d="M60 236V246"/><path d="M100 236V246"/><path d="M140 236V246"/><path d="M180 236V246"/><path d="M220 236V246"/><path d="M260 236V246"/><path d="M300 236V246"/><path d="M340 236V246"/><path d="M380 236V246"/><path d="M420 236V246"/><path d="M460 236V246"/><path d="M500 236V246"/><path d="M540 236V246"/><path d="M580 236V246"/><path d="M620 236V246"/></g>
+      <g data-s=".1" stroke="rgba(255,255,255,.13)"><path d="M150 158V236M260 118V236M370 78V236M480 38V236" stroke-dasharray="2 8"/></g>
+      <g data-s=".18"><path d="M40 236V198H150V158H260V118H370V78H480V38H600" stroke="rgba(255,201,51,.34)" stroke-width="2.2"/>
+        <g stroke="rgba(255,201,51,.34)" fill="#0f1a3a"><circle cx="40" cy="198" r="6"/><circle cx="150" cy="158" r="6"/><circle cx="260" cy="118" r="6"/><circle cx="370" cy="78" r="6"/><circle cx="480" cy="38" r="6"/></g></g>
+      <g data-s=".28" stroke="rgba(255,255,255,.13)"><path d="M600 38V12M600 12H626L616 22L626 32H600"/></g>
+    </g>
+  </svg>
+    <h2 class="rv">Resume</h2>
   <p class="rsum rv" style="--d:1">10+ years of taking repetitive, tedious manual work off people and companies by streamlining and automating processes, and by turning data into better decisions.</p>
   <p class="rnote rv" id="rnote" style="--d:2">Pick a skill to see where I have used it.</p>
   <ul class="skills" aria-label="Skills">
@@ -676,10 +717,10 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
 <script>
 (function(){
   var rail=document.getElementById('rail'),tabs=[].slice.call(rail.querySelectorAll('.tab')),n=tabs.length,
-  els=[null,document.getElementById('about'),document.querySelector('#approach h2'),document.querySelector('#work h2'),document.querySelector('#resume h2'),document.getElementById('contact')],busy=false;
+  els=[null,document.getElementById('about'),document.getElementById('approach'),document.getElementById('work'),document.getElementById('resume'),document.getElementById('contact')],busy=false;
   function docTop(e){var y=0;while(e){y+=e.offsetTop;e=e.offsetParent}return y}
   var line=document.getElementById('rline'),fill=line.firstElementChild,lastK=-1;
-  function tops(){var sy=scrollY,M=innerWidth<800?24:56,mx=Math.max(0,document.documentElement.scrollHeight-innerHeight);return els.map(function(e){return e?Math.min(Math.max(0,docTop(e)-M),mx):0})}
+  function tops(){var sy=scrollY,M=innerWidth<800?24:56,mx=Math.max(0,document.documentElement.scrollHeight-innerHeight);return els.map(function(e,i){return e?Math.min(Math.max(0,docTop(e)-(i>=2&&i<=4?0:M)),mx):0})}
   function layout(){
     var H=innerHeight,TH=innerWidth<800?62:70,PAD=10,sy=scrollY,tp=tops(),sec=tp.map(function(t){return t-sy}),k=0;
     for(var i=0;i<n;i++)if(sec[i]<=8)k=i;
@@ -703,8 +744,9 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
   tabs.forEach(function(t,i){t.addEventListener('click',function(e){
     e.preventDefault();
     var y=tops()[i];
-    window.__navTarget=y+(i?1:0);setTimeout(function(){window.__navTarget=null},2200);
-    scrollTo({top:y+(i?1:0),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+    var off=(i&&(i<2||i>4))?1:0;
+    window.__navTarget=y+off;setTimeout(function(){window.__navTarget=null},2200);
+    scrollTo({top:y+off,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
   })});
   layout();
 })();
@@ -741,17 +783,30 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
         if(window.__navTarget!=null){window.__navTarget+=shift;window.scrollTo({top:window.__navTarget,behavior:rm?'auto':'smooth'})}}}
     setTimeout(function(){w.classList.remove('instant')},80);
   }
-  function par(){var vh=innerHeight;wks.forEach(function(w){if(!w.classList.contains('open'))return;var r=w.getBoundingClientRect();if(r.bottom<-150)collapseWk(w,true);else if(r.top>vh+150)collapseWk(w,false)});[].forEach.call(document.querySelectorAll('.wkh'),function(h){var r=h.getBoundingClientRect(),w=h.parentNode.getBoundingClientRect();h.classList.toggle('stuck',h.parentNode.classList.contains('open')&&r.top<=1&&w.bottom>r.bottom+1)});bn.forEach(function(n){var r=n.parentNode.getBoundingClientRect(),k=inkOf(n),top0=parseFloat(getComputedStyle(n).top)||22,lo=Math.max(0,16-top0-k.top),hi=Math.max(lo,r.height-16-top0-k.bottom),span=Math.min(hi-lo,380),p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height)));n.style.setProperty('--py',(rm?lo:lo+span*p).toFixed(1)+'px')})}
+  function par(){var vh=innerHeight;wks.forEach(function(w){if(!w.classList.contains('open'))return;var r=w.getBoundingClientRect();if(r.bottom<-150)collapseWk(w,true);else if(r.top>vh+150)collapseWk(w,false)});[].forEach.call(document.querySelectorAll('.wkh'),function(h){var r=h.getBoundingClientRect(),w=h.parentNode.getBoundingClientRect();h.classList.toggle('stuck',h.parentNode.classList.contains('open')&&r.top<=48&&w.bottom>r.bottom+1)});bn.forEach(function(n){var r=n.parentNode.getBoundingClientRect(),k=inkOf(n),top0=parseFloat(getComputedStyle(n).top)||22,lo=Math.max(0,16-top0-k.top),hi=Math.max(lo,r.height-16-top0-k.bottom),span=Math.min(hi-lo,380),p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height)));n.style.setProperty('--py',(rm?lo:lo+span*p).toFixed(1)+'px')})}
   function reqPar(){if(!pb){pb=true;requestAnimationFrame(function(){par();pb=false})}}
   addEventListener('scroll',reqPar,{passive:true});addEventListener('resize',reqPar);par();
   setWh();addEventListener('resize',setWh);addEventListener('load',setWh);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(setWh);
   wks.forEach(function(w){
     var btn=w.querySelector('.wkh button');if(!btn)return;
     btn.addEventListener('click',function(){
-      var was=w.classList.contains('open');
+      if(w.classList.contains('closing'))return;
+      var was=w.classList.contains('open'),hdr=w.querySelector('.wkh'),hb=hdr.getBoundingClientRect().top;
+      if(was){
+        /* fade the story out first, then fold it away while keeping this header where it is on the screen */
+        w.classList.add('closing');
+        setTimeout(function(){
+          w.classList.add('instant');w.classList.remove('open');btn.setAttribute('aria-expanded','false');
+          window.scrollTo({top:hdr.getBoundingClientRect().top+scrollY-Math.max(0,hb),behavior:'instant'});
+          void w.offsetHeight;w.classList.remove('closing');setTimeout(function(){w.classList.remove('instant')},60);
+        },rm?0:230);
+        return;
+      }
       wks.forEach(function(x){if(x!==w){x.classList.remove('open');var b=x.querySelector('.wkh button');if(b)b.setAttribute('aria-expanded','false')}});
-      w.classList.toggle('open',!was);btn.setAttribute('aria-expanded',String(!was));
-      if(!was)setTimeout(function(){(function(){var st=w.querySelector('.story'),y=st?st.getBoundingClientRect().top+scrollY-(whOf(w)+16):w.querySelector('.wkh').getBoundingClientRect().top+scrollY;window.scrollTo({top:y,behavior:rm?'auto':'smooth'})})()},rm?0:540);
+      w.classList.add('open');btn.setAttribute('aria-expanded','true');
+      /* the story appears at once and rises in while the page glides to the stage */
+      var st=w.querySelector('.story'),y=st?st.getBoundingClientRect().top+scrollY-(whOf(w)+16):hdr.getBoundingClientRect().top+scrollY;
+      window.scrollTo({top:y,behavior:rm?'auto':'smooth'});
     });
   });
   var story=document.querySelector('.story');
@@ -882,6 +937,23 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){M.ready=false;reqStory()});
     reqStory();
   }
+})();
+</script>
+<script>
+(function(){
+  var arts=[].slice.call(document.querySelectorAll('.hdrart')),rm=matchMedia('(prefers-reduced-motion:reduce)').matches,busy=false;
+  if(!arts.length||rm)return;
+  var layers=arts.map(function(a){return [].slice.call(a.querySelectorAll('[data-s]'))});
+  function run(){
+    var vh=innerHeight;
+    arts.forEach(function(a,i){
+      var r=a.getBoundingClientRect();if(r.bottom<-300||r.top>vh+300)return;
+      var off=r.top+r.height/2-190;
+      layers[i].forEach(function(g){var t=Math.max(-48,Math.min(48,-off*(+g.dataset.s)*.4));g.style.transform='translateY('+t.toFixed(1)+'px)'});
+    });
+  }
+  function req(){if(!busy){busy=true;requestAnimationFrame(function(){run();busy=false})}}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);run();
 })();
 </script>
 </body>
