@@ -13,7 +13,7 @@ box-sizing:border-box}
 :root[data-theme="dark"]{--bg:#0d1430;--ink:#eef1fb;--muted:#a0a9c6;--line:#27315a;--accent:#7b8cff;--on:#0d1430;--soft:#18213f;--dk:#070b1d;--to:#ff5c57;--tf:#ffa347;--ts:#ff8a3d}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:1rem}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 "Schibsted Grotesk",system-ui,sans-serif;overflow-x:clip;padding-top:env(safe-area-inset-top,0px);padding-bottom:calc(3.6rem + env(safe-area-inset-bottom,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 "Schibsted Grotesk",system-ui,sans-serif;overflow-x:clip;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .w{max-width:1360px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem);padding-left:calc(clamp(1.5rem,4vw,4rem) + var(--rail));position:relative}
 html{--rail:88px}
 .rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);z-index:28;background:#0a1128;border-right:1px solid rgba(255,255,255,.09)}
@@ -118,7 +118,7 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .contact p{max-width:30rem;margin:0 0 1rem}
 .links{display:flex;gap:1.5rem;flex-wrap:wrap;font-weight:700;font-size:1.25rem}
 .links a{color:inherit}
-footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(--bg)}
+footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--bg)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}.rv{opacity:1;transform:none}.wd>span{transform:none}.hero .lede{opacity:1}.contact::before{clip-path:none}.contact{color:var(--on)}}
 </style>
 </head>
@@ -398,7 +398,7 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
   var WORDS=['Curious','Problem solver','Systems thinker','UX and UI designer','Application developer','Team lead','Minimalist','Stoic','Dog person'],setW=1;
   (function(){var t=WORDS.concat(WORDS).join(' \u2022 ')+' \u2022 ';for(var i=0;i<2;i++){var e=document.createElement('span');e.textContent=t;e.style.display='inline-block';band.appendChild(e)}})();
   function meas(){setW=band.firstChild.getBoundingClientRect().width||1;bh=bar.offsetHeight||56;slot.style.height=bh+'px'}
-  function pos(){bar.style.transform='translateY('+Math.max(slot.getBoundingClientRect().top,innerHeight-bh)+'px)'}
+  function pos(){var rem=document.documentElement.scrollHeight-innerHeight-scrollY,hide=1-Math.max(0,Math.min(1,rem/140));bar.style.transform='translateY('+(Math.max(slot.getBoundingClientRect().top,innerHeight-bh)+hide*(bh+6))+'px)'}
   meas();addEventListener('load',meas);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(meas);
   function upd(){
     var y=window.scrollY,vh=innerHeight;
@@ -437,9 +437,10 @@ footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.9rem;background:var(-
 <script>
 (function(){
   var rail=document.getElementById('rail'),tabs=[].slice.call(rail.querySelectorAll('.tab')),n=tabs.length,
-  els=[null,'about','approach','resume','contact'].map(function(id){return id?document.getElementById(id):null}),busy=false;
+  els=[null,document.getElementById('about'),document.querySelector('#approach h2'),document.querySelector('#resume h2'),document.getElementById('contact')],busy=false;
+  function docTop(e){var y=0;while(e){y+=e.offsetTop;e=e.offsetParent}return y}
   var line=document.getElementById('rline'),fill=line.firstElementChild,lastK=-1;
-  function tops(){var sy=scrollY,M=innerWidth<800?24:56,mx=Math.max(0,document.documentElement.scrollHeight-innerHeight);return els.map(function(e){return e?Math.min(Math.max(0,e.getBoundingClientRect().top+sy-M),mx):0})}
+  function tops(){var sy=scrollY,M=innerWidth<800?24:56,mx=Math.max(0,document.documentElement.scrollHeight-innerHeight);return els.map(function(e){return e?Math.min(Math.max(0,docTop(e)-M),mx):0})}
   function layout(){
     var H=innerHeight,TH=innerWidth<800?62:70,PAD=10,sy=scrollY,sec=tops().map(function(t){return t-sy}),k=0;
     for(var i=0;i<n;i++)if(sec[i]<=8)k=i;
