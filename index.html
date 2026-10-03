@@ -81,7 +81,6 @@ section{position:relative}
 .work .intro{color:rgba(255,255,255,.88);max-width:44rem;margin:0 0 3rem}
 .wlist{margin-top:3rem}
 .wk{position:relative;background:var(--wc);box-shadow:0 0 0 100vmax var(--wc);clip-path:inset(0 -100vmax);padding:3.4rem 0 3.8rem;--wh:96px}
-.wk .bignum{position:absolute;right:clamp(.5rem,3vw,3rem);top:1.4rem;font-weight:900;font-size:clamp(7rem,15vw,12rem);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.3);pointer-events:none;will-change:transform;transform:translateY(var(--py,0px))}
 .wkh{position:sticky;top:0;z-index:8;margin:0;background:transparent}
 .wkh.stuck{background:var(--wc)}
 .wk:not(.open) .wkh{position:relative;z-index:8}
@@ -207,11 +206,6 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 
 .jobs{margin-top:2.2rem}
 .co{position:relative;display:grid;grid-template-columns:1fr minmax(150px,210px);gap:0 2.4rem;transition:opacity .3s;--cb:#0f1a3a;--rbg:var(--cb);background:var(--cb);box-shadow:0 0 0 100vmax var(--cb);clip-path:inset(0 -100vmax)}
-.co[data-co="appian"]{--lc:#2420ef}
-.co[data-co="captech"]{--lc:#215fb1}
-.co[data-co="shellpoint"]{--lc:#002e3b}
-.co[data-co="uh"]{--lc:#e41736}
-.co::before{content:"";position:absolute;right:var(--br,-90px);top:0;bottom:0;width:14px;background:var(--lc);z-index:7}
 .logo{position:sticky;top:0;z-index:3;align-self:start;grid-column:2;grid-row:1;padding:2.4rem 0 1rem;margin-bottom:3rem}
 .roles{grid-column:1;grid-row:1}
 .stk{grid-column:1 / -1;grid-row:1;align-self:start;position:sticky;top:0;z-index:2;height:var(--kh,90px);margin-bottom:calc(var(--kh,90px) * -1);background-color:var(--rbg)}
@@ -372,7 +366,6 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
   <p class="intro rv" style="--d:1">Selected projects and the thinking behind them. Open one to read the story. The first is the one you have been looking at all along: the mark in the corner of this page.</p>
   <div class="wlist">
     <section class="wk" style="--wc:#2336d0">
-      <div class="bignum" aria-hidden="true">01</div>
       <h3 class="wkh"><button type="button" aria-expanded="false" aria-controls="wkp1"><span class="wt"><small>Brand identity</small><b>Balancing curves and hard lines</b></span><span class="wcta"><span class="wtxt wt-read">Read the story</span><span class="wtxt wt-close">Close the story</span><span class="ac" aria-hidden="true"></span></span></button></h3>
       <div class="wkctx"><p class="clede">How I designed my own mark: a T that bends, an S that does not, and a D that holds them together.</p><dl class="cmeta">
         <div><dt>Role</dt><dd>Designer</dd></div>
@@ -428,7 +421,6 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       </div></div>
     </section>
     <section class="wk soon" style="--wc:#18258f">
-      <div class="bignum" aria-hidden="true">02</div>
       <h3 class="wkh"><span class="wnb"><span class="wt"><small>Coming soon</small><b>The next use case</b></span></span></h3>
       <div class="wkctx"><p class="clede">Another project and the thinking behind it is on the way.</p></div>
     </section>
@@ -787,7 +779,7 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
     roles.forEach(function(el){var jr=el.getBoundingClientRect();el.style.setProperty('--tl',Math.max(0,Math.min(1,(vh*.62-jr.top)/Math.max(1,jr.height))).toFixed(3))});
   }
   function req(){if(!busy){busy=true;requestAnimationFrame(function(){run();busy=false})}}
-  function sizeCards(){var rw=document.getElementById('rail').getBoundingClientRect().width;[].forEach.call(document.querySelectorAll('.co'),function(c){c.style.setProperty('--br',(c.getBoundingClientRect().right-document.documentElement.clientWidth).toFixed(1)+'px');var h=0;[].forEach.call(c.querySelectorAll('.jh'),function(j){h=Math.max(h,j.offsetHeight)});c.style.setProperty('--kh',Math.ceil(h)+'px')})}
+  function sizeCards(){var rw=document.getElementById('rail').getBoundingClientRect().width;[].forEach.call(document.querySelectorAll('.co'),function(c){var h=0;[].forEach.call(c.querySelectorAll('.jh'),function(j){h=Math.max(h,j.offsetHeight)});c.style.setProperty('--kh',Math.ceil(h)+'px')})}
   addEventListener('scroll',req,{passive:true});addEventListener('resize',function(){sizeCards();req()});addEventListener('load',sizeCards);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sizeCards);sizeCards();run();
 })();
 </script>
@@ -825,6 +817,7 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       if(w.classList.contains('closing'))return;
       var hdr=w.querySelector('.wkh'),hb=hdr.getBoundingClientRect().top;
       w.classList.add('closing');
+      if(window.__stopFollow)window.__stopFollow();
       setTimeout(function(){
         w.classList.add('instant');w.classList.remove('open');btn.setAttribute('aria-expanded','false');
         window.scrollTo({top:hdr.getBoundingClientRect().top+scrollY-Math.max(0,hb),behavior:'instant'});
@@ -996,57 +989,84 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
         if(p<1)requestAnimationFrame(step);else{snapping=false;lastY=scrollY}
       })(t0);
     }
-    addEventListener('scroll',function(){if(snapping)return;goingDown=scrollY>=lastY;lastY=scrollY;clearTimeout(snapT);snapT=setTimeout(snap,150)},{passive:true});
+    addEventListener('scroll',function(){
+      var g=gesture||(touchG&&touchG.g);
+      if(g&&g.inside&&g.seg&&!following&&performance.now()-lastInput<1000&&active()){var lo=yAt(g.seg.lo),hi=yAt(g.seg.hi);if(scrollY>hi+4)window.scrollTo({top:hi,behavior:'instant'});else if(scrollY<lo-4)window.scrollTo({top:lo,behavior:'instant'})}
+    },{passive:true});
+    addEventListener('scroll',function(){if(snapping)return;goingDown=scrollY>=lastY;lastY=scrollY;clearTimeout(snapT);snapT=setTimeout(function(){if(performance.now()-lastInput>60000&&!following)snap()},700)},{passive:true});
     ['wheel','touchstart','keydown'].forEach(function(n){addEventListener(n,function(){cancelSnap=true;clearTimeout(snapT)},{passive:true})});
-    /* each swipe, scroll, or key press plays exactly one transition, then waits: you cannot creep through them */
-    var pAnim=false,gesture=null,lastWheel=0,touchS=null;
+    /* you steer each transition with your scroll, at any speed, but it stops at its resting frame; a fresh scroll is needed to go on to the next one */
+    var gesture=null,lastWheel=0,lastInput=0,touchG=null,tgt=0,following=false;
     function active(){if(rm||!sw.classList.contains('open')||window.__navJump!=null)return false;var f=frameInfo();return f.t>=-.01&&f.t<=1.01}
-    function stateFor(dir){
-      var u=frameInfo().t*U,i;
-      if(dir>0){for(i=0;i<ST.length;i++)if(ST[i]>u+.06)return i;return -1}
-      for(i=ST.length-1;i>=0;i--)if(ST[i]<u-.06)return i;return -1;
+    function uAt(y){var f=frameInfo();return f.t*U+(y-scrollY)*U/f.dist}
+    function yAt(u){var f=frameInfo();return scrollY-f.t*f.dist+f.dist*(u/U)}
+    function refU(){return following?uAt(tgt):frameInfo().t*U}
+    function segmentFor(dir){
+      var u=refU(),i,j=-1;
+      for(i=0;i<ST.length;i++)if(Math.abs(u-ST[i])<.03)j=i;
+      if(j>=0){if(dir>0)return j>=ST.length-1?null:{lo:ST[j],hi:ST[j+1]};return j<=0?null:{lo:ST[j-1],hi:ST[j]}}
+      for(i=0;i<ST.length-1;i++)if(u>ST[i]&&u<ST[i+1])return {lo:ST[i],hi:ST[i+1]};
+      return null;
     }
-    function pageTo(i){
-      var f=frameInfo(),u0=f.t*U,y0=scrollY,y1=y0-f.t*f.dist+f.dist*(ST[i]/U),dur=Math.min(1500,420+240*Math.abs(ST[i]-u0)),t0=performance.now();
-      pAnim=true;snapping=true;clearTimeout(snapT);
-      (function step(now){
-        if(!pAnim)return;
-        var p=Math.min(1,(now-t0)/dur),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
-        window.scrollTo({top:y0+(y1-y0)*e,behavior:'instant'});
-        if(p<1)requestAnimationFrame(step);else{pAnim=false;snapping=false;lastY=scrollY}
-      })(t0);
-      setTimeout(function(){if(pAnim){pAnim=false;snapping=false;window.scrollTo({top:y1,behavior:'instant'});lastY=scrollY}},dur+120);
+    var stuck=0;
+    function follow(){
+      /* stop as soon as the story is closed or we are no longer making progress, so it can never hold the page back */
+      if(!sw.classList.contains('open')||window.__navJump!=null){following=false;stuck=0;return}
+      var d=tgt-scrollY;
+      if(Math.abs(d)<1.5){window.scrollTo({top:tgt,behavior:'instant'});following=false;stuck=0;return}
+      var before=scrollY,step=d*.3;if(Math.abs(step)<1)step=d>0?1:-1;
+      window.scrollBy({top:step,behavior:'instant'});
+      if(scrollY===before){if(++stuck>4){following=false;stuck=0;return}}else stuck=0;
+      requestAnimationFrame(follow);
     }
-    function pageDir(dir){var t=stateFor(dir);if(t<0)return false;pageTo(t);return true}
+    window.__stopFollow=function(){following=false;stuck=0;gesture=null;touchG=null};
+    /* move the scroll target by dy, but never past the ends of this transition; returns true if an end was reached */
+    function steer(g,dy){
+      var base=following?tgt:scrollY,lo=yAt(g.seg.lo),hi=yAt(g.seg.hi),want=base+dy,y=Math.max(lo,Math.min(hi,want));
+      tgt=y;if(!following){following=true;requestAnimationFrame(follow)}
+      return want<=lo||want>=hi;
+    }
+    function begin(dir,inside){var seg=inside?segmentFor(dir):null;return {inside:!!seg,seg:seg,blocked:false,dir:dir,prev:0,t:performance.now(),moved:false}}
     addEventListener('wheel',function(e){
       if(e.ctrlKey)return;
-      var now=performance.now(),ad=Math.abs(e.deltaY),dir=e.deltaY>0?1:-1,fresh=now-lastWheel>170||!gesture;
-      /* a new swipe during the previous one's trailing momentum shows as a jump in speed or a change of direction */
-      if(!fresh&&gesture.used&&now-gesture.t>380&&(ad>gesture.prev+14||dir!==gesture.dir))fresh=true;
-      if(fresh)gesture={inside:active(),used:false,prev:0,dir:dir,t:now};
+      var now=performance.now(),dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1),ad=Math.abs(dy),dir=dy>0?1:-1;lastInput=now;
+      var fresh=now-lastWheel>170||!gesture;
+      /* a new scroll that begins while the last one's momentum is still trailing off shows as a jump in speed */
+      if(!fresh&&gesture.blocked&&now-gesture.t>380&&(ad>gesture.prev+14||dir!==gesture.dir))fresh=true;
+      if(fresh)gesture=begin(dir,active());
       gesture.prev=ad;lastWheel=now;
-      if(!gesture.inside)return;
-      if(pAnim||gesture.used){e.preventDefault();return}
-      if(ad<4)return;
-      gesture.used=true;gesture.t=now;gesture.dir=dir;
-      if(pageDir(dir))e.preventDefault();else gesture.inside=false;
+      /* a scroll that arrives at the pinned start is caught right there instead of drifting on past the first frame */
+      if(!gesture.inside&&!gesture.caught&&dir>0&&active()&&frameInfo().t*U<.4){gesture.caught=true;var sg=segmentFor(1);if(sg){gesture.seg=sg;gesture.inside=true}}
+      if(!gesture.inside){following=false;return}
+      e.preventDefault();
+      if(gesture.blocked||ad<1)return;
+      if(steer(gesture,dy)){gesture.blocked=true;gesture.t=now}
     },{passive:false});
     addEventListener('keydown',function(e){
       if(e.metaKey||e.ctrlKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test((e.target&&e.target.tagName)||''))return;
-      var d=0;if(e.key==='ArrowDown'||e.key==='PageDown'||(e.key===' '&&!e.shiftKey))d=1;else if(e.key==='ArrowUp'||e.key==='PageUp'||(e.key===' '&&e.shiftKey))d=-1;
+      var d=0,amt=0;
+      if(e.key==='ArrowDown'){d=1;amt=70}else if(e.key==='ArrowUp'){d=-1;amt=70}else if(e.key==='PageDown'||(e.key===' '&&!e.shiftKey)){d=1;amt=innerHeight*.8}else if(e.key==='PageUp'||(e.key===' '&&e.shiftKey)){d=-1;amt=innerHeight*.8}
       if(!d||!active())return;
-      if(pAnim){e.preventDefault();return}
-      if(pageDir(d))e.preventDefault();
+      lastInput=performance.now();
+      if(!gesture||!e.repeat||!gesture.keys||gesture.dir!==d){gesture=begin(d,true);gesture.keys=true}
+      if(!gesture.inside)return;
+      e.preventDefault();
+      if(gesture.blocked)return;
+      if(steer(gesture,d*amt))gesture.blocked=true;
     });
-    addEventListener('touchstart',function(e){touchS={y:e.touches[0].clientY,inside:active(),used:false}},{passive:true});
+    addEventListener('keyup',function(){if(gesture&&gesture.keys)gesture=null});
+    addEventListener('touchstart',function(e){lastInput=performance.now();touchG={y:e.touches[0].clientY,g:null,started:active()}},{passive:true});
     addEventListener('touchmove',function(e){
-      if(!touchS||!touchS.inside)return;
-      var dy=touchS.y-e.touches[0].clientY;
-      if(pAnim||touchS.used){if(e.cancelable)e.preventDefault();return}
-      if(Math.abs(dy)>18){touchS.used=true;if(pageDir(dy>0?1:-1)){if(e.cancelable)e.preventDefault()}else touchS.inside=false}
-      else if(e.cancelable)e.preventDefault();
+      if(!touchG)return;
+      lastInput=performance.now();
+      var y=e.touches[0].clientY,dy=touchG.y-y;touchG.y=y;
+      if(!touchG.started&&!touchG.g)return;
+      if(!touchG.g){if(Math.abs(dy)<2)return;touchG.g=begin(dy>0?1:-1,true);if(!touchG.g.inside){touchG.started=false;touchG.g=null;return}}
+      if(e.cancelable)e.preventDefault();
+      if(touchG.g.blocked)return;
+      if(steer(touchG.g,dy))touchG.g.blocked=true;
     },{passive:false});
-    addEventListener('touchend',function(){touchS=null},{passive:true});
+    addEventListener('touchend',function(){touchG=null},{passive:true});
     addEventListener('scroll',reqStory,{passive:true});addEventListener('resize',function(){M.ready=false;reqStory()});
     wks.forEach(function(w){var b=w.querySelector('.wkh button');if(b)b.addEventListener('click',function(){setTimeout(function(){M.ready=false;reqStory()},560)})});
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){M.ready=false;reqStory()});
