@@ -74,10 +74,6 @@ section{position:relative}
 .about{position:relative;z-index:2;padding:0 0 7rem}
 .dark,.work,.resume{position:relative}
 
-.hdrart{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%);position:absolute;right:clamp(0rem,1vw,1rem);top:-4rem;width:min(640px,54%);height:auto;pointer-events:none;z-index:-1}
-.hdrart [data-s]{will-change:transform}
-.hdrart.a3{top:-5.4rem;width:min(520px,40%)}
-@media (max-width:800px){.hdrart{width:92%;top:-1rem;opacity:.5}}
 .dark::before,.work::before,.resume::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;z-index:6}
 .dark::before,.work::before,.resume::before{background:#ffc933}
 .work{position:relative;z-index:1;background:#0f1a3a;color:#fff;--ink:#fff;--muted:rgba(255,255,255,.84);--line:rgba(255,255,255,.3);padding:3.2rem 0 0}
@@ -88,7 +84,7 @@ section{position:relative}
 .wk .bignum{position:absolute;right:clamp(.5rem,3vw,3rem);top:1.4rem;font-weight:900;font-size:clamp(7rem,15vw,12rem);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.3);pointer-events:none;will-change:transform;transform:translateY(var(--py,0px))}
 .wkh{position:sticky;top:0;z-index:8;margin:0;background:transparent}
 .wkh.stuck{background:var(--wc)}
-.wk:not(.open) .wkh{position:static}
+.wk:not(.open) .wkh{position:relative;z-index:8}
 .wkh button,.wkh .wnb{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1.4rem;padding:1.2rem 0;color:#fff;cursor:pointer;font-family:inherit;position:relative;z-index:1}
 .wkh .wnb{grid-template-columns:1fr;cursor:default;opacity:.8}
 .wkh button:focus-visible{outline:3px solid #ffc933;outline-offset:4px}
@@ -106,6 +102,8 @@ section{position:relative}
 .wk:not(.soon):not(.open) .wcta{opacity:0;transform:translateY(-8px);transition:opacity .25s ease,transform .3s cubic-bezier(.2,.8,.2,1)}
 .wk:not(.soon):not(.open).hov .wcta,.wk:not(.soon):not(.open) .wkh button:focus-visible .wcta{opacity:1;transform:none}
 .wk.hov:not(.open) .wcta .ac{animation:nudge .9s ease-in-out infinite}
+.wk:not(.soon):not(.open)::after{content:"";position:absolute;inset:0;background:rgba(5,10,36,.26);box-shadow:0 0 0 100vmax rgba(5,10,36,.26);opacity:0;transition:opacity .25s ease;pointer-events:none;z-index:0}
+.wk.hov:not(.open)::after{opacity:1}
 @keyframes nudge{0%,100%{translate:0 0}50%{translate:0 4px}}
 @media (hover:none) and (pointer:coarse){.wk:not(.soon):not(.open) .wcta{opacity:.9;transform:none}}
 @media (prefers-reduced-motion:reduce){.wk.hov:not(.open) .wcta .ac{animation:none}.wk .wcta{transition:none!important}}
@@ -143,8 +141,8 @@ section{position:relative}
 .lstage{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:1.5rem 3rem;align-items:center;padding:3.2rem clamp(1.5rem,4vw,3.5rem) 1.6rem}
 .lbar{position:absolute;left:clamp(1.5rem,4vw,3rem);right:clamp(1.5rem,4vw,3rem);top:1.2rem;height:4px;border-radius:4px;background:rgba(255,255,255,.18);overflow:hidden;z-index:3}
 .lbar i{display:block;height:100%;background:#ffc933;transform-origin:left;transform:scaleX(var(--f,0))}
-.lcap{position:relative;min-height:15rem;align-self:center}
-.cap{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);opacity:0;visibility:hidden}
+.lcap{position:relative;min-height:15rem;align-self:start;margin-top:3.4rem}
+.cap{position:absolute;left:0;right:0;top:0;opacity:0;visibility:hidden}
 .slbl{display:inline-flex;align-items:center;gap:.7rem;color:#ffc933;font-weight:800;margin-bottom:.8rem}
 .slbl span{font-weight:900;font-size:1.8rem;letter-spacing:-.03em;color:#ffc933}
 .sh{font-size:clamp(1.8rem,3.2vw,2.7rem);font-weight:900;letter-spacing:-.03em;line-height:1.08;margin:0 0 1rem;color:#fff}
@@ -154,7 +152,7 @@ section{position:relative}
 .lviz .n,.lviz #dGrp{opacity:0}.lviz #comp{color:#ffc933}
 .lviz .lb{font:700 20px 'Schibsted Grotesk',system-ui,sans-serif;fill:#a9b4de;opacity:0}
 @media (prefers-reduced-motion:reduce){.story{height:auto}.stage{position:static;height:auto}.lbar{display:none}.lcap{min-height:0}.cap{position:static;transform:none;opacity:1!important;visibility:visible!important;margin-bottom:1.2rem}.lviz #words{display:none}.lviz #comp{color:#ffc933}.lviz #tCurve,.lviz #sHard,.lviz #dGrp{opacity:1!important}.lviz #lblHard,.lviz #lblCurve{display:none}}
-@media (max-width:800px){.lstage{grid-template-columns:1fr;gap:.6rem;padding-top:2.6rem}.lviz{order:-1;max-height:38vh}.lcap{min-height:11rem}}
+@media (max-width:800px){.lstage{grid-template-columns:1fr;gap:.6rem;padding-top:2.6rem}.lviz{order:-1;max-height:38vh}.lcap{min-height:11rem;margin-top:1rem}}
 @media (max-width:800px){.cmeta{grid-template-columns:repeat(2,minmax(0,1fr))}.wkh button,.wkh .wnb{gap:1rem}}
 .resume{position:relative;overflow:clip;background:#0f1a3a;color:#fff;--rbg:#0f1a3a;--ink:#fff;--muted:rgba(255,255,255,.82);--line:rgba(255,255,255,.3);--accent:#ffc933;--on:#0f1a3a}
 .resume .w{position:relative;z-index:1}
@@ -213,7 +211,7 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .co[data-co="captech"]{--lc:#215fb1}
 .co[data-co="shellpoint"]{--lc:#002e3b}
 .co[data-co="uh"]{--lc:#e41736}
-.co::before{content:"";position:absolute;left:var(--bl,-90px);top:0;bottom:0;width:14px;background:var(--lc);z-index:7}
+.co::before{content:"";position:absolute;right:var(--br,-90px);top:0;bottom:0;width:14px;background:var(--lc);z-index:7}
 .logo{position:sticky;top:0;z-index:3;align-self:start;grid-column:2;grid-row:1;padding:2.4rem 0 1rem;margin-bottom:3rem}
 .roles{grid-column:1;grid-row:1}
 .stk{grid-column:1 / -1;grid-row:1;align-self:start;position:sticky;top:0;z-index:2;height:var(--kh,90px);margin-bottom:calc(var(--kh,90px) * -1);background-color:var(--rbg)}
@@ -301,18 +299,7 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
 <div class="zpad" aria-hidden="true"></div>
 </div>
 <section id="approach" class="dark"><div class="w">
-  <svg class="hdrart a1" viewBox="0 -40 640 310" aria-hidden="true" focusable="false">
-    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
-      <g data-s=".05"><path d="M0 196H640" stroke="rgba(255,255,255,.13)" stroke-dasharray="2 9"/></g>
-      <g data-s=".13" stroke="rgba(255,255,255,.13)"><circle cx="318" cy="110" r="46"/><circle cx="318" cy="110" r="86" stroke-dasharray="3 10"/></g>
-      <g data-s=".22">
-        <path d="M24 176 C 130 20, 210 232, 318 110 S 500 12, 616 128" stroke="rgba(255,201,51,.34)" stroke-width="2.2"/>
-        <path d="M24 176 L130 20 M318 110 L210 232 M318 110 L430 40 M616 128 L500 12" stroke="rgba(255,255,255,.13)"/>
-        <g stroke="rgba(255,255,255,.13)" fill="#0a1128"><circle cx="130" cy="20" r="5"/><circle cx="430" cy="40" r="5"/><circle cx="500" cy="12" r="5"/></g>
-        <g stroke="rgba(255,201,51,.34)" fill="#0a1128"><rect x="16" y="168" width="16" height="16" rx="2"/><rect x="310" y="102" width="16" height="16" rx="2"/><rect x="608" y="120" width="16" height="16" rx="2"/></g>
-      </g>
-    </g>
-  </svg>
+  
     <h2 class="rv">My approach to design</h2>
   <p class="intro rv" style="--d:1">Five steps from a messy problem to a measurable result.</p>
   <div class="steps">
@@ -380,15 +367,7 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
 </div></section>
 
 <section id="work" class="work"><div class="w">
-  <svg class="hdrart a2" viewBox="0 -40 640 310" aria-hidden="true" focusable="false">
-    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
-      <g data-s=".06" stroke="rgba(255,255,255,.13)"><rect x="40" y="86" width="190" height="124" rx="14"/><path d="M64 110H190M64 134H160M64 158H176"/><circle cx="64" cy="186" r="6"/></g>
-      <g data-s=".13" stroke="rgba(255,255,255,.13)"><rect x="250" y="20" width="230" height="150" rx="16"/><rect x="274" y="44" width="70" height="46" rx="8"/><path d="M274 112H420M274 134H380"/></g>
-      <g data-s=".21"><rect x="352" y="70" width="250" height="150" rx="16" stroke="rgba(255,201,51,.34)" stroke-width="2.2"/><path d="M380 104H520M380 130H560M380 156H470" stroke="rgba(255,255,255,.13)"/>
-        <g stroke="rgba(255,201,51,.34)" fill="#0f1a3a"><rect x="344" y="62" width="14" height="14" rx="2"/><rect x="596" y="62" width="14" height="14" rx="2"/><rect x="596" y="212" width="14" height="14" rx="2"/></g></g>
-      <g data-s=".32"><path d="M560 168 L560 206 L571 197 L581 214 L588 210 L578 194 L592 192 Z" stroke="rgba(255,201,51,.34)" fill="#0f1a3a"/></g>
-    </g>
-  </svg>
+  
     <h2 class="rv">My work</h2>
   <p class="intro rv" style="--d:1">Selected projects and the thinking behind them. Open one to read the story. The first is the one you have been looking at all along: the mark in the corner of this page.</p>
   <div class="wlist">
@@ -407,16 +386,16 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
             <div class="stage lstage">
               <div class="lbar" aria-hidden="true"><i></i></div>
               <div class="lcap">
-<div class="cap" data-a="0.0" data-b="2.6"><div class="slbl"><span>01</span>The name</div><h4 class="sh">It starts with a name</h4><p class="sp">The site is called Tyler Shepherd Design. Three words, and a lot of letters to carry around.</p></div>
-<div class="cap" data-a="2.6" data-b="5.2"><div class="slbl"><span>02</span>The initials</div><h4 class="sh">Strip it down to TSD</h4><p class="sp">Everything except the initials goes. Three letters are all the mark has to work with, so each one gets its own turn.</p></div>
-<div class="cap" data-a="5.2" data-b="7.0"><div class="slbl"><span>03</span>The T</div><h4 class="sh">The T is all hard edges</h4><p class="sp">I gave the T the rigid side of the idea: a flat bar, a straight stem, and square corners everywhere.</p></div>
-<div class="cap" data-a="7.0" data-b="9.2"><div class="slbl"><span>04</span>Flip the script</div><h4 class="sh">Now the same T is all curves</h4><p class="sp">Rotate it and the rules reverse. The bar becomes a soft arch and the stem bends away like a brush stroke.</p></div>
-<div class="cap" data-a="9.2" data-b="11.6"><div class="slbl"><span>05</span>The S</div><h4 class="sh">The S is all curves</h4><p class="sp">The S gets the opposite treatment to start: one smooth line with no corners at all.</p></div>
-<div class="cap" data-a="11.6" data-b="13.7"><div class="slbl"><span>06</span>Flip the script</div><h4 class="sh">Turn it and it turns hard</h4><p class="sp">Rotate the S and it becomes a folded ribbon of straight lines and sharp corners.</p></div>
-<div class="cap" data-a="13.7" data-b="17.4"><div class="slbl"><span>07</span>The D</div><h4 class="sh">The D balances both</h4><p class="sp">A D already holds both ideas: a straight edge and a curve. Pull it apart, then turn the curve on its side and let it stretch into the sweep of the logo.</p></div>
-<div class="cap" data-a="17.4" data-b="18.9"><div class="slbl"><span>08</span>Putting it together</div><h4 class="sh">The T and S come over the D</h4><p class="sp">The straight edge steps aside because the bottom of the S takes its place. The T and the S come over the curve and balance on it.</p></div>
+<div class="cap" data-a="0" data-b="2.5"><div class="slbl"><span>01</span>The name</div><h4 class="sh">It starts with a name</h4><p class="sp">The site is called Tyler Shepherd Design. Three words, and a lot of letters to carry around.</p></div>
+<div class="cap" data-a="2.4" data-b="5.2"><div class="slbl"><span>02</span>The initials</div><h4 class="sh">Strip it down to TSD</h4><p class="sp">Everything except the initials goes. Three letters are all the mark has to work with, so each one gets its own turn.</p></div>
+<div class="cap" data-a="5.1" data-b="6.8"><div class="slbl"><span>03</span>The T</div><h4 class="sh">The T is all hard edges</h4><p class="sp">I gave the T the rigid side of the idea: a flat bar, a straight stem, and square corners everywhere.</p></div>
+<div class="cap" data-a="6.6" data-b="9.3"><div class="slbl"><span>04</span>Flip the script</div><h4 class="sh">Now the same T is all curves</h4><p class="sp">Rotate it and the rules reverse. The bar becomes a soft arch and the stem bends away like a brush stroke.</p></div>
+<div class="cap" data-a="9.2" data-b="11.1"><div class="slbl"><span>05</span>The S</div><h4 class="sh">The S is all curves</h4><p class="sp">The S gets the opposite treatment to start: one smooth line with no corners at all.</p></div>
+<div class="cap" data-a="11.0" data-b="13.7"><div class="slbl"><span>06</span>Flip the script</div><h4 class="sh">Turn it and it turns hard</h4><p class="sp">Rotate the S and it becomes a folded ribbon of straight lines and sharp corners.</p></div>
+<div class="cap" data-a="13.6" data-b="17.4"><div class="slbl"><span>07</span>The D</div><h4 class="sh">The D balances both</h4><p class="sp">A D already holds both ideas: a straight edge and a curve. Pull it apart, then turn the curve on its side and let it stretch into the sweep of the logo.</p></div>
+<div class="cap" data-a="17.3" data-b="19.0"><div class="slbl"><span>08</span>Putting it together</div><h4 class="sh">The T and S come over the D</h4><p class="sp">The straight edge steps aside because the bottom of the S takes its place. The T and the S come over the curve and balance on it.</p></div>
 <div class="cap" data-a="18.9" data-b="20.4"><div class="slbl"><span>09</span>The mark</div><h4 class="sh">Merge it into one shape</h4><p class="sp">Trace it, join the strokes, and the three letters become a single mark: curves and hard lines holding each other up.</p></div>
-              <div class="cap" data-a="20.4" data-b="22.8"><div class="slbl"><span>10</span>One more thing</div><h4 class="sh">Squint real hard</h4><p class="sp">If you squint real hard, it kinda looks like a face.</p></div>
+              <div class="cap" data-a="20.3" data-b="22.9"><div class="slbl"><span>10</span>One more thing</div><h4 class="sh">Squint real hard</h4><p class="sp">If you squint real hard, it kinda looks like a face.</p></div>
 <div class="cap" data-a="22.8" data-b="99"><div class="slbl"><span>11</span>Squint harder</div><h4 class="sh">Squint harder</h4><p class="sp">And if you squint harder, it even kinda looks like my face.</p></div>
               </div>
               <svg class="lviz" viewBox="0 0 600 520" role="img" aria-label="Animation: the initials T, S, and D are pulled out of the name and parked at the top, each is brought down and flipped between hard and curved, the D is split and turned on its side, and the T and S come over it to form the final mark">
@@ -460,15 +439,7 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
   <div class="rword px" data-s=".16">EXPERIENCE</div>
 </div>
   <div class="w">
-  <svg class="hdrart a3" viewBox="0 -40 640 310" aria-hidden="true" focusable="false">
-    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
-      <g data-s=".04" stroke="rgba(255,255,255,.13)"><path d="M0 236H640"/><path d="M20 236V246"/><path d="M60 236V246"/><path d="M100 236V246"/><path d="M140 236V246"/><path d="M180 236V246"/><path d="M220 236V246"/><path d="M260 236V246"/><path d="M300 236V246"/><path d="M340 236V246"/><path d="M380 236V246"/><path d="M420 236V246"/><path d="M460 236V246"/><path d="M500 236V246"/><path d="M540 236V246"/><path d="M580 236V246"/><path d="M620 236V246"/></g>
-      <g data-s=".1" stroke="rgba(255,255,255,.13)"><path d="M150 158V236M260 118V236M370 78V236M480 38V236" stroke-dasharray="2 8"/></g>
-      <g data-s=".18"><path d="M40 236V198H150V158H260V118H370V78H480V38H600" stroke="rgba(255,201,51,.34)" stroke-width="2.2"/>
-        <g stroke="rgba(255,201,51,.34)" fill="#0f1a3a"><circle cx="40" cy="198" r="6"/><circle cx="150" cy="158" r="6"/><circle cx="260" cy="118" r="6"/><circle cx="370" cy="78" r="6"/><circle cx="480" cy="38" r="6"/></g></g>
-      <g data-s=".28" stroke="rgba(255,255,255,.13)"><path d="M600 38V12M600 12H626L616 22L626 32H600"/></g>
-    </g>
-  </svg>
+  
     <h2 class="rv">Resume</h2>
   <p class="rsum rv" style="--d:1">10+ years of taking repetitive, tedious manual work off people and companies by streamlining and automating processes, and by turning data into better decisions.</p>
   <p class="rnote rv" id="rnote" style="--d:2">Pick a skill to see where I have used it.</p>
@@ -816,7 +787,7 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
     roles.forEach(function(el){var jr=el.getBoundingClientRect();el.style.setProperty('--tl',Math.max(0,Math.min(1,(vh*.62-jr.top)/Math.max(1,jr.height))).toFixed(3))});
   }
   function req(){if(!busy){busy=true;requestAnimationFrame(function(){run();busy=false})}}
-  function sizeCards(){var rw=document.getElementById('rail').getBoundingClientRect().width;[].forEach.call(document.querySelectorAll('.co'),function(c){c.style.setProperty('--bl',(rw-c.getBoundingClientRect().left).toFixed(1)+'px');var h=0;[].forEach.call(c.querySelectorAll('.jh'),function(j){h=Math.max(h,j.offsetHeight)});c.style.setProperty('--kh',Math.ceil(h)+'px')})}
+  function sizeCards(){var rw=document.getElementById('rail').getBoundingClientRect().width;[].forEach.call(document.querySelectorAll('.co'),function(c){c.style.setProperty('--br',(c.getBoundingClientRect().right-document.documentElement.clientWidth).toFixed(1)+'px');var h=0;[].forEach.call(c.querySelectorAll('.jh'),function(j){h=Math.max(h,j.offsetHeight)});c.style.setProperty('--kh',Math.ceil(h)+'px')})}
   addEventListener('scroll',req,{passive:true});addEventListener('resize',function(){sizeCards();req()});addEventListener('load',sizeCards);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sizeCards);sizeCards();run();
 })();
 </script>
@@ -870,10 +841,19 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       w.classList.add('open');w.classList.remove('hov');btn.setAttribute('aria-expanded','true');
       if(window.__reqStory)window.__reqStory();
       /* the story appears at once and rises in while the page glides to the stage */
-      var st=w.querySelector('.story'),y=st?st.getBoundingClientRect().top+scrollY-(whOf(w)+16):hdr.getBoundingClientRect().top+scrollY;
-      window.scrollTo({top:y,behavior:rm?'auto':'smooth'});
+      var st=w.querySelector('.story'),y=st?layoutTop(st)-(whOf(w)+16):layoutTop(hdr);
+      glideTo(y);
     });
   });
+  /* where an element sits in the page ignoring any fade or slide it is in the middle of */
+  function layoutTop(el){var y=0;while(el){y+=el.offsetTop;el=el.offsetParent}return y}
+  /* our own glide, so it always arrives exactly where the story is pinned */
+  function glideTo(y1){
+    var y0=scrollY,d=y1-y0,t0=performance.now(),dur=rm?0:Math.min(900,350+Math.abs(d)*.25);
+    (function f(now){var p=dur?Math.min(1,(now-t0)/dur):1,e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo({top:y0+d*e,behavior:'instant'});if(p<1)requestAnimationFrame(f)})(t0);
+    /* if the browser skips frames, still finish exactly on target */
+    setTimeout(function(){window.scrollTo({top:y1,behavior:'instant'})},dur+80);
+  }
   var story=document.querySelector('.story');
   if(story){
     var stage=story.querySelector('.stage'),svg=story.querySelector('.lviz'),sw=story.closest('.wk'),sb=false,U=25.6,
@@ -998,28 +978,80 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
     }
     function reqStory(){if(!sb){sb=true;requestAnimationFrame(function(){runStory();sb=false})}}
     window.__reqStory=reqStory;
+    /* each transition finishes on a resting frame; when you stop scrolling, the story settles on one instead of stopping mid-move */
+    var ST=[0,3.1,4.8,5.8,7.3,8.9,9.9,11.7,13.3,15.8,16.9,18.5,19.6,22.5,25.0],REST=ST.concat([25.6]),snapT=0,snapping=false,cancelSnap=false,lastY=scrollY,goingDown=true;
+    function frameInfo(){var rect=story.getBoundingClientRect(),dist=Math.max(1,story.offsetHeight-stage.offsetHeight),top0=whOf(sw)+16;return {t:(top0-rect.top)/dist,dist:dist,top0:top0,rect:rect}}
+    function snap(){
+      if(rm||snapping||!sw.classList.contains('open')||window.__navJump!=null)return;
+      var f=frameInfo();if(f.t<=.003||f.t>=.997)return;
+      var u=f.t*U,k=0;for(var i=0;i<REST.length-1;i++)if(u>=REST[i])k=i;
+      var a=REST[k],b=REST[k+1],fr=(u-a)/(b-a),target=fr<.25?a:fr>.75?b:(goingDown?b:a);
+      var y0=scrollY,y1=scrollY-f.t*f.dist+f.dist*(target/U),dy=y1-y0;
+      if(Math.abs(dy)<2)return;
+      snapping=true;cancelSnap=false;var t0=performance.now(),dur=Math.min(520,260+Math.abs(dy)*.35);
+      (function step(now){
+        if(cancelSnap){snapping=false;lastY=scrollY;return}
+        var p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);
+        window.scrollTo({top:y0+dy*e,behavior:'instant'});
+        if(p<1)requestAnimationFrame(step);else{snapping=false;lastY=scrollY}
+      })(t0);
+    }
+    addEventListener('scroll',function(){if(snapping)return;goingDown=scrollY>=lastY;lastY=scrollY;clearTimeout(snapT);snapT=setTimeout(snap,150)},{passive:true});
+    ['wheel','touchstart','keydown'].forEach(function(n){addEventListener(n,function(){cancelSnap=true;clearTimeout(snapT)},{passive:true})});
+    /* each swipe, scroll, or key press plays exactly one transition, then waits: you cannot creep through them */
+    var pAnim=false,gesture=null,lastWheel=0,touchS=null;
+    function active(){if(rm||!sw.classList.contains('open')||window.__navJump!=null)return false;var f=frameInfo();return f.t>=-.01&&f.t<=1.01}
+    function stateFor(dir){
+      var u=frameInfo().t*U,i;
+      if(dir>0){for(i=0;i<ST.length;i++)if(ST[i]>u+.06)return i;return -1}
+      for(i=ST.length-1;i>=0;i--)if(ST[i]<u-.06)return i;return -1;
+    }
+    function pageTo(i){
+      var f=frameInfo(),u0=f.t*U,y0=scrollY,y1=y0-f.t*f.dist+f.dist*(ST[i]/U),dur=Math.min(1500,420+240*Math.abs(ST[i]-u0)),t0=performance.now();
+      pAnim=true;snapping=true;clearTimeout(snapT);
+      (function step(now){
+        if(!pAnim)return;
+        var p=Math.min(1,(now-t0)/dur),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+        window.scrollTo({top:y0+(y1-y0)*e,behavior:'instant'});
+        if(p<1)requestAnimationFrame(step);else{pAnim=false;snapping=false;lastY=scrollY}
+      })(t0);
+      setTimeout(function(){if(pAnim){pAnim=false;snapping=false;window.scrollTo({top:y1,behavior:'instant'});lastY=scrollY}},dur+120);
+    }
+    function pageDir(dir){var t=stateFor(dir);if(t<0)return false;pageTo(t);return true}
+    addEventListener('wheel',function(e){
+      if(e.ctrlKey)return;
+      var now=performance.now(),ad=Math.abs(e.deltaY),dir=e.deltaY>0?1:-1,fresh=now-lastWheel>170||!gesture;
+      /* a new swipe during the previous one's trailing momentum shows as a jump in speed or a change of direction */
+      if(!fresh&&gesture.used&&now-gesture.t>380&&(ad>gesture.prev+14||dir!==gesture.dir))fresh=true;
+      if(fresh)gesture={inside:active(),used:false,prev:0,dir:dir,t:now};
+      gesture.prev=ad;lastWheel=now;
+      if(!gesture.inside)return;
+      if(pAnim||gesture.used){e.preventDefault();return}
+      if(ad<4)return;
+      gesture.used=true;gesture.t=now;gesture.dir=dir;
+      if(pageDir(dir))e.preventDefault();else gesture.inside=false;
+    },{passive:false});
+    addEventListener('keydown',function(e){
+      if(e.metaKey||e.ctrlKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test((e.target&&e.target.tagName)||''))return;
+      var d=0;if(e.key==='ArrowDown'||e.key==='PageDown'||(e.key===' '&&!e.shiftKey))d=1;else if(e.key==='ArrowUp'||e.key==='PageUp'||(e.key===' '&&e.shiftKey))d=-1;
+      if(!d||!active())return;
+      if(pAnim){e.preventDefault();return}
+      if(pageDir(d))e.preventDefault();
+    });
+    addEventListener('touchstart',function(e){touchS={y:e.touches[0].clientY,inside:active(),used:false}},{passive:true});
+    addEventListener('touchmove',function(e){
+      if(!touchS||!touchS.inside)return;
+      var dy=touchS.y-e.touches[0].clientY;
+      if(pAnim||touchS.used){if(e.cancelable)e.preventDefault();return}
+      if(Math.abs(dy)>18){touchS.used=true;if(pageDir(dy>0?1:-1)){if(e.cancelable)e.preventDefault()}else touchS.inside=false}
+      else if(e.cancelable)e.preventDefault();
+    },{passive:false});
+    addEventListener('touchend',function(){touchS=null},{passive:true});
     addEventListener('scroll',reqStory,{passive:true});addEventListener('resize',function(){M.ready=false;reqStory()});
     wks.forEach(function(w){var b=w.querySelector('.wkh button');if(b)b.addEventListener('click',function(){setTimeout(function(){M.ready=false;reqStory()},560)})});
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){M.ready=false;reqStory()});
     reqStory();
   }
-})();
-</script>
-<script>
-(function(){
-  var arts=[].slice.call(document.querySelectorAll('.hdrart')),rm=matchMedia('(prefers-reduced-motion:reduce)').matches,busy=false;
-  if(!arts.length||rm)return;
-  var layers=arts.map(function(a){return [].slice.call(a.querySelectorAll('[data-s]'))});
-  function run(){
-    var vh=innerHeight;
-    arts.forEach(function(a,i){
-      var r=a.getBoundingClientRect();if(r.bottom<-300||r.top>vh+300)return;
-      var off=r.top+r.height/2-190;
-      layers[i].forEach(function(g){var t=Math.max(-48,Math.min(48,-off*(+g.dataset.s)*.4));g.style.transform='translateY('+t.toFixed(1)+'px)'});
-    });
-  }
-  function req(){if(!busy){busy=true;requestAnimationFrame(function(){run();busy=false})}}
-  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);run();
 })();
 </script>
 <script>
