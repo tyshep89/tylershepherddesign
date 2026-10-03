@@ -140,6 +140,11 @@ section{position:relative}
 .lstage{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:1.5rem 3rem;align-items:center;padding:3.2rem clamp(1.5rem,4vw,3.5rem) 1.6rem}
 .lbar{position:absolute;left:clamp(1.5rem,4vw,3rem);right:clamp(1.5rem,4vw,3rem);top:1.2rem;height:4px;border-radius:4px;background:rgba(255,255,255,.18);overflow:hidden;z-index:3}
 .lbar i{display:block;height:100%;background:#ffc933;transform-origin:left;transform:scaleX(var(--f,0))}
+.shint{position:absolute;left:50%;bottom:1.3rem;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.88);font-weight:700;font-size:.95rem;letter-spacing:.01em;pointer-events:none;opacity:0;transition:opacity .5s ease;z-index:4;white-space:nowrap}
+.shint.on{opacity:1}
+.shint i{display:block;width:13px;height:13px;border-right:3px solid #ffc933;border-bottom:3px solid #ffc933;transform:rotate(45deg);animation:shintBob 1.3s ease-in-out infinite}
+@keyframes shintBob{0%,100%{translate:0 0;opacity:.55}50%{translate:0 7px;opacity:1}}
+@media (prefers-reduced-motion:reduce){.shint{display:none}}
 .lcap{position:relative;min-height:15rem;align-self:start;margin-top:3.4rem}
 .cap{position:absolute;left:0;right:0;top:0;opacity:0;visibility:hidden}
 .slbl{display:inline-flex;align-items:center;gap:.7rem;color:#ffc933;font-weight:800;margin-bottom:.8rem}
@@ -378,6 +383,7 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
           <div class="story" style="--n:9.0">
             <div class="stage lstage">
               <div class="lbar" aria-hidden="true"><i></i></div>
+              <div class="shint" aria-hidden="true"><span>Scroll to see the process</span><i></i></div>
               <div class="lcap">
 <div class="cap" data-a="0" data-b="2.5"><div class="slbl"><span>01</span>The name</div><h4 class="sh">It starts with a name</h4><p class="sp">The site is called Tyler Shepherd Design. Three words, and a lot of letters to carry around.</p></div>
 <div class="cap" data-a="2.4" data-b="5.2"><div class="slbl"><span>02</span>The initials</div><h4 class="sh">Strip it down to TSD</h4><p class="sp">Everything except the initials goes. Three letters are all the mark has to work with, so each one gets its own turn.</p></div>
@@ -963,11 +969,13 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       bar.style.setProperty('--f',Math.min(1,u/U).toFixed(3));
       caption(u);
     }
+    var hint=story.querySelector('.shint'),hintDone=false;
     function runStory(){
-      if(!sw.classList.contains('open'))return;
+      if(!sw.classList.contains('open')){hintDone=false;if(hint)hint.classList.remove('on');return}
       if(rm){render(U);return}
       var rect=story.getBoundingClientRect(),dist=Math.max(1,story.offsetHeight-stage.offsetHeight),top0=whOf(sw)+16,t=Math.max(0,Math.min(1,(top0-rect.top)/dist));
       render(t*U);
+      if(hint){if(t*U>.12)hintDone=true;hint.classList.toggle('on',!hintDone)}
     }
     function reqStory(){if(!sb){sb=true;requestAnimationFrame(function(){runStory();sb=false})}}
     window.__reqStory=reqStory;
