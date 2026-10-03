@@ -39,6 +39,7 @@ html{--rail:88px}
 @keyframes labelIn{0%,30%{color:#c5cdee}58%,100%{color:#0f1a3a}}
 @keyframes labelOut{0%,50%{color:#0f1a3a}78%,100%{color:#c5cdee}}
 .tab svg.navlogo{transition:fill .3s}
+.tab.mask,.tab.mask:hover{background:#0a1128;transition:none}
 @keyframes tabIn{0%{transform:scale(0,0);opacity:0;filter:brightness(1)}16%{transform:scale(.07,.07);opacity:1;filter:brightness(2.4)}44%{transform:scale(1,.07);opacity:1;filter:brightness(1.7)}100%{transform:scale(1,1);opacity:1;filter:brightness(1)}}
 @keyframes tabOut{0%{transform:scale(1,1);opacity:1;filter:brightness(1)}34%{transform:scale(1,.07);opacity:1;filter:brightness(1.8)}70%{transform:scale(.07,.07);opacity:1;filter:brightness(2.5)}100%{transform:scale(0,0);opacity:0;filter:brightness(1)}}
 @media (prefers-reduced-motion:reduce){.tab.on::before,.tab.on,.tab.leaving{animation:none}.tab.leaving::before{animation:none;opacity:0}}
@@ -72,13 +73,14 @@ h2{font-weight:900;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.04em;line-h
 section{position:relative}
 .about{position:relative;z-index:2;padding:0 0 7rem}
 .dark,.work,.resume{position:relative}
+
 .hdrart{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%);position:absolute;right:clamp(0rem,1vw,1rem);top:-4rem;width:min(640px,54%);height:auto;pointer-events:none;z-index:-1}
 .hdrart [data-s]{will-change:transform}
 .hdrart.a3{top:-5.4rem;width:min(520px,40%)}
 @media (max-width:800px){.hdrart{width:92%;top:-1rem;opacity:.5}}
 .dark::before,.work::before,.resume::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;z-index:6}
 .dark::before,.work::before,.resume::before{background:#ffc933}
-.work{position:relative;z-index:1;background:#0f1a3a;color:#fff;--ink:#fff;--muted:rgba(255,255,255,.84);--line:rgba(255,255,255,.3);padding:3.2rem 0 6rem}
+.work{position:relative;z-index:1;background:#0f1a3a;color:#fff;--ink:#fff;--muted:rgba(255,255,255,.84);--line:rgba(255,255,255,.3);padding:3.2rem 0 0}
 .work h2{color:#fff}
 .work .intro{color:rgba(255,255,255,.88);max-width:44rem;margin:0 0 3rem}
 .wlist{margin-top:3rem}
@@ -94,12 +96,26 @@ section{position:relative}
 .wt{display:flex;flex-direction:column;gap:.1rem}
 .wt small{color:rgba(255,255,255,.82);font-weight:700;font-size:.85rem}
 .wt b{font-size:clamp(1.6rem,3.6vw,2.6rem);font-weight:900;letter-spacing:-.03em;line-height:1.08}
-.wcta{display:flex;align-items:center;gap:.8rem;font-weight:700}
+.wcta{display:flex;align-items:center;gap:.7rem;font-weight:700}
 .wcta .wtxt{font-size:.95rem}
+.wt-close{display:none}
+.wk.open .wt-read{display:none}
+.wk.open .wt-close{display:inline}
+/* closed: the whole banner is the link and the indicator pops up when you point at it */
+.wk:not(.soon):not(.open){cursor:pointer}
+.wk:not(.soon):not(.open) .wcta{opacity:0;transform:translateY(-8px);transition:opacity .25s ease,transform .3s cubic-bezier(.2,.8,.2,1)}
+.wk:not(.soon):not(.open).hov .wcta,.wk:not(.soon):not(.open) .wkh button:focus-visible .wcta{opacity:1;transform:none}
+.wk.hov:not(.open) .wcta .ac{animation:nudge .9s ease-in-out infinite}
+@keyframes nudge{0%,100%{translate:0 0}50%{translate:0 4px}}
+@media (hover:none) and (pointer:coarse){.wk:not(.soon):not(.open) .wcta{opacity:.9;transform:none}}
+@media (prefers-reduced-motion:reduce){.wk.hov:not(.open) .wcta .ac{animation:none}.wk .wcta{transition:none!important}}
+/* open: only the indicator closes the story */
+.wk.open .wkh button{pointer-events:none;cursor:default}
+.wk.open .wcta{pointer-events:auto;cursor:pointer;opacity:.9;transition:opacity .2s}
+.wk.open .wcta:hover{opacity:1}
+.wk:not(.soon) .wkp,.wk:not(.soon) .wkp *{cursor:auto}
 .wk .ac{border-color:#fff}
 .wk.open .wcta .ac{transform:rotate(-135deg) translate(-2px,-2px)}
-.wtxt{transition:opacity .3s ease}
-.wk.open .wtxt{opacity:0}
 .wkctx{position:relative;z-index:1;padding:.8rem 0 0}
 .wkctx .clede{font-size:1.25rem;color:#e2e7ff;max-width:44rem;margin:0}
 .wkctx .cmeta{margin-top:2rem;max-width:60rem}
@@ -161,13 +177,14 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .dark{background:#0a1128;color:#eef1fb;--ink:#eef1fb;--muted:#a9b2cf;--line:#2c3760;--soft:#1a2448;--accent:#8ea0ff;--on:#0a1026;padding:3rem 0 0;margin:-460px 0 0;z-index:5}
 .intro{color:var(--muted);max-width:36rem;margin:0 0 1rem}
 #approach .intro{margin-bottom:3rem}
-.step{position:relative;display:flex;align-items:center;min-height:62vh;padding:5rem 0}
+.step{position:sticky;top:0;display:flex;align-items:center;min-height:0;padding:2.4rem 0}
+.step .more{height:auto;overflow:visible;opacity:1}
 .step.r{justify-content:flex-end}
-.step{background:var(--bgc);box-shadow:0 0 0 100vmax var(--bgc);clip-path:inset(0 -100vmax)}
+.step{background:var(--bgc);box-shadow:0 0 0 100vmax var(--bgc);clip-path:inset(0 -100vmax);filter:brightness(var(--bri,1))}
 .c1{--bgc:#2b44ff;--fg:#fff;--fg2:rgba(255,255,255,.86);--lab:#ffc933;--bar:#ffc933;--num:rgba(255,255,255,.3)}
 .c2{--bgc:#ff5c39;--fg:#0f1a3a;--fg2:rgba(15,26,58,.86);--lab:#0f1a3a;--bar:#0f1a3a;--num:rgba(15,26,58,.26)}
 .c3{--bgc:#ffc933;--fg:#0f1a3a;--fg2:rgba(15,26,58,.84);--lab:#2b44ff;--bar:#2b44ff;--num:rgba(15,26,58,.22)}
-.step .num{position:absolute;top:50%;font-weight:900;font-size:clamp(10rem,30vw,24rem);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px var(--num);pointer-events:none;will-change:transform;transform:translateY(calc(-50% + var(--py,0px)))}
+.step .num{position:absolute;top:50%;font-weight:900;font-size:clamp(9rem,24vw,18rem);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px var(--num);pointer-events:none;will-change:transform;transform:translateY(calc(-50% + var(--py,0px)))}
 .step.l .num{right:-1rem}.step.r .num{left:-1rem}
 .step .txt{position:relative;z-index:1;width:100%;max-width:54rem}
 .step.r .txt{text-align:right}
@@ -179,7 +196,7 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .step.r .ask{padding-left:0;padding-right:1.2rem;border-left:0;border-right:6px solid var(--bar)}
 .step .ask q{display:block;font-size:1.5rem;font-weight:700;line-height:1.3;quotes:none;color:var(--fg)}
 .step .watch{margin-top:1.3rem;font-weight:500;color:var(--fg)}
-@media (max-width:800px){.step{min-height:0;padding:3rem 0}.step.r{justify-content:flex-start}.step .num{font-size:11rem}.step .txt{text-align:left!important}.step.r .ask{padding-right:0;padding-left:1.2rem;border-right:0;border-left:6px solid var(--bar)}}
+@media (max-width:800px){.step{min-height:0;padding:2rem 0}.step.r{justify-content:flex-start}.step .num{font-size:9rem}.step .txt{text-align:left!important}.step.r .ask{padding-right:0;padding-left:1.2rem;border-right:0;border-left:6px solid var(--bar)}}
 .resume{padding:4.5rem 0 6rem}
 .rsum{max-width:44rem;font-size:1.2rem;font-weight:500;color:var(--ink);margin:0 0 1.4rem}
 .rnote{color:var(--muted);margin:0 0 1rem}
@@ -304,9 +321,11 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       <div class="txt rv" style="--d:1">
         <div class="label">Ask why</div>
         <h3>Start with the problem, not the solution.</h3>
+        <div class="more"><div class="moreIn">
         <p>Everyone arrives with an answer. I slow the room down until we agree on what is actually broken and who feels it.</p>
         <div class="ask"><small>The question I ask</small><q>What problem are we solving, and for whom?</q></div>
         <p class="watch"><small>What I watch out for</small>The first solution anyone suggests.</p>
+        </div></div>
       </div>
     </article>
     <article class="step r c2">
@@ -314,9 +333,11 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       <div class="txt rv" style="--d:1">
         <div class="label">Map the journey</div>
         <h3>See the whole day, not one screen.</h3>
+        <div class="more"><div class="moreIn">
         <p>I map how work really flows, including the handoffs and the feelings along the way, because pain hides between the steps.</p>
         <div class="ask"><small>The question I ask</small><q>Where does it slow down, and how does that feel?</q></div>
         <p class="watch"><small>What I watch out for</small>Workarounds that people stopped noticing.</p>
+        </div></div>
       </div>
     </article>
     <article class="step l c3">
@@ -324,9 +345,11 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       <div class="txt rv" style="--d:1">
         <div class="label">Reframe</div>
         <h3>Pick the one thing worth fixing.</h3>
+        <div class="more"><div class="moreIn">
         <p>There are always ten problems. I look for the one that unlocks the most and say no to the rest, out loud and with reasons.</p>
         <div class="ask"><small>The question I ask</small><q>If we fix only one thing, which changes the most?</q></div>
         <p class="watch"><small>What I watch out for</small>Mistaking a loud problem for an important one.</p>
+        </div></div>
       </div>
     </article>
     <article class="step r c1">
@@ -334,9 +357,11 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       <div class="txt rv" style="--d:1">
         <div class="label">Design small</div>
         <h3>Make it testable this week.</h3>
+        <div class="more"><div class="moreIn">
         <p>I sketch, prototype, and put it in front of real people early. A rough idea that teaches me something beats a polished one that does not.</p>
         <div class="ask"><small>The question I ask</small><q>What is the smallest version someone could try?</q></div>
         <p class="watch"><small>What I watch out for</small>Falling in love with my own first draft.</p>
+        </div></div>
       </div>
     </article>
     <article class="step l c2">
@@ -344,9 +369,11 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       <div class="txt rv" style="--d:1">
         <div class="label">Prove impact</div>
         <h3>Tie it back to a result.</h3>
+        <div class="more"><div class="moreIn">
         <p>A design earns its place when it moves something the business cares about. I decide how we will know it worked before we build.</p>
         <div class="ask"><small>The question I ask</small><q>How will we know this worked?</q></div>
         <p class="watch"><small>What I watch out for</small>Measuring activity instead of outcomes.</p>
+        </div></div>
       </div>
     </article>
   </div>
@@ -367,7 +394,7 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
   <div class="wlist">
     <section class="wk" style="--wc:#2336d0">
       <div class="bignum" aria-hidden="true">01</div>
-      <h3 class="wkh"><button type="button" aria-expanded="false" aria-controls="wkp1"><span class="wt"><small>Brand identity</small><b>Balancing curves and hard lines</b></span><span class="wcta"><span class="wtxt">Read the story</span><span class="ac" aria-hidden="true"></span></span></button></h3>
+      <h3 class="wkh"><button type="button" aria-expanded="false" aria-controls="wkp1"><span class="wt"><small>Brand identity</small><b>Balancing curves and hard lines</b></span><span class="wcta"><span class="wtxt wt-read">Read the story</span><span class="wtxt wt-close">Close the story</span><span class="ac" aria-hidden="true"></span></span></button></h3>
       <div class="wkctx"><p class="clede">How I designed my own mark: a T that bends, an S that does not, and a D that holds them together.</p><dl class="cmeta">
         <div><dt>Role</dt><dd>Designer</dd></div>
         <div><dt>Deliverables</dt><dd>Logo, color system, favicon</dd></div>
@@ -684,7 +711,7 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
   if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&window.scrollY<40){introOn=true;T=0}
   requestAnimationFrame(frame);
   // scroll effects
-  var ab=$('about'),band=$('band'),ap=$('approach'),sn=[].slice.call(document.querySelectorAll('.step .num')),ct=$('contact'),bar=document.querySelector('.band'),slot=$('slot'),bh=56;
+  var ab=$('about'),band=$('band'),ap=$('approach'),sn=[].slice.call(document.querySelectorAll('.nomatch')),ct=$('contact'),bar=document.querySelector('.band'),slot=$('slot'),bh=56;
   function clamp(v){return Math.max(0,Math.min(1,v))}
   var WORDS=['Curious','Problem solver','Systems thinker','UX and UI designer','Application developer','Team lead','Minimalist','Stoic','Dog person'],setW=1;
   (function(){var t=WORDS.concat(WORDS).join(' \u2022 ')+' \u2022 ';for(var i=0;i<2;i++){var e=document.createElement('span');e.textContent=t;e.style.display='inline-block';band.appendChild(e)}})();
@@ -732,7 +759,8 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
   function docTop(e){var y=0;while(e){y+=e.offsetTop;e=e.offsetParent}return y}
   var line=document.getElementById('rline'),fill=line.firstElementChild,lastK=-1;
   function tops(){var sy=scrollY,M=innerWidth<800?24:56,mx=Math.max(0,document.documentElement.scrollHeight-innerHeight);return els.map(function(e,i){return e?Math.min(Math.max(0,docTop(e)-(i>=2&&i<=4?0:M)),mx):0})}
-  var jumpTo=null,jumpY=0,colored=-1,jumpTimer=0;
+  var jumpTo=null,jumpY=0,jumpY0=0,jumpFrom=0,colored=-1,jumpTimer=0;
+  Object.defineProperty(window,'__navJump',{get:function(){return jumpTo}});
   function cancelJump(){jumpTo=null;clearTimeout(jumpTimer)}
   addEventListener('wheel',cancelJump,{passive:true});addEventListener('touchstart',cancelJump,{passive:true});addEventListener('keydown',function(e){if(/^(Arrow|Page|Home|End| )/.test(e.key))cancelJump()});
   function layout(){
@@ -749,11 +777,12 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
       t.style.height=(TH-6)+'px';t.style.transform='translateY('+y.toFixed(1)+'px)';
       var wasOn=t.classList.contains('on');
       t.classList.toggle('on',i===kc);t.classList.toggle('hc',i===kc&&kc<n-1);
+      t.classList.toggle('mask',i===k&&k!==kc);
       if(i===kc)t.classList.remove('leaving');
       else if(wasOn){t.classList.add('leaving');clearTimeout(t._lv);t._lv=setTimeout(function(){t.classList.remove('leaving')},560)}
       if(i===kc)t.setAttribute('aria-current','true');else t.removeAttribute('aria-current');
     });
-    if(k<n-1&&jumpTo===null){
+    if(k<n-1){
       var p=Math.max(0,Math.min(1,(0-sec[k])/Math.max(1,sec[k+1]-sec[k]))),th=TH-6,ct=ys[k],cb=Math.max(ct+th,ys[k+1]-7),room=cb-ct-th;
       if(k!==lastK){fill.style.height='0px';lastK=k}
       line.style.display='block';line.style.top=ct.toFixed(1)+'px';line.style.height=(cb-ct).toFixed(1)+'px';
@@ -764,11 +793,16 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
   addEventListener('scroll',req,{passive:true});addEventListener('resize',req);addEventListener('load',req);
   tabs.forEach(function(t,i){t.addEventListener('click',function(e){
     e.preventDefault();
-    var y=tops()[i];
-    var off=(i&&(i<2||i>4))?1:0;
-    if(i!==colored){jumpTo=i;jumpY=y+off;clearTimeout(jumpTimer);jumpTimer=setTimeout(function(){jumpTo=null;req()},9000)}
-    window.__navTarget=y+off;setTimeout(function(){window.__navTarget=null},2200);
-    scrollTo({top:y+off,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+    function go(){
+      var y=tops()[i];
+      var off=(i&&(i<2||i>4))?1:0;
+      if(i!==colored){jumpFrom=colored;jumpY0=scrollY;jumpTo=i;jumpY=y+off;clearTimeout(jumpTimer);jumpTimer=setTimeout(function(){jumpTo=null;req()},9000)}
+      window.__navTarget=y+off;setTimeout(function(){window.__navTarget=null},2200);
+      scrollTo({top:y+off,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+    }
+    /* if a work story is open, close it before travelling, so the distance is measured on the folded page */
+    var ow=document.querySelector('.wk.open');
+    if(ow&&ow._close)ow._close(go);else go();
   })});
   layout();
 })();
@@ -811,21 +845,29 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
   setWh();addEventListener('resize',setWh);addEventListener('load',setWh);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(setWh);
   wks.forEach(function(w){
     var btn=w.querySelector('.wkh button');if(!btn)return;
+    function hov(on){if(on===w.classList.contains('hov'))return;w.classList.toggle('hov',on)}
+    w.addEventListener('mousemove',function(e){hov(!w.classList.contains('open')&&!e.target.closest('.wkp'))});
+    w.addEventListener('mouseleave',function(){hov(false)});
+    w.addEventListener('click',function(e){if(w.classList.contains('open')||e.target.closest('.wkp')||e.target.closest('.wkh button'))return;if(window.getSelection&&String(window.getSelection()).length)return;btn.click()});
+    function closeThis(done){
+      /* fade the story out first, then fold it away while keeping this header where it is on the screen */
+      if(w.classList.contains('closing'))return;
+      var hdr=w.querySelector('.wkh'),hb=hdr.getBoundingClientRect().top;
+      w.classList.add('closing');
+      setTimeout(function(){
+        w.classList.add('instant');w.classList.remove('open');btn.setAttribute('aria-expanded','false');
+        window.scrollTo({top:hdr.getBoundingClientRect().top+scrollY-Math.max(0,hb),behavior:'instant'});
+        void w.offsetHeight;w.classList.remove('closing');setTimeout(function(){w.classList.remove('instant')},60);
+        if(done)done();
+      },rm?0:230);
+    }
+    w._close=closeThis;
     btn.addEventListener('click',function(){
       if(w.classList.contains('closing'))return;
-      var was=w.classList.contains('open'),hdr=w.querySelector('.wkh'),hb=hdr.getBoundingClientRect().top;
-      if(was){
-        /* fade the story out first, then fold it away while keeping this header where it is on the screen */
-        w.classList.add('closing');
-        setTimeout(function(){
-          w.classList.add('instant');w.classList.remove('open');btn.setAttribute('aria-expanded','false');
-          window.scrollTo({top:hdr.getBoundingClientRect().top+scrollY-Math.max(0,hb),behavior:'instant'});
-          void w.offsetHeight;w.classList.remove('closing');setTimeout(function(){w.classList.remove('instant')},60);
-        },rm?0:230);
-        return;
-      }
+      var was=w.classList.contains('open'),hdr=w.querySelector('.wkh');
+      if(was){closeThis();return}
       wks.forEach(function(x){if(x!==w){x.classList.remove('open');var b=x.querySelector('.wkh button');if(b)b.setAttribute('aria-expanded','false')}});
-      w.classList.add('open');btn.setAttribute('aria-expanded','true');
+      w.classList.add('open');w.classList.remove('hov');btn.setAttribute('aria-expanded','true');
       if(window.__reqStory)window.__reqStory();
       /* the story appears at once and rises in while the page glides to the stage */
       var st=w.querySelector('.story'),y=st?st.getBoundingClientRect().top+scrollY-(whOf(w)+16):hdr.getBoundingClientRect().top+scrollY;
@@ -977,6 +1019,29 @@ footer{padding:.9rem 0 1rem;color:var(--muted);font-size:.9rem;background:var(--
     });
   }
   function req(){if(!busy){busy=true;requestAnimationFrame(function(){run();busy=false})}}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);run();
+})();
+</script>
+<script>
+(function(){
+  /* the big numbers keep drifting as you scroll, even while their card is pinned, by following where the card would be if it were not pinned */
+  var steps=[].slice.call(document.querySelectorAll('#approach .step')),cont=document.querySelector('#approach .steps'),nums=steps.map(function(s){return s.querySelector('.num')}),busy=false,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!steps.length||!cont)return;
+  function run(){
+    busy=false;
+    var vh=innerHeight,ct=cont.getBoundingClientRect(),acc=0;
+    if(ct.bottom<-200||ct.top>vh+200){return}
+    steps.forEach(function(st,i){
+      var h=st.offsetHeight,nh=nums[i].offsetHeight*.8,free=Math.max(0,(h-nh)/2-10),center=ct.top+acc+h/2;acc+=h;
+      if(!rm){var py=Math.max(-free,Math.min(free,-(center-vh/2)*.2));nums[i].style.setProperty('--py',py.toFixed(1)+'px')}
+      /* a card gets a little darker as the next one slides up over it */
+      var cover=0;
+      if(i<steps.length-1){var a=st.getBoundingClientRect(),b=steps[i+1].getBoundingClientRect();cover=Math.max(0,Math.min(1,(a.bottom-b.top)/Math.max(1,a.height)))}
+      cover=cover*cover*(3-2*cover);
+      st.style.setProperty('--bri',(1-.3*cover).toFixed(3));
+    });
+  }
+  function req(){if(!busy){busy=true;requestAnimationFrame(run)}}
   addEventListener('scroll',req,{passive:true});addEventListener('resize',req);run();
 })();
 </script>
