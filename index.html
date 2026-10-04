@@ -1188,8 +1188,10 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     var o={prev:prev,sec:sec,head:head,h2:h2,sub:sub,ST:0,H2:0,cA:null,cB:null};
     o.size=function(){
       if(rm)return;
-      var vh=innerHeight,h=head.offsetHeight,Hc=Math.round(.62*vh),R=70;
+      var vh=innerHeight,h=head.offsetHeight,Hc=Math.round(.62*vh);
       o.H2=h2.offsetHeight;o.ST=Math.max(20,Math.round(vh*.31));
+      /* the header lets go and scrolls with the page when the section before it has risen to the standard section margin (56px) above it */
+      var R=Math.max(0,o.ST-56);
       var Hw=o.ST+h+Hc-R;
       sec.style.setProperty('--hc',Hc+'px');sec.style.setProperty('--hw',Hw+'px');sec.style.setProperty('--st',o.ST+'px');
       onSize(Hc,Math.max(0,Hw-h-30));
@@ -1204,7 +1206,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     var now=performance.now(),k=1-Math.exp(-Math.min(64,now-last)/110),again=false;last=now;
     list.forEach(function(o){
       if(rm){o.h2.style.opacity=o.h2.style.transform=o.sub.style.opacity='';return}
-      var wb=o.prev.getBoundingClientRect().bottom,ta=sm((o.ST+o.H2+30-wb)/(o.H2+110)),tb=sm((o.ST-60-wb)/130);
+      var wb=o.prev.getBoundingClientRect().bottom,ta=sm((o.ST+o.H2+130-wb)/(o.H2+140)),tb=sm((o.ST-5-wb)/45);
       o.cA=o.cA==null?ta:o.cA+(ta-o.cA)*k;o.cB=o.cB==null?tb:o.cB+(tb-o.cB)*k;
       o.h2.style.opacity=o.cA.toFixed(3);o.h2.style.transform='translateY('+(40*(1-o.cA)).toFixed(1)+'px) scale('+(.86+.14*o.cA).toFixed(4)+')';
       o.sub.style.opacity=o.cB.toFixed(3);
@@ -1236,7 +1238,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   function frame(){
     if(tgt==null){running=false;last=null;return}
     /* if anything else moves the page (the nav, the logo story, the scrollbar), let go straight away */
-    if(last!=null&&Math.abs(scrollY-last)>3){stop();return}
+    if(window.__navJump!=null||(last!=null&&Math.abs(scrollY-last)>3)){stop();return}
     var d=tgt-scrollY;
     if(Math.abs(d)<1.5){window.scrollTo({top:tgt,behavior:'instant'});stop();return}
     var step=d*.2;if(Math.abs(step)<1)step=d>0?1:-1;
