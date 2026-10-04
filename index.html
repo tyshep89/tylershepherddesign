@@ -77,11 +77,11 @@ section{position:relative}
 .shead .intro,.shead .rsum,.shead p{margin:0 auto!important;max-width:44rem}
 .contact .links{justify-content:center}
 
-.work{position:relative;z-index:1;background:#0f1a3a;color:#fff;--ink:#fff;--muted:rgba(255,255,255,.84);--line:rgba(255,255,255,.3);padding:3.5rem 0 0}
+.work{position:relative;z-index:3;background:#0f1a3a;color:#fff;--ink:#fff;--muted:rgba(255,255,255,.84);--line:rgba(255,255,255,.3);padding:3.5rem 0 0}
 .work h2{color:#fff}
 .work .intro{color:rgba(255,255,255,.88);max-width:44rem;margin:0 0 3rem}
-.work{padding:1.4rem 0 1.1rem}
-.wcard{position:relative;margin:0 clamp(.8rem,2vw,2.2rem) 1.7rem calc(var(--rail) + clamp(.8rem,2vw,2.2rem));overflow:clip}
+.work{padding:1.4rem 0 0}
+.wcard{position:relative;margin:0 clamp(.8rem,2vw,2.2rem) 0 calc(var(--rail) + clamp(.8rem,2vw,2.2rem));overflow:clip}
 .wcard::after{content:"";position:absolute;left:0;right:0;bottom:0;height:28px;z-index:20;pointer-events:none;background:radial-gradient(circle at 28px 0,transparent 27.4px,#0f1a3a 28.4px) 0 0 / 28px 28px no-repeat,radial-gradient(circle at 0 0,transparent 27.4px,#0f1a3a 28.4px) 100% 0 / 28px 28px no-repeat}
 .wcard .w{max-width:none;padding-left:clamp(1.4rem,3vw,3rem);padding-right:clamp(1.4rem,3vw,3rem)}
 .whead{position:relative;border-radius:28px 28px 0 0;overflow:hidden;background-color:#132657;background-image:radial-gradient(rgba(142,160,255,.14) 1px,transparent 1.4px);background-size:9px 9px}
@@ -184,7 +184,7 @@ dl div{display:flex;justify-content:space-between;gap:1.5rem;padding:.9rem 0;bor
 dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:right}
 .rv{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*90ms)}
 .rv.in{opacity:1;transform:none}
-.dark{background:#0f1a3a;color:#eef1fb;--ink:#eef1fb;--muted:#a9b2cf;--line:#2c3760;--soft:#1a2448;--accent:#8ea0ff;--on:#0a1026;padding:3.5rem 0 0;margin:0 0 3rem;z-index:5}
+.dark{background:#0f1a3a;color:#eef1fb;--ink:#eef1fb;--muted:#a9b2cf;--line:#2c3760;--soft:#1a2448;--accent:#8ea0ff;--on:#0a1026;padding:3.5rem 0 0;margin:0 0 6.2rem;z-index:5}
 .intro{color:var(--muted);max-width:36rem;margin:0 0 1rem}
 #approach .intro{margin-bottom:3rem}
 .step{position:sticky;top:0;display:flex;align-items:center;min-height:0;padding:3.6rem 0}
@@ -207,7 +207,11 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .step .ask q{display:block;font-size:1.5rem;font-weight:700;line-height:1.3;quotes:none;color:var(--fg)}
 .step .watch{margin-top:1.3rem;font-weight:500;color:var(--fg)}
 @media (max-width:800px){.step{min-height:0;padding:2.8rem 0}.step.r{justify-content:flex-start}.step .num{font-size:9rem}.step .txt{text-align:left!important}.step.r .ask{padding-right:0;padding-left:1.2rem;border-right:0;border-left:6px solid var(--bar)}}
-.resume{padding:3.5rem 0 6rem}
+.resume{padding:0 0 6rem;margin-top:calc(var(--hc,560px) * -1)}
+.rwrap{height:var(--hw,1020px);margin-bottom:2.6rem}
+#resume .shead{position:sticky;top:var(--st,360px);margin:0 auto}
+#resume .shead h2{transform-origin:50% 60%;will-change:transform,opacity}
+@media (prefers-reduced-motion:reduce){.resume{margin-top:0}.rwrap{height:auto}#resume .shead{position:static}}
 .rsum{max-width:44rem;font-size:1.2rem;font-weight:500;color:var(--ink);margin:0 0 1.4rem}
 .rnote{color:var(--muted);margin:0 0 1rem}
 .tag{font:600 .98rem "Schibsted Grotesk",system-ui,sans-serif;background:none;color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:.4rem 1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
@@ -445,8 +449,8 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
 </div>
   <div class="w">
   
-    <div class="shead"><h2>Resume</h2>
-  <p class="rsum">10+ years of taking repetitive, tedious manual work off people and companies by streamlining and automating processes, and by turning data into better decisions.</p></div>
+    <div class="rwrap"><div class="shead"><h2>Resume</h2>
+  <p class="rsum">10+ years of taking repetitive, tedious manual work off people and companies by streamlining and automating processes, and by turning data into better decisions.</p></div></div>
   <p class="rnote rv" id="rnote" style="--d:2">Pick a skill to see where I have used it.</p>
   <ul class="skills" aria-label="Skills">
     <li class="rv" style="--d:1"><button type="button" class="tag" aria-pressed="false" data-skill="UX and UI design">UX and UI design</button></li>
@@ -692,7 +696,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   var WORDS=['Curious','Problem solver','Systems thinker','UX and UI designer','Application developer','Team lead','Minimalist','Stoic','Dog person'],setW=1;
   (function(){var t=WORDS.concat(WORDS).join(' \u2022 ')+' \u2022 ';for(var i=0;i<2;i++){var e=document.createElement('span');e.textContent=t;e.style.display='inline-block';band.appendChild(e)}})();
   function meas(){setW=band.firstChild.getBoundingClientRect().width||1;bh=bar.offsetHeight||56;slot.style.height=bh+'px'}
-  function pos(){var rem=document.documentElement.scrollHeight-innerHeight-scrollY,hide=1-Math.max(0,Math.min(1,rem/140));bar.style.transform='translateY('+(Math.max(document.getElementById('resume').getBoundingClientRect().top,innerHeight-bh)+hide*(bh+6))+'px)'}
+  function pos(){var rem=document.documentElement.scrollHeight-innerHeight-scrollY,hide=1-Math.max(0,Math.min(1,rem/140));bar.style.transform='translateY('+(Math.max(document.getElementById('resume').getBoundingClientRect().top+(window.__tuck||0),innerHeight-bh)+hide*(bh+6))+'px)'}
   meas();addEventListener('load',meas);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(meas);
   function upd(){
     var y=window.scrollY,vh=innerHeight;
@@ -734,7 +738,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   els=[null,document.getElementById('about'),document.getElementById('approach'),document.getElementById('work'),document.getElementById('resume'),document.getElementById('contact')],busy=false;
   function docTop(e){var y=0;while(e){y+=e.offsetTop;e=e.offsetParent}return y}
   var line=document.getElementById('rline'),fill=line.firstElementChild,lastK=-1;
-  function tops(){var sy=scrollY,M=innerWidth<800?24:56,mx=Math.max(0,document.documentElement.scrollHeight-innerHeight);return els.map(function(e,i){return e?Math.min(Math.max(0,docTop(e)-(i>=2&&i<=4?0:M)),mx):0})}
+  function tops(){var sy=scrollY,M=innerWidth<800?24:56,mx=Math.max(0,document.documentElement.scrollHeight-innerHeight);return els.map(function(e,i){return e?Math.min(Math.max(0,docTop(e)+(i===4?(window.__resLand||0):0)-(i>=2&&i<=4?0:M)),mx):0})}
   var jumpTo=null,jumpY=0,jumpY0=0,jumpFrom=0,colored=-1,jumpTimer=0;
   Object.defineProperty(window,'__navJump',{get:function(){return jumpTo}});
   function cancelJump(){jumpTo=null;clearTimeout(jumpTimer)}
@@ -1136,6 +1140,38 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   addEventListener('scroll',req,{passive:true});
   addEventListener('resize',req);addEventListener('load',req);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(req);
+})();
+</script>
+<script>
+(function(){
+  /* The Resume header rests in the upper part of the page, behind the end of My work. As that section's bottom edge rises it uncovers the title,
+     which grows and fades in while moving up slightly; the subtext then joins it, and finally the whole header scrolls up with the rest */
+  var work=document.getElementById('work'),res=document.getElementById('resume'),wrap=res&&res.querySelector('.rwrap'),head=wrap&&wrap.querySelector('.shead'),h2=head&&head.querySelector('h2'),sub=head&&head.querySelector('.rsum'),
+      busy=false,rm=matchMedia('(prefers-reduced-motion:reduce)').matches,ST=0,H2=0;
+  if(!work||!res||!wrap||!head||!h2||!sub)return;
+  function sm(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
+  function size(){
+    if(rm)return;
+    var vh=innerHeight,h=head.offsetHeight,Hc=Math.round(.62*vh),R=70;
+    H2=h2.offsetHeight;ST=Math.max(20,Math.round(vh*.31));
+    var Hw=ST+h+Hc-R;
+    res.style.setProperty('--hc',Hc+'px');res.style.setProperty('--hw',Hw+'px');res.style.setProperty('--st',ST+'px');
+    window.__tuck=Hc;window.__resLand=Math.max(0,Hw-h-30);
+  }
+  function run(){
+    busy=false;
+    if(rm){h2.style.opacity=h2.style.transform=sub.style.opacity='';return}
+    var wb=work.getBoundingClientRect().bottom,a=sm((ST+H2+30-wb)/(H2+110)),b=sm((ST-60-wb)/130);
+    h2.style.opacity=a.toFixed(3);h2.style.transform='translateY('+(40*(1-a)).toFixed(1)+'px) scale('+(.86+.14*a).toFixed(4)+')';
+    sub.style.opacity=b.toFixed(3);
+  }
+  function req(){if(!busy){busy=true;requestAnimationFrame(run)}}
+  function all(){size();req()}
+  size();run();
+  addEventListener('scroll',req,{passive:true});
+  addEventListener('resize',all);addEventListener('load',all);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(all);
+  if(window.ResizeObserver)new ResizeObserver(req).observe(work);
 })();
 </script>
 </body>
