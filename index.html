@@ -80,8 +80,8 @@ section{position:relative}
 .work{position:relative;z-index:1;background:#0f1a3a;color:#fff;--ink:#fff;--muted:rgba(255,255,255,.84);--line:rgba(255,255,255,.3);padding:3.5rem 0 0}
 .work h2{color:#fff}
 .work .intro{color:rgba(255,255,255,.88);max-width:44rem;margin:0 0 3rem}
-.work{padding:0 0 1.1rem}
-.wcard{position:relative;margin:4.4rem clamp(.8rem,2vw,2.2rem) 1.7rem calc(var(--rail) + clamp(.8rem,2vw,2.2rem));overflow:clip}
+.work{padding:1.4rem 0 1.1rem}
+.wcard{position:relative;margin:0 clamp(.8rem,2vw,2.2rem) 1.7rem calc(var(--rail) + clamp(.8rem,2vw,2.2rem));overflow:clip}
 .wcard::after{content:"";position:absolute;left:0;right:0;bottom:0;height:28px;z-index:20;pointer-events:none;background:radial-gradient(circle at 28px 0,transparent 27.4px,#0f1a3a 28.4px) 0 0 / 28px 28px no-repeat,radial-gradient(circle at 0 0,transparent 27.4px,#0f1a3a 28.4px) 100% 0 / 28px 28px no-repeat}
 .wcard .w{max-width:none;padding-left:clamp(1.4rem,3vw,3rem);padding-right:clamp(1.4rem,3vw,3rem)}
 .whead{position:relative;border-radius:28px 28px 0 0;overflow:hidden;background-color:#132657;background-image:radial-gradient(rgba(142,160,255,.14) 1px,transparent 1.4px);background-size:9px 9px}
@@ -184,7 +184,7 @@ dl div{display:flex;justify-content:space-between;gap:1.5rem;padding:.9rem 0;bor
 dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:right}
 .rv{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*90ms)}
 .rv.in{opacity:1;transform:none}
-.dark{background:#0f1a3a;color:#eef1fb;--ink:#eef1fb;--muted:#a9b2cf;--line:#2c3760;--soft:#1a2448;--accent:#8ea0ff;--on:#0a1026;padding:3.5rem 0 0;margin:0;z-index:5}
+.dark{background:#0f1a3a;color:#eef1fb;--ink:#eef1fb;--muted:#a9b2cf;--line:#2c3760;--soft:#1a2448;--accent:#8ea0ff;--on:#0a1026;padding:3.5rem 0 0;margin:0 0 3rem;z-index:5}
 .intro{color:var(--muted);max-width:36rem;margin:0 0 1rem}
 #approach .intro{margin-bottom:3rem}
 .step{position:sticky;top:0;display:flex;align-items:center;min-height:0;padding:3.6rem 0}
@@ -1118,14 +1118,16 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
 <script>
 (function(){
   /* My work: a rounded card (header and projects) sitting below the section above. The header text comes in from outside the top of the card,
-     passes through the middle, and leaves out of the bottom as it drifts downward; the dot texture drifts at its own rate while the card itself scrolls past at normal speed */
+     sits exactly centred when the card is at the top of the page (with its margin), then drifts out of the bottom; the dot texture drifts at its own rate while the card itself scrolls past at normal speed */
   var head=document.getElementById('whead'),inn=document.getElementById('wheadIn'),busy=false,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(!head||!inn)return;
   function run(){
     busy=false;
     if(rm){inn.style.transform='';head.style.backgroundPosition='';return}
-    var vh=innerHeight,r=head.getBoundingClientRect(),p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height)));
-    inn.style.transform='translateY('+(-130+260*p).toFixed(1)+'px)';
+    var vh=innerHeight,r=head.getBoundingClientRect(),p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height))),
+        M=document.getElementById('wcard').offsetTop,   /* where the card sits when you land on the section: the top of the page plus its small margin */
+        off=Math.max(-196,Math.min(100,(M-r.top)*.22));   /* zero there, so the text is exactly centred; above it before, below it after */
+    inn.style.transform='translateY('+off.toFixed(1)+'px)';
     head.style.backgroundPosition='0 '+(p*150).toFixed(1)+'px';
   }
   function req(){if(!busy){busy=true;requestAnimationFrame(run)}}
