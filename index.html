@@ -29,24 +29,29 @@ html{--rail:88px}
 .tab[data-k="Home"].on svg.navlogo{fill:#0f1a3a}
 .tab svg.navlogo{width:46px;height:41px;fill:#ffc933;stroke:none;stroke-width:0}
 .tab:hover{background:rgba(255,255,255,.09);color:#fff}
-.tab::before{content:"";position:absolute;inset:0;border-radius:14px;background:#ffc933;transform:scale(0);opacity:0;pointer-events:none;z-index:0}
+.tab::before{content:"";position:absolute;inset:0;border-radius:14px;background:#ffc933;opacity:0;pointer-events:none;z-index:0;clip-path:inset(0 0 100% 0)}
 .tab>*{position:relative;z-index:1}
 .tab.on,.tab.on:hover{background:transparent;color:#0f1a3a}
-.tab.on::before{transform:scale(1);opacity:1;animation:tabIn .6s cubic-bezier(.2,.8,.2,1) both}
+.tab.on::before{opacity:1;clip-path:inset(0)}
 .tab.on{animation:labelIn .6s linear both}
-.tab.leaving::before{animation:tabOut .5s ease-in forwards}
+.tab.on.fill-top::before{animation:fillTop .6s cubic-bezier(.2,.8,.2,1) both}
+.tab.on.fill-bottom::before{animation:fillBottom .6s cubic-bezier(.2,.8,.2,1) both}
 .tab.leaving{animation:labelOut .5s linear both}
-@keyframes labelIn{0%,30%{color:#c5cdee}58%,100%{color:#0f1a3a}}
-@keyframes labelOut{0%,50%{color:#0f1a3a}78%,100%{color:#c5cdee}}
+.tab.leaving::before{opacity:1}
+.tab.leaving.drain-down::before{animation:drainDown .5s ease-in forwards}
+.tab.leaving.drain-up::before{animation:drainUp .5s ease-in forwards}
 .tab svg.navlogo{transition:fill .3s}
 .tab.mask,.tab.mask:hover{background:#0a1128;transition:none}
-@keyframes tabIn{0%{transform:scale(0,0);opacity:0;filter:brightness(1)}16%{transform:scale(.07,.07);opacity:1;filter:brightness(2.4)}44%{transform:scale(1,.07);opacity:1;filter:brightness(1.7)}100%{transform:scale(1,1);opacity:1;filter:brightness(1)}}
-@keyframes tabOut{0%{transform:scale(1,1);opacity:1;filter:brightness(1)}34%{transform:scale(1,.07);opacity:1;filter:brightness(1.8)}70%{transform:scale(.07,.07);opacity:1;filter:brightness(2.5)}100%{transform:scale(0,0);opacity:0;filter:brightness(1)}}
-@media (prefers-reduced-motion:reduce){.tab.on::before,.tab.on,.tab.leaving{animation:none}.tab.leaving::before{animation:none;opacity:0}}
+@keyframes fillTop{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+@keyframes fillBottom{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0)}}
+@keyframes drainDown{from{clip-path:inset(0)}to{clip-path:inset(100% 0 0 0)}}
+@keyframes drainUp{from{clip-path:inset(0)}to{clip-path:inset(0 0 100% 0)}}
+@media (prefers-reduced-motion:reduce){.tab.on::before,.tab.on,.tab.leaving,.tab.on.fill-top::before,.tab.on.fill-bottom::before{animation:none}.tab.leaving::before,.tab.leaving.drain-down::before,.tab.leaving.drain-up::before{animation:none;opacity:0}}
 @media (max-width:800px){html{--rail:60px}.tab span{display:none}}
 a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 h1{font-weight:900;font-size:clamp(2.4rem,7.8vw,7.4rem);line-height:1.04;letter-spacing:.012em;margin:0;white-space:nowrap;position:relative;z-index:1;color:#fff}
 h1 em{font-style:normal;color:#ffc933;text-decoration:none}
+.hl{display:block;will-change:transform}
 .wd{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
 .wd>span{display:inline-block;transform:translateY(110%);animation:up .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d)*70ms + 150ms)}
 @keyframes up{to{transform:none}}
@@ -81,7 +86,7 @@ section{position:relative}
 .work h2{color:#fff}
 .work .intro{color:rgba(255,255,255,.88);max-width:44rem;margin:0 0 3rem}
 .work{padding:1.4rem 0 0}
-.wcard{position:relative;margin:0 clamp(.8rem,2vw,2.2rem) 0 calc(var(--rail) + clamp(.8rem,2vw,2.2rem));overflow:clip}
+.wcard{position:relative;margin:0;overflow:clip}
 .wcard::after{content:"";position:absolute;left:0;right:0;bottom:0;height:28px;z-index:20;pointer-events:none;background:radial-gradient(circle at 28px 0,transparent 27.4px,#0f1a3a 28.4px) 0 0 / 28px 28px no-repeat,radial-gradient(circle at 0 0,transparent 27.4px,#0f1a3a 28.4px) 100% 0 / 28px 28px no-repeat}
 .wcard .w{max-width:none;padding-left:clamp(1.4rem,3vw,3rem);padding-right:clamp(1.4rem,3vw,3rem)}
 .whead{position:relative;border-radius:28px 28px 0 0;overflow:hidden;background-color:#132657;background-image:radial-gradient(rgba(142,160,255,.14) 1px,transparent 1.4px);background-size:9px 9px}
@@ -231,7 +236,7 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .cn{margin-top:.9rem;font-weight:800;font-size:1.05rem;line-height:1.25}
 .cd{margin-top:.25rem;color:var(--muted);font-size:.9rem}
 .roles{position:relative;padding:0}
-.job{display:block;position:relative;padding:2.9rem 1rem;margin:0;transition:opacity .3s,background .3s,box-shadow .3s}
+.job{display:block;position:relative;padding:var(--jp,2.9rem) 1rem;margin:0;transition:opacity .3s,background .3s,box-shadow .3s}
 .job.match{background:color-mix(in srgb,var(--accent) 9%,transparent);box-shadow:inset 5px 0 0 var(--accent)}
 .job.dim{opacity:.3}
 .bul{margin:.9rem 0 0;padding-left:1.1rem;color:var(--muted);max-width:44rem}
@@ -240,7 +245,7 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .used{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
 .used span{font-size:.82rem;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:.15rem .65rem;color:var(--muted);transition:background .25s,color .25s,border-color .25s}
 .used span.on{background:var(--sun);color:#0f1a3a;border-color:var(--sun)}
-.jh{position:sticky;top:0;z-index:5;margin:-2.9rem -1rem .7rem;padding:2.4rem 1rem .75rem}
+.jh{position:sticky;top:0;z-index:5;margin:calc(var(--jp,2.9rem) * -1) -1rem .7rem;padding:2.4rem 1rem .75rem}
 .job .when{color:var(--muted);font-size:.92rem;margin:0 0 .25rem}
 .job h3{font-size:1.4rem;font-weight:800;letter-spacing:-.02em;margin:0 0 .4rem}
 .jh h3{display:inline-block;background:#ffc933;color:#0f1a3a;padding:.25rem .8rem;border-radius:10px;line-height:1.3}
@@ -278,7 +283,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
 <div class="zone">
 <div class="bgstage" aria-hidden="true"><canvas id="hand"></canvas></div>
 <header class="hero" id="hero"><div class="w">
-  <h1 id="h1">I turn messy<br>problems into<br>things <em>people love</em><br>to use.</h1>
+  <h1 id="h1"><span class="hl">I turn messy</span><span class="hl">problems into</span><span class="hl">things <em>people love</em></span><span class="hl">to use.</span></h1>
 </div></header>
 <div class="hslot" id="hslot"></div>
 
@@ -376,7 +381,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   </div>
 </div></section>
 
-<section id="work" class="work"><div class="wcard" id="wcard">
+<section id="work" class="work"><div class="w"><div class="wcard" id="wcard">
   <div class="whead" id="whead"><div class="whead-in shead" id="wheadIn"><h2>My work</h2>
   <p class="intro">Selected projects and the thinking behind them. Open one to read the story. The first is the one you have been looking at all along: the mark in the corner of this page.</p></div></div>
   <div class="w">
@@ -442,7 +447,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
       <div class="wkctx"><p class="clede">Another project and the thinking behind it is on the way.</p></div>
     </section>
   </div>
-</div></div></section>
+</div></div></div></section>
 <section id="resume" class="resume">
   <div class="rbg" aria-hidden="true">
   <div class="rword px" data-s=".16">EXPERIENCE</div>
@@ -603,7 +608,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     u=Math.max(10,Math.min(VW<800?TW*.92/COLS:46,TW*.9/COLS));
     hsEl.style.height=Math.max(VH*.92,R*u*Math.cos(F1)+2*GP)+'px';
     var TT=24,TB=Math.max(TT+80,VH-14),TY=(TT+TB)/2,hsr0=hsEl.getBoundingClientRect();WYb=hsr0.top+sy0+hsr0.height/2;BLD=Math.max(300,WYb-VH*.5);OX=(TL+TR)/2-VW/2;OY=WYb-VH*.5;HD=Math.max(60,TB-TT);
-    YC=(VH*.5+OY+R*u/2*Math.cos(F0)-TY)/Math.sin(F0);pile();
+    YC=(VH*.5+R*u/2*Math.cos(F0)-TY)/Math.sin(F0);pile();
     cv.style.transformOrigin=(VW/2)+'px '+(VH*.5)+'px';
     need=true;
   }
@@ -655,7 +660,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   }
   function draw(){
     g.clearRect(0,0,VW,VH);
-    var pr=Math.max(0,Math.min(1,(P-.1)/.85)),ph=F0+(F1-F0)*pr*pr*(3-2*pr),cp=Math.cos(ph),sp=Math.sin(ph),hh0=R*u*Math.cos(F1),hsr=hsEl.getBoundingClientRect(),ovr=ovEl.getBoundingClientRect(),yc=Math.max(hsr.top+hsr.height/2,90+hh0/2),oy=yc-VH*.5,camY=VH*.5+oy+R*u/2*cp;
+    var pr=Math.max(0,Math.min(1,(P-.1)/.85)),ph=F0+(F1-F0)*pr*pr*(3-2*pr),cp=Math.cos(ph),sp=Math.sin(ph),hh0=R*u*Math.cos(F1),hsr=hsEl.getBoundingClientRect(),ovr=ovEl.getBoundingClientRect(),yc=Math.max(Math.min(hsr.top+hsr.height/2,VH*.5),90+hh0/2),oy=yc-VH*.5,camY=VH*.5+oy+R*u/2*cp;
     function pj(X,Y,Z){return [VW/2+OX+X,camY-(Z*cp+Y*sp)]}
     var gsa=.16*(1-Math.min(1,P*4))*Math.min(1,T/1.2);
     if(gsa>.004){var pc=pj(0,YC,0),rr=(TR-TL)*.5;g.save();g.translate(pc[0],pc[1]);g.scale(1,sp*.45);var gg=g.createRadialGradient(0,0,0,0,0,rr);gg.addColorStop(0,'rgba(0,0,0,'+(gsa*1.6)+')');gg.addColorStop(1,'rgba(15,26,58,0)');g.fillStyle=gg;g.beginPath();g.arc(0,0,rr,0,6.283);g.fill();g.restore()}
@@ -691,16 +696,22 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&window.scrollY<40){introOn=true;T=0}
   requestAnimationFrame(frame);
   // scroll effects
-  var ab=$('about'),band=$('band'),ap=$('approach'),sn=[].slice.call(document.querySelectorAll('.nomatch')),ct=$('contact'),bar=document.querySelector('.band'),slot=$('slot'),bh=56;
+  var hLines=[].slice.call(document.querySelectorAll('#h1 .hl')),hExit=[],ab=$('about'),band=$('band'),ap=$('approach'),sn=[].slice.call(document.querySelectorAll('.nomatch')),ct=$('contact'),bar=document.querySelector('.band'),slot=$('slot'),bh=56;
   function clamp(v){return Math.max(0,Math.min(1,v))}
   var WORDS=['Curious','Problem solver','Systems thinker','UX and UI designer','Application developer','Team lead','Minimalist','Stoic','Dog person'],setW=1;
   (function(){var t=WORDS.concat(WORDS).join(' \u2022 ')+' \u2022 ';for(var i=0;i<2;i++){var e=document.createElement('span');e.textContent=t;e.style.display='inline-block';band.appendChild(e)}})();
   function meas(){setW=band.firstChild.getBoundingClientRect().width||1;bh=bar.offsetHeight||56;slot.style.height=bh+'px'}
   function pos(){var rem=document.documentElement.scrollHeight-innerHeight-scrollY,hide=1-Math.max(0,Math.min(1,rem/140));bar.style.transform='translateY('+(Math.max(document.getElementById('resume').getBoundingClientRect().top+(window.__tuck||0),innerHeight-bh)+hide*(bh+6))+'px)'}
   meas();addEventListener('load',meas);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(meas);
+  function hMeasure(){hLines.forEach(function(l){l.style.transform=''});hExit=hLines.map(function(l){var r=l.getBoundingClientRect();return Math.max(60,r.bottom+window.scrollY+6)})}
+  addEventListener('load',hMeasure);addEventListener('resize',hMeasure);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(hMeasure);hMeasure();
   function upd(){
     var y=window.scrollY,vh=innerHeight;
     place(clamp(y/BLD));
+    /* the headline stays put while the bricks begin to form, then leaves one line at a time: the first line eases away slowly and picks up speed,
+       and the next line begins to go while it is still on its way, picking up speed as the line before it gets close to the top, and so on,
+       so that the last line is gone just as HELLO! is complete */
+    if(hLines.length){var ys=Math.min(y,BLD),n=hLines.length,stride=BLD/(n-1+2),W=2*stride;hLines.forEach(function(l,i){var t=Math.max(0,Math.min(1,(ys-i*stride)/W)),D=hExit[i]*Math.pow(t,2.4);l.style.transform=ys>0?'translateY('+(ys-D).toFixed(1)+'px)':''})}
     band.style.transform='translateX('+(-((y*.55)%setW))+'px)';pos();
     sn.forEach(function(n){var r=n.parentNode.getBoundingClientRect();n.style.setProperty('--py',(-(r.top+r.height/2-vh/2)*.22).toFixed(1)+'px')});
     var ar=ap.getBoundingClientRect();
@@ -750,7 +761,8 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     var kc=k;
     if(jumpTo!==null){if(Math.abs(sy-jumpY)<4||Math.abs(sy-jumpY)<40&&k===jumpTo)jumpTo=null;else kc=colored}
     colored=kc;
-    var ys=[];
+    var ys=[],prevOn=-1;
+    tabs.forEach(function(t,i){if(t.classList.contains('on'))prevOn=i});
     tabs.forEach(function(t,i){
       var top=PAD+i*TH,bot=H-PAD-(n-i)*TH,y=i<=k?top:Math.min(bot,top+sec[i]);
       ys.push(y);
@@ -758,8 +770,16 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
       var wasOn=t.classList.contains('on');
       t.classList.toggle('on',i===kc);t.classList.toggle('hc',i===kc&&kc<n-1);
       t.classList.toggle('mask',i===k&&k!==kc);
-      if(i===kc)t.classList.remove('leaving');
-      else if(wasOn){t.classList.add('leaving');clearTimeout(t._lv);t._lv=setTimeout(function(){t.classList.remove('leaving')},560)}
+      if(i===kc){
+        t.classList.remove('leaving','drain-down','drain-up');
+        /* the yellow arrives from the side the previous section was on: from the top if we came from above, from the bottom if we came from below */
+        if(!wasOn){t.classList.remove('fill-top','fill-bottom');t.classList.add(prevOn>kc?'fill-bottom':'fill-top')}
+      }
+      else if(wasOn){
+        t.classList.remove('fill-top','fill-bottom','drain-down','drain-up');
+        /* and the one being left drains away in the direction of travel */
+        t.classList.add('leaving',i<kc?'drain-down':'drain-up');clearTimeout(t._lv);t._lv=setTimeout(function(){t.classList.remove('leaving','drain-down','drain-up')},560)
+      }
       if(i===kc)t.setAttribute('aria-current','true');else t.removeAttribute('aria-current');
     });
     if(k<n-1){
@@ -1049,7 +1069,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     function begin(dir,inside){var seg=inside?segmentFor(dir):null;return {inside:!!seg,seg:seg,blocked:false,dir:dir,prev:0,t:performance.now(),moved:false}}
     addEventListener('wheel',function(e){
       if(e.ctrlKey)return;
-      var now=performance.now(),dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1),ad=Math.abs(dy),dir=dy>0?1:-1;lastInput=now;
+      var now=performance.now(),dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1)*(window.__K||1),ad=Math.abs(dy),dir=dy>0?1:-1;lastInput=now;
       var fresh=now-lastWheel>260||!gesture;
       /* a new scroll that begins while the last one's momentum is still trailing off shows as a jump in speed */
       if(!fresh&&gesture.blocked&&now-gesture.t>380&&(ad>gesture.prev+14||dir!==gesture.dir))fresh=true;
@@ -1101,19 +1121,23 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   /* the big numbers keep drifting as you scroll, even while their card is pinned, by following where the card would be if it were not pinned */
   var steps=[].slice.call(document.querySelectorAll('#approach .step')),cont=document.querySelector('#approach .steps'),nums=steps.map(function(s){return s.querySelector('.num')}),busy=false,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(!steps.length||!cont)return;
+  var PY=[],BR=[],last=performance.now();
   function run(){
     busy=false;
+    var now=performance.now(),k=rm?1:1-Math.exp(-Math.min(64,now-last)/110),moving=false;last=now;
     var vh=innerHeight,ct=cont.getBoundingClientRect(),acc=0;
     if(ct.bottom<-200||ct.top>vh+200){return}
     steps.forEach(function(st,i){
       var h=st.offsetHeight,nh=nums[i].offsetHeight*.8,free=Math.max(0,(h-nh)/2-10),center=ct.top+acc+h/2;acc+=h;
-      if(!rm){var py=Math.max(-free,Math.min(free,-(center-vh/2)*.2));nums[i].style.setProperty('--py',py.toFixed(1)+'px')}
+      if(!rm){var py=Math.max(-free,Math.min(free,-(center-vh/2)*.2));PY[i]=PY[i]==null?py:PY[i]+(py-PY[i])*k;if(Math.abs(py-PY[i])>.2)moving=true;nums[i].style.setProperty('--py',PY[i].toFixed(1)+'px')}
       /* a card gets a little darker as the next one slides up over it */
       var cover=0;
       if(i<steps.length-1){var a=st.getBoundingClientRect(),b=steps[i+1].getBoundingClientRect();cover=Math.max(0,Math.min(1,(a.bottom-b.top)/Math.max(1,a.height)))}
       cover=cover*cover*(3-2*cover);
-      st.style.setProperty('--bri',(1-.3*cover).toFixed(3));
+      var br=1-.3*cover;BR[i]=BR[i]==null?br:BR[i]+(br-BR[i])*k;if(Math.abs(br-BR[i])>.002)moving=true;
+      st.style.setProperty('--bri',BR[i].toFixed(3));
     });
+    if(moving)req();
   }
   function req(){if(!busy){busy=true;requestAnimationFrame(run)}}
   addEventListener('scroll',req,{passive:true});addEventListener('resize',req);run();
@@ -1125,15 +1149,19 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
      sits exactly centred when the card is at the top of the page (with its margin), then drifts out of the bottom; the dot texture drifts at its own rate while the card itself scrolls past at normal speed */
   var head=document.getElementById('whead'),inn=document.getElementById('wheadIn'),busy=false,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(!head||!inn)return;
+  var cOff=null,cBg=null,lastT=performance.now();
   function run(){
     busy=false;
     if(rm){inn.style.transform='';head.style.backgroundPosition='';return}
+    var nowT=performance.now(),k=1-Math.exp(-Math.min(64,nowT-lastT)/110);lastT=nowT;
     var vh=innerHeight,r=head.getBoundingClientRect(),p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height))),
-        M=document.getElementById('wcard').offsetTop,   /* where the card sits when you land on the section: the top of the page plus its small margin */
+        M=parseFloat(getComputedStyle(document.getElementById('work')).paddingTop)||0,   /* where the card sits when you land on the section: the top of the page plus its small margin */
         t2=inn.querySelector('h2'),entry=(parseFloat(getComputedStyle(inn).paddingTop)||34)+t2.offsetHeight/2,   /* how far up the text must start so half of the title shows as the card comes on screen */
         off=Math.max(-entry,Math.min(100,(M-r.top)*entry/Math.max(1,vh-M)));   /* a slow drift that reaches zero (exactly centred) at the landing position */
-    inn.style.transform='translateY('+off.toFixed(1)+'px)';
-    head.style.backgroundPosition='0 '+(p*150).toFixed(1)+'px';
+    var bg=p*150;cOff=cOff==null?off:cOff+(off-cOff)*k;cBg=cBg==null?bg:cBg+(bg-cBg)*k;
+    inn.style.transform='translateY('+cOff.toFixed(1)+'px)';
+    head.style.backgroundPosition='0 '+cBg.toFixed(1)+'px';
+    if(Math.abs(off-cOff)>.2||Math.abs(bg-cBg)>.4)req();
   }
   function req(){if(!busy){busy=true;requestAnimationFrame(run)}}
   run();
@@ -1158,12 +1186,17 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     res.style.setProperty('--hc',Hc+'px');res.style.setProperty('--hw',Hw+'px');res.style.setProperty('--st',ST+'px');
     window.__tuck=Hc;window.__resLand=Math.max(0,Hw-h-30);
   }
+  var cA=null,cB=null,lastR=performance.now();
   function run(){
     busy=false;
     if(rm){h2.style.opacity=h2.style.transform=sub.style.opacity='';return}
-    var wb=work.getBoundingClientRect().bottom,a=sm((ST+H2+30-wb)/(H2+110)),b=sm((ST-60-wb)/130);
+    var nowR=performance.now(),k=1-Math.exp(-Math.min(64,nowR-lastR)/110);lastR=nowR;
+    var wb=work.getBoundingClientRect().bottom,ta=sm((ST+H2+30-wb)/(H2+110)),tb=sm((ST-60-wb)/130);
+    cA=cA==null?ta:cA+(ta-cA)*k;cB=cB==null?tb:cB+(tb-cB)*k;
+    var a=cA,b=cB;
     h2.style.opacity=a.toFixed(3);h2.style.transform='translateY('+(40*(1-a)).toFixed(1)+'px) scale('+(.86+.14*a).toFixed(4)+')';
     sub.style.opacity=b.toFixed(3);
+    if(Math.abs(ta-cA)>.002||Math.abs(tb-cB)>.002)req();
   }
   function req(){if(!busy){busy=true;requestAnimationFrame(run)}}
   function all(){size();req()}
@@ -1172,6 +1205,39 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   addEventListener('resize',all);addEventListener('load',all);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(all);
   if(window.ResizeObserver)new ResizeObserver(req).observe(work);
+})();
+</script>
+<script>
+(function(){
+  /* Scroll pace. While the HELLO bricks are being built at the top of the page, 15 units of wheel movement move the page 1 (so you can
+     watch the bricks go together); everywhere after that, 3 units move it 1. Touch screens and the keyboard scroll as usual, and the
+     nav's own glides are left alone. */
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var KH=1/15,KR=1/3,hs=document.getElementById('hslot'),tgt=null,running=false,last=null;
+  Object.defineProperty(window,'__K',{get:function(){return KR}});
+  function maxY(){return document.documentElement.scrollHeight-innerHeight}
+  /* the scroll position at which the bricks have finished building */
+  function built(){if(!hs)return 400;var r=hs.getBoundingClientRect();return Math.max(300,r.top+scrollY+r.height/2-innerHeight*.5)}
+  function stop(){tgt=null;running=false;last=null}
+  function frame(){
+    if(tgt==null){running=false;last=null;return}
+    /* if anything else moves the page (the nav, the logo story, the scrollbar), let go straight away */
+    if(last!=null&&Math.abs(scrollY-last)>3){stop();return}
+    var d=tgt-scrollY;
+    if(Math.abs(d)<1.5){window.scrollTo({top:tgt,behavior:'instant'});stop();return}
+    var step=d*.2;if(Math.abs(step)<1)step=d>0?1:-1;
+    window.scrollBy({top:step,behavior:'instant'});last=scrollY;requestAnimationFrame(frame);
+  }
+  addEventListener('wheel',function(e){
+    if(e.ctrlKey||e.defaultPrevented||window.__navJump!=null)return;
+    var dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1);
+    if(Math.abs(dy)<.5)return;
+    e.preventDefault();
+    var base=tgt==null?scrollY:tgt,k=base<built()?KH:KR;
+    tgt=Math.max(0,Math.min(maxY(),base+dy*k));
+    if(!running){running=true;last=scrollY;requestAnimationFrame(frame)}
+  },{passive:false});
+  addEventListener('keydown',stop);addEventListener('touchstart',stop,{passive:true});
 })();
 </script>
 </body>
