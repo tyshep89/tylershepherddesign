@@ -1126,7 +1126,8 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     if(rm){inn.style.transform='';head.style.backgroundPosition='';return}
     var vh=innerHeight,r=head.getBoundingClientRect(),p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height))),
         M=document.getElementById('wcard').offsetTop,   /* where the card sits when you land on the section: the top of the page plus its small margin */
-        off=Math.max(-196,Math.min(100,(M-r.top)*.22));   /* zero there, so the text is exactly centred; above it before, below it after */
+        t2=inn.querySelector('h2'),entry=(parseFloat(getComputedStyle(inn).paddingTop)||34)+t2.offsetHeight/2,   /* how far up the text must start so half of the title shows as the card comes on screen */
+        off=Math.max(-entry,Math.min(100,(M-r.top)*entry/Math.max(1,vh-M)));   /* a slow drift that reaches zero (exactly centred) at the landing position */
     inn.style.transform='translateY('+off.toFixed(1)+'px)';
     head.style.backgroundPosition='0 '+(p*150).toFixed(1)+'px';
   }
