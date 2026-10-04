@@ -80,17 +80,14 @@ section{position:relative}
 .work{position:relative;z-index:1;background:#0f1a3a;color:#fff;--ink:#fff;--muted:rgba(255,255,255,.84);--line:rgba(255,255,255,.3);padding:3.5rem 0 0}
 .work h2{color:#fff}
 .work .intro{color:rgba(255,255,255,.88);max-width:44rem;margin:0 0 3rem}
-.work{padding:16px 0 1.1rem}
-.wcover{position:sticky;top:0;z-index:20;height:44px;margin:0 clamp(.8rem,2vw,2.2rem) -44px calc(var(--rail) + clamp(.8rem,2vw,2.2rem));pointer-events:none;background:linear-gradient(#0f1a3a,#0f1a3a) 0 0 / 100% 16px no-repeat,radial-gradient(circle at 28px 28px,transparent 27.4px,#0f1a3a 28.4px) 0 16px / 28px 28px no-repeat,radial-gradient(circle at 0 28px,transparent 27.4px,#0f1a3a 28.4px) 100% 16px / 28px 28px no-repeat}
-.wcard{position:relative;margin:0 clamp(.8rem,2vw,2.2rem) 0 calc(var(--rail) + clamp(.8rem,2vw,2.2rem));overflow:clip;background-color:#132657;background-image:radial-gradient(rgba(142,160,255,.14) 1px,transparent 1.4px);background-size:9px 9px}
-.whead{position:sticky;top:16px;z-index:12;overflow:hidden;background-color:#132657;background-image:radial-gradient(rgba(142,160,255,.14) 1px,transparent 1.4px);background-size:9px 9px}
-.whead-in{padding:clamp(1.6rem,3.2vw,3rem) clamp(1.4rem,3vw,3rem) clamp(1.2rem,2.4vw,2.2rem);will-change:transform}
-.whead h2{margin:0 0 .7rem;color:#fff;font-size:clamp(3.4rem,10vw,9rem);font-weight:800;letter-spacing:-.04em;line-height:.92}
-.whead .intro{margin:0;max-width:40rem;color:rgba(255,255,255,.8);font-size:clamp(1.05rem,1.5vw,1.3rem)}
+.work{padding:0 0 1.1rem}
+.wcard{position:relative;margin:4.4rem clamp(.8rem,2vw,2.2rem) 1.7rem calc(var(--rail) + clamp(.8rem,2vw,2.2rem));overflow:clip}
 .wcard::after{content:"";position:absolute;left:0;right:0;bottom:0;height:28px;z-index:20;pointer-events:none;background:radial-gradient(circle at 28px 0,transparent 27.4px,#0f1a3a 28.4px) 0 0 / 28px 28px no-repeat,radial-gradient(circle at 0 0,transparent 27.4px,#0f1a3a 28.4px) 100% 0 / 28px 28px no-repeat}
 .wcard .w{max-width:none;padding-left:clamp(1.4rem,3vw,3rem);padding-right:clamp(1.4rem,3vw,3rem)}
-.wcard .wlist{margin:0}
-.wlist{margin-top:3rem}
+.whead{position:relative;border-radius:28px 28px 0 0;overflow:hidden;background-color:#132657;background-image:radial-gradient(rgba(142,160,255,.14) 1px,transparent 1.4px);background-size:9px 9px}
+.whead-in{padding:34px clamp(1.4rem,3vw,3rem);will-change:transform}
+.whead .shead{margin:0 auto}
+.wlist{margin-top:0}
 .wk{position:relative;background:var(--wc);box-shadow:0 0 0 100vmax var(--wc);clip-path:inset(0 -100vmax);padding:3.4rem 0 3.8rem;--wh:96px}
 .wkh{position:sticky;top:var(--stk,0px);z-index:8;margin:0;background:transparent}
 .wkh.stuck{background:var(--wc)}
@@ -375,8 +372,8 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   </div>
 </div></section>
 
-<section id="work" class="work"><div class="wcover" aria-hidden="true"></div><div class="wcard" id="wcard">
-  <div class="whead"><div class="whead-in"><h2>My work</h2>
+<section id="work" class="work"><div class="wcard" id="wcard">
+  <div class="whead" id="whead"><div class="whead-in shead" id="wheadIn"><h2>My work</h2>
   <p class="intro">Selected projects and the thinking behind them. Open one to read the story. The first is the one you have been looking at all along: the mark in the corner of this page.</p></div></div>
   <div class="w">
   <div class="wlist">
@@ -1015,7 +1012,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     addEventListener('scroll',function(){if(snapping)return;goingDown=scrollY>=lastY;lastY=scrollY;clearTimeout(snapT);snapT=setTimeout(function(){if(performance.now()-lastInput>60000&&!following)snap()},700)},{passive:true});
     ['wheel','touchstart','keydown'].forEach(function(n){addEventListener(n,function(){cancelSnap=true;clearTimeout(snapT)},{passive:true})});
     /* you steer each transition with your scroll, at any speed, but it stops at its resting frame; a fresh scroll is needed to go on to the next one */
-    var gesture=null,lastWheel=0,lastInput=0,touchG=null,tgt=0,following=false;
+    var gesture=null,lastWheel=0,lastInput=0,lastBlocked=0,touchG=null,tgt=0,following=false;
     function active(){if(rm||!sw.classList.contains('open')||window.__navJump!=null)return false;var f=frameInfo();return f.t>=-.01&&f.t<=1.01}
     function uAt(y){var f=frameInfo();return f.t*U+(y-scrollY)*U/f.dist}
     function yAt(u){var f=frameInfo();return scrollY-f.t*f.dist+f.dist*(u/U)}
@@ -1052,6 +1049,8 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
       var fresh=now-lastWheel>260||!gesture;
       /* a new scroll that begins while the last one's momentum is still trailing off shows as a jump in speed */
       if(!fresh&&gesture.blocked&&now-gesture.t>380&&(ad>gesture.prev+14||dir!==gesture.dir))fresh=true;
+      /* after a stop, a short pause is always needed before the next scroll counts, so a stalled frame cannot let one swipe run on */
+      if(fresh&&gesture&&now-lastBlocked<450){fresh=false;gesture.blocked=true}
       if(fresh)gesture=begin(dir,active());
       gesture.prev=ad;lastWheel=now;
       /* a scroll that arrives at the pinned start is caught right there instead of drifting on past the first frame */
@@ -1059,7 +1058,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
       if(!gesture.inside){following=false;return}
       e.preventDefault();
       if(gesture.blocked||ad<1)return;
-      if(steer(gesture,dy)){gesture.blocked=true;gesture.t=now}
+      if(steer(gesture,dy)){gesture.blocked=true;gesture.t=now;lastBlocked=now}
     },{passive:false});
     addEventListener('keydown',function(e){
       if(e.metaKey||e.ctrlKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test((e.target&&e.target.tagName)||''))return;
@@ -1118,44 +1117,22 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
 </script>
 <script>
 (function(){
-  /* My work: a wide rounded card whose top edge grows up to uncover the big title (which rises inside it). Once the card reaches the top
-     of the page, with a little margin, it stops there: the title shrinks to a single line and stays as the work scrolls through under it,
-     and everything leaves with the last project */
-  var card=document.getElementById('wcard'),head=card&&card.querySelector('.whead'),inn=head&&head.querySelector('.whead-in'),h2=inn&&inn.querySelector('h2'),sub=inn&&inn.querySelector('.intro'),
-      busy=false,rm=matchMedia('(prefers-reduced-motion:reduce)').matches,M=16,Hbig=0,Hsmall=0,fBig=0,fSmall=0,ptBig=0,pbBig=0,ptSmall=14;
-  if(!card||!head||!inn||!h2||!sub)return;
-  function top(e){var y=0;while(e){y+=e.offsetTop;e=e.offsetParent}return y}
-  function sm(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
-  function size(){
-    head.style.height=head.style.marginBottom='';h2.style.fontSize='';inn.style.paddingTop=inn.style.paddingBottom='';sub.style.opacity='';inn.style.transform='';
-    var cs=getComputedStyle(inn);fBig=parseFloat(getComputedStyle(h2).fontSize);ptBig=parseFloat(cs.paddingTop);pbBig=parseFloat(cs.paddingBottom);Hbig=head.offsetHeight;
-    fSmall=Math.max(22,Math.min(34,.024*innerWidth));
-    h2.style.fontSize=fSmall+'px';inn.style.paddingTop=inn.style.paddingBottom=ptSmall+'px';sub.style.display='none';h2.style.marginBottom='0';
-    Hsmall=head.offsetHeight;
-    sub.style.display='';h2.style.marginBottom='';h2.style.fontSize='';inn.style.paddingTop=inn.style.paddingBottom='';
-    window.__stk=rm?0:M+Hsmall;card.style.setProperty('--stk',(rm?0:M+Hsmall)+'px');
-    if(window.__setWh)window.__setWh();
-  }
+  /* My work: a rounded card (header and projects) sitting below the section above. The header text comes in from outside the top of the card,
+     passes through the middle, and leaves out of the bottom as it drifts downward; the dot texture drifts at its own rate while the card itself scrolls past at normal speed */
+  var head=document.getElementById('whead'),inn=document.getElementById('wheadIn'),busy=false,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!head||!inn)return;
   function run(){
     busy=false;
-    if(rm){card.style.clipPath='';head.style.position='relative';head.style.top='0';return}
-    var vh=innerHeight,y0=top(card)-scrollY,q=Math.max(0,vh-y0),s=sm(q/(.85*vh)),c=.4*vh*(1-s),visTop=Math.max(M,y0+c),inset=visTop-y0;
-    card.style.clipPath=(y0>M+1&&inset>.5)?'inset('+inset.toFixed(1)+'px 0 0 0 round 28px)':'';
-    var d=Math.max(0,M-y0),h=Math.max(Hsmall,Hbig-d),r=Hbig>Hsmall?(h-Hsmall)/(Hbig-Hsmall):1;
-    head.style.height=h.toFixed(1)+'px';head.style.marginBottom=(Hbig-h).toFixed(1)+'px';
-    h2.style.fontSize=(fSmall+(fBig-fSmall)*r).toFixed(2)+'px';
-    inn.style.paddingTop=(ptSmall+(ptBig-ptSmall)*r).toFixed(1)+'px';inn.style.paddingBottom=(ptSmall+(pbBig-ptSmall)*r).toFixed(1)+'px';
-    h2.style.marginBottom=(.7*r).toFixed(2)+'rem';
-    sub.style.opacity=Math.max(0,Math.min(1,(r-.45)/.55)).toFixed(3);
-    inn.style.transform='translateY('+(120*(1-s)).toFixed(1)+'px)';
+    if(rm){inn.style.transform='';head.style.backgroundPosition='';return}
+    var vh=innerHeight,r=head.getBoundingClientRect(),p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height)));
+    inn.style.transform='translateY('+(-130+260*p).toFixed(1)+'px)';
+    head.style.backgroundPosition='0 '+(p*150).toFixed(1)+'px';
   }
   function req(){if(!busy){busy=true;requestAnimationFrame(run)}}
-  function all(){size();req()}
-  size();run();
+  run();
   addEventListener('scroll',req,{passive:true});
-  addEventListener('resize',all);addEventListener('load',all);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(all);
-  if(window.ResizeObserver)new ResizeObserver(function(){req()}).observe(card);
+  addEventListener('resize',req);addEventListener('load',req);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(req);
 })();
 </script>
 </body>
