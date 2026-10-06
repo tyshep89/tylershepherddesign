@@ -194,7 +194,7 @@ dl div{display:flex;justify-content:space-between;gap:1.5rem;padding:.9rem 0;bor
 dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:right}
 .rv{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*90ms)}
 .rv.in{opacity:1;transform:none}
-.dark{background:#0f1a3a;color:#eef1fb;--ink:#eef1fb;--muted:#a9b2cf;--line:#2c3760;--soft:#1a2448;--accent:#8ea0ff;--on:#0a1026;padding:0;margin:calc(var(--hc,560px) * -1) 0 6.2rem;z-index:1}
+.dark{background:#0f1a3a;color:#eef1fb;--ink:#eef1fb;--muted:#a9b2cf;--line:#2c3760;--soft:#1a2448;--accent:#8ea0ff;--on:#0a1026;padding:0;margin:calc(var(--hc,560px) * -1) 0 2.8rem;z-index:1}
 .intro{color:var(--muted);max-width:36rem;margin:0 0 1rem}
 #approach .intro{margin-bottom:3rem}
 .step{position:sticky;top:0;display:flex;align-items:center;min-height:0;padding:3.6rem 0}
@@ -224,7 +224,8 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 @media (max-width:800px){.step{min-height:0;padding:2.8rem 0}.step.r{justify-content:flex-start}.step .num{font-size:9rem}.step .txt{text-align:left!important}.step.r .ask{padding-right:0;padding-left:1.2rem;border-right:0;border-left:6px solid var(--bar)}}
 .resume{padding:0 0 6rem;margin-top:calc(var(--hc,560px) * -1)}
 .rwrap{height:var(--hw,1020px);margin-bottom:2.6rem}
-#approach .rwrap,#resume .rwrap{margin-bottom:6rem}
+#approach .rwrap{margin-bottom:3rem}
+#resume .rwrap{margin-bottom:6rem}
 #resume .shead,#approach .shead{position:sticky;top:var(--st,360px);margin:0 auto}
 #resume .shead h2,#approach .shead h2{transform-origin:50% 60%;will-change:transform,opacity}
 @media (prefers-reduced-motion:reduce){.resume,.dark{margin-top:0}.rwrap{height:auto}#resume .shead,#approach .shead{position:static}}
@@ -271,13 +272,17 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .cin{position:relative;z-index:1;width:100%;padding:0 clamp(1.4rem,3vw,3rem);will-change:transform}
 .ccard::before{content:"";position:absolute;inset:0;background:var(--accent);clip-path:circle(var(--r,0%) at 50% 55%)}
 .contact.on{color:#fff}
+.cin{color:#8ea0ff}
+.cin p{color:#aab6ff}
+.ctop{position:absolute;inset:0;z-index:2;pointer-events:none;display:flex;align-items:center;justify-content:center;clip-path:circle(var(--r,0%) at 50% 55%)}
+.ctop .cin,.ctop .cin p{color:#fff}
 .ov h2{font-size:clamp(2.8rem,5.8vw,5rem);letter-spacing:.015em;margin-bottom:1.7rem}
 .contact h2{font-size:clamp(1.7rem,5.6vw,4.2rem);margin-bottom:1rem}
 .contact p{max-width:30rem;margin:0 0 1rem}
 .links{display:flex;gap:1.5rem;flex-wrap:wrap;font-weight:700;font-size:1.25rem}
 .links a{color:inherit}
 footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;background:#0f1a3a}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}.rv{opacity:1;transform:none}.wd>span{transform:none}.hero .lede{opacity:1}.ccard::before{clip-path:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}.rv{opacity:1;transform:none}.wd>span{transform:none}.hero .lede{opacity:1}.ccard::before{clip-path:none}.ctop{clip-path:none}}
 </style>
 </head>
 <body>
@@ -709,27 +714,29 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
   if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&window.scrollY<40){introOn=true;T=0}
   requestAnimationFrame(frame);
   // scroll effects
-  var hLines=[].slice.call(document.querySelectorAll('#h1 .hl')),hExit=[],ab=$('about'),band=$('band'),ap=$('approach'),sn=[].slice.call(document.querySelectorAll('.nomatch')),ct=$('contact'),bar=document.querySelector('.band'),slot=$('slot'),bh=56;
+  var hLines=[].slice.call(document.querySelectorAll('#h1 .hl')),hExit=[],hBump=24,ab=$('about'),band=$('band'),ap=$('approach'),sn=[].slice.call(document.querySelectorAll('.nomatch')),ct=$('contact'),bar=document.querySelector('.band'),slot=$('slot'),bh=56;
   function clamp(v){return Math.max(0,Math.min(1,v))}
   var WORDS=['Curious','Problem solver','Systems thinker','UX and UI designer','Application developer','Team lead','Minimalist','Stoic','Dog person'],setW=1;
   (function(){var t=WORDS.concat(WORDS).join(' \u2022 ')+' \u2022 ';for(var i=0;i<2;i++){var e=document.createElement('span');e.textContent=t;e.style.display='inline-block';band.appendChild(e)}})();
   function meas(){setW=band.firstChild.getBoundingClientRect().width||1;bh=bar.offsetHeight||56;slot.style.height=bh+'px'}
   function pos(){var rem=document.documentElement.scrollHeight-innerHeight-scrollY,hide=1-Math.max(0,Math.min(1,rem/140));bar.style.transform='translateY('+(Math.max(document.getElementById('resume').getBoundingClientRect().top+(window.__tuck||0),innerHeight-bh)+hide*(bh+6))+'px)'}
   meas();addEventListener('load',meas);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(meas);
-  function hMeasure(){hLines.forEach(function(l){l.style.transform=''});hExit=hLines.map(function(l){var r=l.getBoundingClientRect();return Math.max(60,r.bottom+window.scrollY+6)})}
+  function hMeasure(){hLines.forEach(function(l){l.style.transform=''});if(hLines[0])hBump=Math.max(10,hLines[0].offsetHeight*.2);hExit=hLines.map(function(l){var r=l.getBoundingClientRect();return Math.max(60,r.bottom+window.scrollY+6)})}
   addEventListener('load',hMeasure);addEventListener('resize',hMeasure);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(hMeasure);hMeasure();
   function upd(){
     var y=window.scrollY,vh=innerHeight;
     place(clamp(y/BLD));
     /* the headline stays put while the bricks begin to form, then leaves one line at a time: the first line eases away slowly and picks up speed,
-       and the next line begins to go while it is still on its way, picking up speed as the line before it gets close to the top, and so on,
+       and the next line begins to go while it is still on its way (each line first dips down a little, as if springing to get ready to leave), picking up speed as the line before it gets close to the top, and so on,
        so that the last line is gone just as HELLO! is complete */
-    if(hLines.length){var ys=Math.min(y,BLD),n=hLines.length,stride=BLD/(n-1+2),W=2*stride;hLines.forEach(function(l,i){var t=Math.max(0,Math.min(1,(ys-i*stride)/W)),D=hExit[i]*Math.pow(t,2.4);l.style.transform=ys>0?'translateY('+(ys-D).toFixed(1)+'px)':''})}
+    if(hLines.length){var ys=Math.min(y,BLD),n=hLines.length,stride=BLD/(n-1+2),W=2*stride;hLines.forEach(function(l,i){var t=Math.max(0,Math.min(1,(ys-i*stride)/W)),D=hExit[i]*Math.pow(t,2.4)-(t<.24?hBump*Math.sin(Math.PI*t/.24):0);l.style.transform=ys>0?'translateY('+(ys-D).toFixed(1)+'px)':''})}
     band.style.transform='translateX('+(-((y*.55)%setW))+'px)';pos();
     sn.forEach(function(n){var r=n.parentNode.getBoundingClientRect();n.style.setProperty('--py',(-(r.top+r.height/2-vh/2)*.22).toFixed(1)+'px')});
     var ar=ap.getBoundingClientRect();
     var cr=ct.getBoundingClientRect(),rem=document.documentElement.scrollHeight-vh-y,fin=cr.top-rem,st=vh*.62,q=st>fin+40?clamp((st-cr.top)/(st-fin)):clamp((vh-cr.top)/(vh*.85));
-    ct.style.setProperty('--r',(q*130)+'%');
+    /* the bubble starts out slowly and speeds up as it grows, and the last stretch carries it right out to the corners of the card, so it fills it completely */
+    var rr=Math.pow(q,2.4)*82;
+    ct.style.setProperty('--r',rr.toFixed(1)+'%');
     ct.classList.toggle('on',q>.55);
   }
   if(!RM){var t=false;addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){upd();t=false})}},{passive:true});addEventListener('resize',function(){size();meas();upd()});upd()}
@@ -1195,22 +1202,23 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     opt=opt||{};
     var wrap=sec&&sec.querySelector('.rwrap'),head=wrap&&wrap.querySelector('.shead'),h2=head&&head.querySelector('h2'),sub=head&&head.querySelector('p');
     if(!prev||!sec||!wrap||!head||!h2||!sub)return;
-    var o={prev:prev,sec:sec,head:head,h2:h2,sub:sub,ST:0,H2:0,cA:null,cB:null,stFrac:opt.stFrac||.31,late:!!opt.late,steps:opt.holdSteps?sec.querySelector('.steps'):null};
+    var o={prev:prev,sec:sec,head:head,h2:h2,sub:sub,ST:0,H2:0,cA:null,cB:null,stFrac:opt.stFrac||.31,late:!!opt.late,above:opt.above||56,steps:opt.holdSteps?sec.querySelector('.steps'):null};
     o.size=function(){
       if(rm)return;
       var vh=innerHeight,h=head.offsetHeight,Hc=Math.round(.62*vh);
       o.H2=h2.offsetHeight;o.ST=o.late?Math.max(20,Math.round(vh-h-(parseFloat(getComputedStyle(wrap).marginBottom)||96)-30)):Math.max(20,Math.round(vh*o.stFrac));
-      /* the header lets go and scrolls with the page when the section before it has risen to the standard section margin (56px) above it;
+      /* the header lets go and scrolls with the page when the section before it has risen to its margin above it (56px; for My approach 88px, so the
+         heading sits closer to its own steps than to the section before);
          for My approach and Resume it rests low on the screen, so that its first step is just coming into view as the header finishes appearing, and then
          everything scrolls up together */
-      var R=Math.max(0,o.ST-56);
+      var R=Math.max(0,o.ST-o.above);
       var Hw=o.ST+h+Hc-R;
       sec.style.setProperty('--hc',Hc+'px');sec.style.setProperty('--hw',Hw+'px');sec.style.setProperty('--st',o.ST+'px');
       onSize(Hc,Math.max(0,Hw-h-30));
     };
     list.push(o);
   }
-  make(document.querySelector('.zone'),document.getElementById('approach'),function(Hc,land){window.__apLand=land},{late:true});
+  make(document.querySelector('.zone'),document.getElementById('approach'),function(Hc,land){window.__apLand=land},{late:true,above:88});
   make(document.getElementById('work'),document.getElementById('resume'),function(Hc,land){window.__tuck=Hc;window.__resLand=land},{late:true});
   /* true while either header is appearing, so the wheel can slow right down */
   window.__apSlow=function(){if(rm)return false;return list.some(function(o){var wb=o.prev.getBoundingClientRect().bottom;return wb<o.ST+o.H2+40&&wb>o.ST-60})};
@@ -1247,11 +1255,23 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
 <script>
 (function(){
   /* Scroll pace. While the HELLO bricks are being built at the top of the page, 15 units of wheel movement move the page 1 (so you can
-     watch the bricks go together); everywhere after that, 3 units move it 1 (15 units while the My approach or Resume header is appearing). Touch screens and the keyboard scroll as usual, and the
+     watch the bricks go together); everywhere after that, 3 units move it 1 (15 units while the My approach or Resume header is appearing; 15 easing to 5 while My work crosses the middle of the screen). Touch screens and the keyboard scroll as usual, and the
      nav's own glides are left alone. */
   if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   var KH=1/15,KA=1/15,KR=1/3,hs=document.getElementById('hslot'),tgt=null,running=false,last=null;
   Object.defineProperty(window,'__K',{get:function(){return KR}});
+  /* My work coming up the screen: normal until its top edge is a quarter of the way up from the bottom, then 15 to 1 there, easing to 5 to 1
+     by the time it is a quarter of the way down from the top, where it starts to pick back up, easing back to the normal pace by the top */
+  function sm(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
+  function workK(){
+    var w=document.getElementById('work');if(!w)return null;
+    var t=w.getBoundingClientRect().top,vh=innerHeight,K0=1/15,K1=1/5,a=.75*vh,a0=.82*vh,b=.25*vh,c=-.05*vh;
+    if(t>a0||t<c)return null;
+    if(t>a)return KR+(K0-KR)*sm((a0-t)/(a0-a));   /* a short ease into the slow down just before the quarter mark */
+    if(t>=b)return K0+(K1-K0)*sm((a-t)/(a-b));
+    return K1+(KR-K1)*sm((b-t)/(b-c));
+  }
+  window.__workK=workK;
   function maxY(){return document.documentElement.scrollHeight-innerHeight}
   /* the scroll position at which the bricks have finished building */
   function built(){if(!hs)return 400;var r=hs.getBoundingClientRect();return Math.max(300,r.top+scrollY+r.height/2-innerHeight*.5)}
@@ -1270,7 +1290,7 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
     var dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1);
     if(Math.abs(dy)<.5)return;
     e.preventDefault();
-    var base=tgt==null?scrollY:tgt,k=base<built()?KH:(window.__apSlow&&window.__apSlow()?KA:KR);
+    var base=tgt==null?scrollY:tgt,k=base<built()?KH:(window.__apSlow&&window.__apSlow()?KA:(workK()||KR));
     tgt=Math.max(0,Math.min(maxY(),base+dy*k));
     if(!running){running=true;last=scrollY;requestAnimationFrame(frame)}
   },{passive:false});
@@ -1299,15 +1319,21 @@ footer{padding:.9rem 0 1rem;color:rgba(255,255,255,.72);font-size:.9rem;backgrou
      you have scrolled to the end of the page. The bubble expansion (--r, set by the page's main scroll handler) fills the card with colour. */
   var card=document.querySelector('.ccard'),cin=card&&card.querySelector('.cin'),busy=false,cur=null,last=performance.now(),rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(!card||!cin)return;
+  /* all the text is light blue on the dark card; a white copy, shown only inside the bubble, sits exactly on top of it, so each letter turns
+     white along the edge of the bubble as it passes through */
+  var topLayer=document.createElement('div'),cin2=cin.cloneNode(true);
+  topLayer.className='ctop';topLayer.setAttribute('aria-hidden','true');
+  [].slice.call(cin2.querySelectorAll('a')).forEach(function(a){a.setAttribute('tabindex','-1')});
+  topLayer.appendChild(cin2);card.appendChild(topLayer);
   function clamp(x){return Math.max(0,Math.min(1,x))}
   function run(){
     busy=false;
-    if(rm){cin.style.transform='';return}
+    if(rm){cin.style.transform=cin2.style.transform='';return}
     var now=performance.now(),k=1-Math.exp(-Math.min(64,now-last)/110),vh=innerHeight,r=card.getBoundingClientRect(),
         rem=document.documentElement.scrollHeight-vh-scrollY,fin=r.top-rem,bh=cin.offsetHeight,ch=card.offsetHeight,
         E=(ch-bh)/2+.4*bh,p=clamp((r.top-fin)/Math.max(1,vh-fin)),target=-E*p;
     last=now;cur=cur==null?target:cur+(target-cur)*k;
-    cin.style.transform='translateY('+cur.toFixed(1)+'px)';
+    cin.style.transform=cin2.style.transform='translateY('+cur.toFixed(1)+'px)';
     if(Math.abs(target-cur)>.2)req();
   }
   function req(){if(!busy){busy=true;requestAnimationFrame(run)}}
