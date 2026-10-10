@@ -103,10 +103,10 @@ body::after{content:'';position:fixed;inset:0;z-index:20;pointer-events:none;bac
 .whead .shead{margin:0 auto}
 .wlist{margin-top:0}
 .wk{color:#3d3d3d;--ink:#3d3d3d;--muted:rgba(61,61,61,.85);--line:rgba(61,61,61,.22);position:relative;background:transparent;box-shadow:none;clip-path:inset(0 -100vmax);padding:1.3rem 0 1.4rem;--wh:96px}
-.wk+.wk::before{background:linear-gradient(rgba(154,116,72,.22),rgba(154,116,72,.22)) center top/calc(100% - 200vmax) 1px no-repeat,#f6f2e9}
+.wk+.wk::before{background:linear-gradient(rgba(154,116,72,.22),rgba(154,116,72,.22)) center top/calc(100% - 200vmax) 1px no-repeat,#fbf9f5}
 .wkh{position:sticky;top:var(--stk,0px);z-index:8;margin:0;background:transparent}
-.wkh.stuck{background:#f7f4ed;box-shadow:0 0 0 100vmax #f7f4ed;clip-path:inset(0 -100vmax)}
-.wk::before{content:'';position:absolute;z-index:-1;top:0;bottom:0;left:-100vmax;right:-100vmax;background:#f6f2e9;pointer-events:none}
+.wkh.stuck{background:#fbf9f5;box-shadow:0 0 0 100vmax #fbf9f5;clip-path:inset(0 -100vmax)}
+.wk::before{content:'';position:absolute;z-index:-1;top:0;bottom:0;left:-100vmax;right:-100vmax;background:#fbf9f5;pointer-events:none}
 .wk:not(.open) .wkh{position:relative;top:0;z-index:8}
 .wkh button,.wkh .wnb{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1.4rem;padding:.7rem 0;color:#3d3d3d;cursor:pointer;font-family:inherit;position:relative;z-index:1}
 .wkh .wnb{grid-template-columns:1fr;cursor:default;opacity:.8}
@@ -1319,7 +1319,7 @@ footer{padding:.9rem 0 1rem;color:#59627c;font-size:.9rem;background:var(--page)
     if(Math.abs(dy)<.5)return;
     e.preventDefault();
     var base=tgt==null?scrollY:tgt,k=base<built()?1/15:1;
-    var ce=document.getElementById('contact');if(ce&&k===1&&ce.getBoundingClientRect().top+scrollY-base<innerHeight*.78)k=1/5;   /* while the Let's talk bubble grows, 5 units of wheel move the page 1 */   /* home page (while the HELLO bricks build): 15 units of wheel move the page 1 */
+    var ce=document.getElementById('contact');if(ce&&k===1&&ce.getBoundingClientRect().top+scrollY-base<innerHeight*.78)k=1/2.5;   /* while the Let's talk bubble grows, 5 units of wheel move the page 1 */   /* home page (while the HELLO bricks build): 15 units of wheel move the page 1 */
     tgt=Math.max(0,Math.min(maxY(),base+dy*k));
     if(!running){running=true;last=scrollY;window.__gt=null;requestAnimationFrame(frame)}
   },{passive:false});
