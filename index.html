@@ -431,6 +431,23 @@ dl{border-top-width:1px}
 .step .ask,.step.r .ask,#approach .step .ask,#approach .step.r .ask{border-left-width:1px;border-right-width:1px}
 .tag{border-width:1px}
 .ov h2{font-size:clamp(2.4rem,7.5vw,6rem);font-weight:700}
+/* yellow tags for eyebrow labels */
+.wt small,.step .label{display:inline-block;width:fit-content;background:#ffc933;color:#2A2520;font-weight:600;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;line-height:1;padding:.4rem .75rem;border-radius:999px;margin-bottom:.45rem}
+/* read the story stays visible, arrow bounces on hover */
+.wk:not(.soon):not(.open) .wcta{opacity:.9;transform:none}
+.wk:not(.soon):not(.open).hov .wcta{opacity:1}
+#approach .step .num{--num:rgba(240,190,40,.65);color:rgba(255,201,51,.12)}
+#approach .step .num{--num:rgba(240,190,40,.4);color:transparent}
+#approach .step .num{--num:rgba(240,190,40,.5);color:rgba(255,201,51,.4)}
+#approach .step .num{--num:#5A9DE3;color:#5A9DE3}
+#approach .step .num{color:transparent}
+.tab.on,.tab.on:hover{color:#f5b800}
+#approach .step .num{color:rgba(90,157,227,.08)}
+.tab.on,.tab.on:hover{color:#d49400}
+.tab.on,.tab.on:hover{color:#E85333}
+.tab.on,.tab.on:hover{color:#d49400}
+#approach .step .num{--num:#E85333;color:rgba(232,83,51,.08)}
+.cbg::after{box-shadow:inset 0 0 0 1px #CCC4BB,inset 0 3px 0 rgba(255,255,255,.95)}
 </style>
 </head>
 <body>
@@ -754,7 +771,7 @@ dl{border-top-width:1px}
   var ART=["a...a.bbbb.c....d.....eee..f", "a...a.b....c....d....e...e.f", "a...a.b....c....d....e...e.f", "aaaaa.bbb..c....d....e...e.f", "a...a.b....c....d....e...e.f", "a...a.b....c....d....e...e..", "a...a.bbbb.cccc.dddd..eee..f"],SEQ=[3,2,4,2,3],BR=[],cv=$('hand'),g=cv.getContext('2d'),VW=1,VH=1,u=30,P=0,T=99,need=true,solved=false,introOn=false,t0=0,COL={},F0=.62,F1=.28,R=ART.length,TW=1000,BW=780,BH=660,YC=0,Q=0,CD=0,PT=0,DK=false,TL=0,TR=1000,HD=300,OX=0,OY=0,WYb=0,CPL=40,SC=1,GP=86,BLD=500,ovEl=document.querySelector('.ov'),meEl=document.querySelector('.me'),hsEl=document.getElementById('hslot'),bgs=document.querySelector('.bgstage'),COLS=ART[0].length;
   function rnd(i,k){var x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x)}
   function hex(v){v=v.trim();return [1,3,5].map(function(i){return parseInt(v.substr(i,2),16)})}
-  function readCols(){DK=false;COL={a:[255,92,57],b:[255,201,51],c:[140,120,255],d:[30,200,180],e:[88,186,120],f:[98,172,250]};need=true}
+  function readCols(){DK=false;COL={a:[232,88,48],b:[156,164,224],c:[46,150,116],d:[150,40,110],e:[236,164,34],f:[24,84,196]};need=true}
   function sh(c,f){return 'rgb('+Math.min(255,c[0]*f|0)+','+Math.min(255,c[1]*f|0)+','+Math.min(255,c[2]*f|0)+')'}
   function mk(col,row,n,ch){var i=BR.length;BR.push({id:i,col:col,row:row,n:n,ch:ch,st:.34*(R-1-row)/(R-1)+rnd(i,4)*.05,tx:rnd(i,1)*2-1,ty:rnd(i,2)*2-1,th:(rnd(i,3)*2-1)*3.1,sp:(rnd(i,5)*2-1)*7,dl:rnd(i,6)*.5+(1-rnd(i,1))*.5})}
   ART.forEach(function(line,ri){
