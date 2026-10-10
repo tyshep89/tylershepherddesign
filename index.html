@@ -203,7 +203,7 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .rv.in{opacity:1;transform:none}
 .dark{background:var(--page);color:#3d3d3d;padding:0;margin:calc(var(--hc,560px) * -1) 0 .6rem;z-index:4}
 .intro{color:var(--muted);max-width:36rem;margin:0 0 1rem}
-#approach .intro{margin-bottom:3rem}
+#approach .intro{margin-bottom:0}
 .step{position:sticky;top:0;display:flex;align-items:center;min-height:0;padding:3.6rem 0}
 .step .more{height:auto;overflow:visible;opacity:1}
 .step.r{justify-content:flex-end}
@@ -231,9 +231,27 @@ dt{color:var(--muted);white-space:nowrap}dd{margin:0;font-weight:600;text-align:
 .step .ask q{display:block;font-size:1.5rem;font-weight:600;line-height:1.3;quotes:none;color:var(--fg)}
 .step .watch{margin-top:1.3rem;font-weight:500;color:var(--fg)}
 @media (max-width:800px){.step{min-height:0;padding:2.8rem 0}.step.r{justify-content:flex-start}.step .num{font-size:9rem}.step .txt{text-align:left!important}.step.r .ask{padding-right:0;padding-left:1.2rem;border-right:0;border-left:6px solid var(--bar)}}
+/* My approach: two even columns, 1 3 5 on the left and 2 4 on the right, staggered, drifting past each other as the page scrolls */
+#approach .steps{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(2rem,6vw,6rem);row-gap:5.5rem;align-items:center;padding:0}
+#approach .step{position:relative;top:auto;display:block;padding:2.6rem 0;background:none;box-shadow:none;clip-path:none;filter:none;will-change:transform}
+#approach .step::before{display:none}
+#approach .steps{position:relative}
+#approach .steps::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:1px;background:linear-gradient(to bottom,transparent,rgba(154,116,72,.25) 8%,rgba(154,116,72,.25) 92%,transparent);pointer-events:none}
+#approach .step:not(.s1){border-top:1px solid rgba(154,116,72,.22)}
+#approach .step.s1{grid-column:1;grid-row:1/3;padding-top:1rem}
+#approach .step.s2{grid-column:2;grid-row:2/4}
+#approach .step.s3{grid-column:1;grid-row:3/5}
+#approach .step.s4{grid-column:2;grid-row:4/6}
+#approach .step.s5{grid-column:1;grid-row:5/7;padding-bottom:0}
+#approach .step .num{font-size:clamp(7rem,15vw,12.5rem);left:auto;right:-.5rem}
+#approach .step.r .num{right:auto;left:-.5rem}
+#approach .step .txt{max-width:none}
+#approach .step.r .txt{text-align:left}
+#approach .step.r .ask{padding-left:1.2rem;padding-right:0;border-right:0;border-left:6px solid var(--bar)}
+@media (max-width:800px){#approach .steps::after{display:none}#approach .steps{display:block}#approach .step{transform:none!important}}
 .resume{padding:0 0 6rem;margin-top:calc(var(--hc,560px) * -1)}
 .rwrap{height:var(--hw,1020px);margin-bottom:2.6rem}
-#approach .rwrap{margin-bottom:3rem}
+#approach .rwrap{margin-bottom:0}
 #resume .rwrap{margin-bottom:6rem}
 #work .rwrap{margin-bottom:1.6rem}
 #resume .shead,#approach .shead,#work .shead{position:sticky;top:var(--st,360px);margin:0 auto}
@@ -308,9 +326,9 @@ footer{padding:.9rem 0 1rem;color:#59627c;font-size:.9rem;background:var(--page)
 .toplogo{position:absolute;top:16px;left:16px;z-index:30;display:flex;align-items:center;gap:.8rem;text-decoration:none;color:#3d3d3d;font-weight:600;font-size:1.7rem;letter-spacing:-.02em}
 .toplogo .tl{display:grid;place-items:center;width:60px;height:60px;border-radius:18px;background:#ffc933}
 .toplogo svg,.topbar svg{width:38px;height:34px;fill:#0f1a3a;stroke:none}
-.topbar{position:fixed;top:14px;left:50%;z-index:29;display:flex;align-items:center;gap:.7rem;padding:6px 18px 6px 6px;border-radius:999px;background:linear-gradient(to top,#e6dece,#fcfbf8);border:1px solid rgba(184,149,95,.5);box-shadow:0 14px 30px -14px rgba(60,50,30,.3),0 2px 6px rgba(60,50,30,.08);color:#3d3d3d;text-decoration:none;font-weight:600;font-size:1rem;letter-spacing:-.01em;transform:translate(-50%,-140%) scale(.85);transform-origin:50% 0;opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.3,1.2,.4,1),opacity .3s,box-shadow .3s}
+.topbar{position:fixed;top:14px;left:50%;z-index:29;display:flex;align-items:center;gap:.7rem;padding:6px 18px 6px 6px;border-radius:999px;background:linear-gradient(to top,#e6dece,#fcfbf8);border:1px solid rgba(184,149,95,.5);box-shadow:0 0 0 rgba(60,50,30,0);color:#3d3d3d;text-decoration:none;font-weight:600;font-size:1rem;letter-spacing:-.01em;transform:translate(-50%,-140%) scale(.85);transform-origin:50% 0;opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.3,1.2,.4,1),opacity .3s,box-shadow .3s}
 .topbar.show{transform:translate(-50%,0) scale(1);opacity:1;pointer-events:auto}
-.topbar.show:hover,.topbar.show:focus-visible{transform:translate(-50%,0) scale(1.06);box-shadow:0 18px 34px -14px rgba(60,50,30,.38),0 3px 8px rgba(60,50,30,.1)}
+.topbar.show:hover,.topbar.show:focus-visible{transform:translate(-50%,0) scale(1.06);box-shadow:0 12px 24px -14px rgba(60,50,30,.2),0 2px 5px rgba(60,50,30,.05)}
 .topbar .tl{display:grid;place-items:center;width:38px;height:38px;border-radius:999px;background:#ffc933}
 .topbar svg{width:26px;height:23px}
 @media (prefers-reduced-motion:reduce){.topbar{transition:none}}
@@ -1206,6 +1224,7 @@ footer{padding:.9rem 0 1rem;color:#59627c;font-size:.9rem;background:var(--page)
       cover=cover*cover*(3-2*cover);
       var br=1-.3*cover;BR[i]=BR[i]==null?br:BR[i]+(br-BR[i])*k;if(Math.abs(br-BR[i])>.002)moving=true;
       st.style.setProperty('--bri',BR[i].toFixed(3));
+      if(!rm&&innerWidth>800){var rc=st.getBoundingClientRect(),cy=rc.top+rc.height/2-(st._ty||0),tz=-(cy-vh/2)*(st.classList.contains('r')?.09:-.03);st._ty=st._ty==null?tz:st._ty+(tz-st._ty)*k;if(Math.abs(tz-st._ty)>.3)moving=true;st.style.transform='translateY('+st._ty.toFixed(1)+'px)'}
     });
     if(moving)req();
   }
